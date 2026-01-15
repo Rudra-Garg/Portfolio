@@ -15,41 +15,41 @@ const timeline = [
         title: "IIIT Guwahati",
         subtitle: "B.Tech Computer Science & Engineering",
         description:
-            "Started undergraduate studies with focus on algorithms, data structures, and systems programming. CGPA: 8.29",
+            "Started undergraduate studies. Current Semester 7 CGPA: 8.42. Focused on Distributed Systems and Network Engineering.",
         type: "education" as const,
     },
     {
         year: "2024",
         title: "GRIG Technologies",
-        subtitle: "Backend Engineering Intern",
+        subtitle: "Back End Developer Intern",
         description:
-            "Optimized certificate generation pipeline achieving 98.3% processing time reduction. Implemented async processing, caching, and database optimizations.",
+            "Engineered certificate generation system reducing processing time by 98.3%. Architected RESTful APIs with Flask-RESTx and optimized data retrieval efficiency by 40%.",
         type: "work" as const,
-        highlight: "98.3% improvement",
+        highlight: "98.3% Speedup",
     },
     {
         year: "2024",
         title: "Fog Computing Research",
-        subtitle: "GVMP Paper Publication",
+        subtitle: "GVMP Strategy",
         description:
-            "Published research on Global View-Based Module Placement for fog computing. Validated 95% network reduction on Docker testbed.",
+            "Designed Gateway Validation Module Placement (GVMP). Demonstrated 95% network usage reduction compared to standard edge-ward placement using a custom Docker testbed.",
         type: "research" as const,
-        highlight: "Published",
+        highlight: "Virtual Testbed",
     },
     {
         year: "2025",
-        title: "UAV Edge Networks",
-        subtitle: "MUCEDS Research",
+        title: "LOKI Voice Assistant",
+        subtitle: "Hybrid NLU Engine",
         description:
-            "Developing hierarchical RL framework for UAV-assisted edge caching. Achieving ~90% cache hit ratio in simulations.",
+            "Developed a desktop-native voice assistant. Achieved 99.77% NER F1-score using a hybrid FastClassifier (Embeddings) + LLM Fallback architecture.",
         type: "research" as const,
-        highlight: "Under Review",
+        highlight: "99.77% F1-Score",
     },
     {
         year: "2026",
         title: "Graduation",
         subtitle: "B.Tech CSE",
-        description: "Expected graduation from IIIT Guwahati.",
+        description: "Expected graduation. Ready for roles in Systems Engineering, Backend Infrastructure, or Research.",
         type: "education" as const,
         upcoming: true,
     },
@@ -57,44 +57,43 @@ const timeline = [
 
 // Tech stack data organized by category
 const techStack = {
-    Infrastructure: {
-        description: "Container orchestration, networking, and observability",
+    "Systems & Infra": {
+        description: "Orchestration, virtualization, and low-level networking",
         items: [
             { name: "Docker", level: "advanced", years: 3 },
             { name: "Kubernetes", level: "intermediate", years: 1 },
             { name: "Linux TC", level: "advanced", years: 2 },
+            { name: "Google Cloud", level: "intermediate", years: 2 },
             { name: "Prometheus", level: "intermediate", years: 1 },
-            { name: "Grafana", level: "intermediate", years: 1 },
         ],
     },
     Backend: {
-        description: "API development, databases, and distributed systems",
+        description: "High-performance APIs and distributed logic",
         items: [
             { name: "Go (Gin)", level: "advanced", years: 2 },
-            { name: "Python", level: "advanced", years: 4 },
-            { name: "FastAPI", level: "advanced", years: 2 },
+            { name: "Python (FastAPI)", level: "advanced", years: 4 },
             { name: "PostgreSQL", level: "advanced", years: 3 },
             { name: "Redis", level: "intermediate", years: 2 },
+            { name: "WebSockets", level: "advanced", years: 2 },
         ],
     },
-    "AI/Research": {
-        description: "Machine learning, NLP, and simulation frameworks",
+    "AI & Research": {
+        description: "Machine learning pipelines and simulation",
         items: [
             { name: "PyTorch", level: "advanced", years: 2 },
             { name: "SUMO", level: "intermediate", years: 1 },
-            { name: "spaCy", level: "advanced", years: 2 },
-            { name: "Rasa NLU", level: "advanced", years: 1 },
+            { name: "sklearn-crfsuite", level: "advanced", years: 1 },
             { name: "NetworkX", level: "intermediate", years: 2 },
         ],
     },
     Frontend: {
-        description: "Modern web development and UI engineering",
+        description: "Interactive UIs and real-time state",
         items: [
-            { name: "Next.js", level: "advanced", years: 2 },
-            { name: "React", level: "advanced", years: 3 },
+            { name: "React / Vite", level: "advanced", years: 3 },
+            { name: "Vue 3", level: "intermediate", years: 1 },
             { name: "TypeScript", level: "advanced", years: 2 },
-            { name: "Tailwind CSS", level: "advanced", years: 2 },
-            { name: "Framer Motion", level: "intermediate", years: 1 },
+            { name: "Tailwind CSS", level: "advanced", years: 3 },
+            { name: "Framer Motion", level: "intermediate", years: 2 },
         ],
     },
 };

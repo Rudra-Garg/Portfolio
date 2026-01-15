@@ -1,3 +1,3424 @@
+Repository: .
+Total files processed: 32
+================================================================================
+
+
+Filename: .cursorrules
+Content:
+# Role & Persona
+You are the Creative Director and Technical Architect for Rudra Garg's portfolio.
+Your goal is to build a "Systems Research & Engineering" portfolio, avoiding generic "web dev" tropes.
+The aesthetic is "Engineered Intelligence": Blueprint, Sci-Fi UI, Data Visualization, Deep Navy/Slate colors.
+
+# User Profile (The Truth)
+- Name: Rudra Garg
+- Education: IIIT Guwahati (CSE, 2026), CGPA 8.29.
+- Key Stack: Next.js, Tailwind, Framer Motion, Python, Go, Docker, Kubernetes.
+- Key Metrics (ALWAYS use these exact numbers):
+  - [cite_start]"98.3% processing time reduction" (GRIG Technologies) [cite: 1395]
+  - [cite_start]"95% network usage reduction" (Fog Computing/GVMP) [cite: 26, 416]
+  - [cite_start]"99.77% NER F1-score" (LOKI Voice Assistant) [cite: 1304]
+  - [cite_start]"~90% Cache Hit Ratio" (UAV/MUCEDS) [cite: 995]
+
+# Design System Rules
+- Fonts: Inter (Body/Headers), JetBrains Mono (Data/Metrics/Code).
+- Colors:
+  - Background: bg-slate-950 (#0B0F14)
+  - Surface: bg-slate-900/50
+  - Accent: text-cyan-400
+  - Muted: text-slate-400
+- Components: Use 'lucide-react' for icons. Use 'framer-motion' for animations.
+- Layouts: Bento Grids, Split Screens, Terminal overlays. NO standard single-column blogs.
+
+# Coding Standards
+- Framework: Next.js 14+ (App Router).
+- Styling: Tailwind CSS.
+- Language: TypeScript (Strict).
+- Components: Shadcn/UI pattern (Radix primitives).
+- Animation: Framer Motion. Keep animations smooth and "mechanical" (easings), not bouncy.
+
+# Special Instructions
+1. When summarizing Research (MUCEDS, GVMP, LOKI), prioritize "Architecture", "Trade-offs", and "Technical Decisions".
+2. When creating the "Hero" section, avoid human photos. Use abstract node/network topologies.
+3. The "About" section is called "The Kernel".
+4. Always separate "Research" (Academic/Simulations) from "Engineering" (Product/Web).
+
+================================================================================
+
+Filename: .gitignore
+Content:
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+.env*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+
+================================================================================
+
+Filename: README.md
+Content:
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+## Getting Started
+
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+================================================================================
+
+Filename: app/about/components.tsx
+Content:
+"use client";
+
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
+import {
+    User,
+    GraduationCap,
+    Briefcase,
+    FlaskConical,
+    ChevronRight,
+    MapPin,
+    Calendar,
+    Code,
+    Brain,
+    Network,
+    Layers,
+    Activity,
+} from "lucide-react";
+
+export function KernelHero() {
+    return (
+        <section className="relative py-24 overflow-hidden">
+            {/* Background */}
+            <div className="absolute inset-0 grid-pattern opacity-30" />
+            <div className="absolute inset-0 bg-gradient-to-b from-emerald-500/5 via-transparent to-transparent" />
+
+            <div className="relative max-w-7xl mx-auto px-6">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                >
+                    {/* Breadcrumb */}
+                    <div className="flex items-center gap-2 text-sm text-slate-500 mb-8">
+                        <a href="/" className="hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors">
+                            Home
+                        </a>
+                        <ChevronRight className="w-4 h-4" />
+                        <span className="text-emerald-600 dark:text-emerald-400">The Kernel</span>
+                    </div>
+
+                    {/* Header */}
+                    <div className="flex flex-col md:flex-row md:items-start gap-8">
+                        {/* Avatar/Icon */}
+                        <div className="w-24 h-24 rounded-2xl bg-emerald-500/10 flex items-center justify-center border border-emerald-500/30">
+                            <User className="w-12 h-12 text-emerald-600 dark:text-emerald-400" />
+                        </div>
+
+                        <div className="flex-1">
+                            <div className="flex items-center gap-3 mb-2">
+                                <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-100">
+                                    Rudra Garg
+                                </h1>
+                                <span className="px-3 py-1 rounded-full text-xs font-mono border border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+                                    Open to Work
+                                </span>
+                            </div>
+
+                            <p className="text-xl text-slate-600 dark:text-slate-400 mb-4">
+                                Systems Researcher & Full-Stack Engineer
+                            </p>
+
+                            {/* Quick Info */}
+                            <div className="flex flex-wrap gap-4 text-sm text-slate-500">
+                                <div className="flex items-center gap-2">
+                                    <MapPin className="w-4 h-4" />
+                                    <span>Guwahati, India</span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <GraduationCap className="w-4 h-4" />
+                                    <span>IIIT Guwahati, CSE</span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <Calendar className="w-4 h-4" />
+                                    <span>Class of 2026</span>
+                                </div>
+                            </div>
+
+                            <p className="text-slate-500 font-mono text-sm mt-4">
+                                CGPA: <span className="text-emerald-600 dark:text-emerald-400">8.29</span>
+                            </p>
+                        </div>
+                    </div>
+                </motion.div>
+            </div>
+        </section>
+    );
+}
+
+export function SystemsThinking() {
+    const principles = [
+        {
+            icon: Layers,
+            title: "Layered Abstraction",
+            description:
+                "Understanding systems from low-level networking (Linux TC, TCP/IP) to high-level orchestration (Kubernetes, service mesh). Each layer informs the others.",
+        },
+        {
+            icon: Network,
+            title: "Distributed First",
+            description:
+                "Designing for failure, partition tolerance, and eventual consistency. Real-world systems are distributed—embrace it in architecture.",
+        },
+        {
+            icon: Activity,
+            title: "Measure, Don't Guess",
+            description:
+                "Prometheus metrics, profiling, and observability before optimization. Data-driven decisions over intuition-based changes.",
+        },
+        {
+            icon: Brain,
+            title: "Theory Meets Practice",
+            description:
+                "Research simulations validated on real testbeds. Academic rigor combined with production engineering pragmatism.",
+        },
+    ];
+
+    return (
+        <section className="py-16 relative">
+            <div className="max-w-7xl mx-auto px-6">
+                {/* Header */}
+                <motion.div
+                    className="mb-12"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                >
+                    <div className="flex items-center gap-3 mb-2">
+                        <div className="w-8 h-px bg-emerald-500/50" />
+                        <span className="font-mono text-sm text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
+                            Philosophy
+                        </span>
+                    </div>
+                    <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-100 mb-4">
+                        Systems Thinking
+                    </h2>
+                    <p className="text-slate-500 max-w-2xl">
+                        My approach to engineering is rooted in understanding systems
+                        holistically—from the kernel to the cloud, from theory to
+                        production.
+                    </p>
+                </motion.div>
+
+                {/* Principles Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {principles.map((principle, index) => (
+                        <motion.div
+                            key={principle.title}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6, delay: index * 0.1 }}
+                            className="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/30 hover:border-emerald-500/30 transition-colors"
+                        >
+                            <div className="flex items-start gap-4">
+                                <div className="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center flex-shrink-0">
+                                    <principle.icon className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
+                                </div>
+                                <div>
+                                    <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-2">
+                                        {principle.title}
+                                    </h3>
+                                    <p className="text-slate-500 text-sm leading-relaxed">
+                                        {principle.description}
+                                    </p>
+                                </div>
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+}
+
+interface TimelineEvent {
+    year: string;
+    title: string;
+    subtitle: string;
+    description: string;
+    type: "education" | "work" | "research";
+    highlight?: string;
+    upcoming?: boolean;
+}
+
+interface TimelineProps {
+    events: TimelineEvent[];
+}
+
+export function Timeline({ events }: TimelineProps) {
+    const typeIcons = {
+        education: GraduationCap,
+        work: Briefcase,
+        research: FlaskConical,
+    };
+
+    const typeColors = {
+        education: {
+            bg: "bg-blue-500/10",
+            border: "border-blue-500/30",
+            text: "text-blue-400",
+        },
+        work: {
+            bg: "bg-orange-500/10",
+            border: "border-orange-500/30",
+            text: "text-orange-400",
+        },
+        research: {
+            bg: "bg-violet-500/10",
+            border: "border-violet-500/30",
+            text: "text-violet-400",
+        },
+    };
+
+    return (
+        <section className="py-16 relative">
+            <div className="max-w-7xl mx-auto px-6">
+                {/* Header */}
+                <motion.div
+                    className="mb-12"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                >
+                    <div className="flex items-center gap-3 mb-2">
+                        <div className="w-8 h-px bg-cyan-500/50" />
+                        <span className="font-mono text-sm text-cyan-600 dark:text-cyan-400 uppercase tracking-wider">
+                            Journey
+                        </span>
+                    </div>
+                    <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-100">
+                        Experience Timeline
+                    </h2>
+                </motion.div>
+
+                {/* Timeline */}
+                <div className="relative">
+                    {/* Vertical Line */}
+                    <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-cyan-500/50 via-slate-700 to-transparent md:-translate-x-px" />
+
+                    {/* Events */}
+                    <div className="space-y-12">
+                        {events.map((event, index) => {
+                            const Icon = typeIcons[event.type];
+                            const colors = typeColors[event.type];
+                            const isLeft = index % 2 === 0;
+
+                            return (
+                                <motion.div
+                                    key={`${event.year}-${event.title}`}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                                    className={cn(
+                                        "relative grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12",
+                                        event.upcoming && "opacity-60"
+                                    )}
+                                >
+                                    {/* Year marker - visible on mobile */}
+                                    <div className="md:hidden flex items-center gap-3 mb-2 ml-12">
+                                        <span className="font-mono text-lg text-cyan-400">
+                                            {event.year}
+                                        </span>
+                                        {event.highlight && (
+                                            <span
+                                                className={cn(
+                                                    "px-2 py-0.5 rounded-full text-xs font-mono",
+                                                    colors.bg,
+                                                    colors.text
+                                                )}
+                                            >
+                                                {event.highlight}
+                                            </span>
+                                        )}
+                                    </div>
+
+                                    {/* Left side (or full width on mobile) */}
+                                    <div
+                                        className={cn(
+                                            "relative pl-12 md:pl-0",
+                                            isLeft ? "md:text-right md:pr-12" : "md:col-start-2 md:pl-12"
+                                        )}
+                                    >
+                                        {/* Mobile icon */}
+                                        <div
+                                            className={cn(
+                                                "absolute left-0 top-0 w-8 h-8 rounded-lg flex items-center justify-center md:hidden",
+                                                colors.bg,
+                                                colors.border,
+                                                "border"
+                                            )}
+                                        >
+                                            <Icon className={cn("w-4 h-4", colors.text)} />
+                                        </div>
+
+                                        {/* Desktop year - hidden on mobile */}
+                                        <div
+                                            className={cn(
+                                                "hidden md:flex items-center gap-3 mb-2",
+                                                isLeft ? "justify-end" : "justify-start"
+                                            )}
+                                        >
+                                            <span className="font-mono text-lg text-cyan-400">
+                                                {event.year}
+                                            </span>
+                                            {event.highlight && (
+                                                <span
+                                                    className={cn(
+                                                        "px-2 py-0.5 rounded-full text-xs font-mono",
+                                                        colors.bg,
+                                                        colors.text
+                                                    )}
+                                                >
+                                                    {event.highlight}
+                                                </span>
+                                            )}
+                                        </div>
+
+                                        {/* Content */}
+                                        <div
+                                            className={cn(
+                                                "p-5 rounded-xl border bg-slate-50/50 dark:bg-slate-900/50",
+                                                colors.border
+                                            )}
+                                        >
+                                            <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-200">
+                                                {event.title}
+                                            </h3>
+                                            <p className={cn("text-sm mb-2", colors.text)}>
+                                                {event.subtitle}
+                                            </p>
+                                            <p className="text-sm text-slate-500">
+                                                {event.description}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    {/* Center Icon - Desktop */}
+                                    <div
+                                        className={cn(
+                                            "hidden md:flex absolute left-1/2 -translate-x-1/2 w-10 h-10 rounded-xl items-center justify-center border",
+                                            colors.bg,
+                                            colors.border
+                                        )}
+                                    >
+                                        <Icon className={cn("w-5 h-5", colors.text)} />
+                                    </div>
+                                </motion.div>
+                            );
+                        })}
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+}
+
+interface TechStackGridProps {
+    stack: {
+        [category: string]: {
+            description: string;
+            items: { name: string; level: string; years: number }[];
+        };
+    };
+}
+
+export function TechStackGrid({ stack }: TechStackGridProps) {
+    const levelColors = {
+        advanced: {
+            bg: "bg-cyan-500/10",
+            border: "border-cyan-500/30",
+            text: "text-cyan-400",
+            bar: "bg-cyan-400",
+        },
+        intermediate: {
+            bg: "bg-slate-700/30",
+            border: "border-slate-600/30",
+            text: "text-slate-400",
+            bar: "bg-slate-500",
+        },
+    };
+
+    return (
+        <section className="py-16 relative">
+            <div className="max-w-7xl mx-auto px-6">
+                {/* Header */}
+                <motion.div
+                    className="mb-12"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                >
+                    <div className="flex items-center gap-3 mb-2">
+                        <div className="w-8 h-px bg-violet-500/50" />
+                        <span className="font-mono text-sm text-violet-600 dark:text-violet-400 uppercase tracking-wider">
+                            Technical
+                        </span>
+                    </div>
+                    <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-100 mb-4">
+                        Tech Stack
+                    </h2>
+                    <p className="text-slate-500 max-w-2xl">
+                        Technologies I use across infrastructure, backend, AI/research, and
+                        frontend development.
+                    </p>
+                </motion.div>
+
+                {/* Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {Object.entries(stack).map(([category, data], categoryIndex) => (
+                        <motion.div
+                            key={category}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
+                            className="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/30"
+                        >
+                            <div className="flex items-center gap-3 mb-2">
+                                <Code className="w-5 h-5 text-violet-600 dark:text-violet-400" />
+                                <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-200">
+                                    {category}
+                                </h3>
+                            </div>
+                            <p className="text-sm text-slate-500 dark:text-slate-600 mb-4">{data.description}</p>
+
+                            <div className="space-y-3">
+                                {data.items.map((item) => {
+                                    const colors =
+                                        levelColors[item.level as keyof typeof levelColors];
+                                    return (
+                                        <div key={item.name}>
+                                            <div className="flex justify-between items-center mb-1">
+                                                <span
+                                                    className={cn("font-mono text-sm", colors.text)}
+                                                >
+                                                    {item.name}
+                                                </span>
+                                                <span className="text-xs text-slate-600">
+                                                    {item.years}y
+                                                </span>
+                                            </div>
+                                            <div className="h-1.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
+                                                <div
+                                                    className={cn("h-full rounded-full", colors.bar)}
+                                                    style={{
+                                                        width:
+                                                            item.level === "advanced" ? "90%" : "60%",
+                                                    }}
+                                                />
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
+
+                {/* Legend */}
+                <div className="mt-8 flex items-center justify-center gap-6 text-xs text-slate-500 dark:text-slate-600">
+                    <div className="flex items-center gap-2">
+                        <div className="w-3 h-3 rounded bg-cyan-500/20 border border-cyan-500/30" />
+                        <span>Advanced</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <div className="w-3 h-3 rounded bg-slate-200 dark:bg-slate-700/30 border border-slate-300 dark:border-slate-600/30" />
+                        <span>Intermediate</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+}
+
+
+================================================================================
+
+Filename: app/about/page.tsx
+Content:
+import type { Metadata } from "next";
+import { Navbar, Footer } from "@/components/layout";
+import { KernelHero, Timeline, TechStackGrid, SystemsThinking } from "./components";
+
+export const metadata: Metadata = {
+    title: "The Kernel | Rudra Garg",
+    description:
+        "Systems Researcher & Full-Stack Engineer at IIIT Guwahati. Background, experience timeline, and technical expertise.",
+};
+
+// Timeline data
+const timeline = [
+    {
+        year: "2022",
+        title: "IIIT Guwahati",
+        subtitle: "B.Tech Computer Science & Engineering",
+        description:
+            "Started undergraduate studies. Current Semester 7 CGPA: 8.42. Focused on Distributed Systems and Network Engineering.",
+        type: "education" as const,
+    },
+    {
+        year: "2024",
+        title: "GRIG Technologies",
+        subtitle: "Back End Developer Intern",
+        description:
+            "Engineered certificate generation system reducing processing time by 98.3%. Architected RESTful APIs with Flask-RESTx and optimized data retrieval efficiency by 40%.",
+        type: "work" as const,
+        highlight: "98.3% Speedup",
+    },
+    {
+        year: "2024",
+        title: "Fog Computing Research",
+        subtitle: "GVMP Strategy",
+        description:
+            "Designed Gateway Validation Module Placement (GVMP). Demonstrated 95% network usage reduction compared to standard edge-ward placement using a custom Docker testbed.",
+        type: "research" as const,
+        highlight: "Virtual Testbed",
+    },
+    {
+        year: "2025",
+        title: "LOKI Voice Assistant",
+        subtitle: "Hybrid NLU Engine",
+        description:
+            "Developed a desktop-native voice assistant. Achieved 99.77% NER F1-score using a hybrid FastClassifier (Embeddings) + LLM Fallback architecture.",
+        type: "research" as const,
+        highlight: "99.77% F1-Score",
+    },
+    {
+        year: "2026",
+        title: "Graduation",
+        subtitle: "B.Tech CSE",
+        description: "Expected graduation. Ready for roles in Systems Engineering, Backend Infrastructure, or Research.",
+        type: "education" as const,
+        upcoming: true,
+    },
+];
+
+// Tech stack data organized by category
+const techStack = {
+    "Systems & Infra": {
+        description: "Orchestration, virtualization, and low-level networking",
+        items: [
+            { name: "Docker", level: "advanced", years: 3 },
+            { name: "Kubernetes", level: "intermediate", years: 1 },
+            { name: "Linux TC", level: "advanced", years: 2 },
+            { name: "Google Cloud", level: "intermediate", years: 2 },
+            { name: "Prometheus", level: "intermediate", years: 1 },
+        ],
+    },
+    Backend: {
+        description: "High-performance APIs and distributed logic",
+        items: [
+            { name: "Go (Gin)", level: "advanced", years: 2 },
+            { name: "Python (FastAPI)", level: "advanced", years: 4 },
+            { name: "PostgreSQL", level: "advanced", years: 3 },
+            { name: "Redis", level: "intermediate", years: 2 },
+            { name: "WebSockets", level: "advanced", years: 2 },
+        ],
+    },
+    "AI & Research": {
+        description: "Machine learning pipelines and simulation",
+        items: [
+            { name: "PyTorch", level: "advanced", years: 2 },
+            { name: "SUMO", level: "intermediate", years: 1 },
+            { name: "sklearn-crfsuite", level: "advanced", years: 1 },
+            { name: "NetworkX", level: "intermediate", years: 2 },
+        ],
+    },
+    Frontend: {
+        description: "Interactive UIs and real-time state",
+        items: [
+            { name: "React / Vite", level: "advanced", years: 3 },
+            { name: "Vue 3", level: "intermediate", years: 1 },
+            { name: "TypeScript", level: "advanced", years: 2 },
+            { name: "Tailwind CSS", level: "advanced", years: 3 },
+            { name: "Framer Motion", level: "intermediate", years: 2 },
+        ],
+    },
+};
+
+export default function AboutPage() {
+    return (
+        <>
+            <Navbar />
+            <main className="min-h-screen pt-16">
+                <KernelHero />
+                <SystemsThinking />
+                <Timeline events={timeline} />
+                <TechStackGrid stack={techStack} />
+            </main>
+            <Footer />
+        </>
+    );
+}
+
+================================================================================
+
+Filename: app/engineering/components.tsx
+Content:
+"use client";
+
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
+import {
+    Wrench,
+    Gamepad2,
+    Globe,
+    Zap,
+    ChevronRight,
+    ExternalLink,
+    Github,
+    Play,
+    FileCode,
+} from "lucide-react";
+
+export function EngineeringHero() {
+    return (
+        <section className="relative py-24 overflow-hidden">
+            {/* Background */}
+            <div className="absolute inset-0 grid-pattern opacity-30" />
+            <div className="absolute inset-0 bg-gradient-to-b from-violet-500/5 via-transparent to-transparent" />
+
+            <div className="relative max-w-7xl mx-auto px-6">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                >
+                    {/* Breadcrumb */}
+                    <div className="flex items-center gap-2 text-sm text-slate-500 mb-8">
+                        <a href="/" className="hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors">
+                            Home
+                        </a>
+                        <ChevronRight className="w-4 h-4" />
+                        <span className="text-violet-600 dark:text-violet-400">Engineering</span>
+                    </div>
+
+                    {/* Header */}
+                    <div className="flex items-center gap-4 mb-6">
+                        <div className="w-14 h-14 rounded-xl bg-violet-500/10 flex items-center justify-center">
+                            <Wrench className="w-7 h-7 text-violet-600 dark:text-violet-400" />
+                        </div>
+                        <div>
+                            <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-100">
+                                Engineering
+                            </h1>
+                            <p className="text-slate-500 font-mono text-sm mt-1">
+                                /products/shipped
+                            </p>
+                        </div>
+                    </div>
+
+                    <p className="text-xl text-slate-600 dark:text-slate-400 max-w-3xl mb-12">
+                        Production-grade applications built for scale. Real-time systems,
+                        multiplayer games, and backend optimizations with measurable impact.
+                    </p>
+
+                    {/* Project Types */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        {[
+                            {
+                                icon: Gamepad2,
+                                label: "Real-time Gaming",
+                                desc: "WebSocket, WebRTC, Game State",
+                            },
+                            {
+                                icon: Globe,
+                                label: "Web Applications",
+                                desc: "Full-stack, APIs, Databases",
+                            },
+                            {
+                                icon: Zap,
+                                label: "Performance",
+                                desc: "Optimization, Caching, Async",
+                            },
+                        ].map((area, index) => (
+                            <motion.div
+                                key={area.label}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
+                                className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/30"
+                            >
+                                <div className="flex items-center gap-3">
+                                    <area.icon className="w-5 h-5 text-violet-600 dark:text-violet-400" />
+                                    <div>
+                                        <p className="font-medium text-slate-800 dark:text-slate-200">{area.label}</p>
+                                        <p className="text-sm text-slate-500">{area.desc}</p>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </motion.div>
+            </div>
+        </section>
+    );
+}
+
+interface ProjectBentoProps {
+    project: {
+        id: string;
+        title: string;
+        subtitle: string;
+        description: string;
+        features: string[];
+        techStack: { name: string; category: string }[];
+        metrics: { label: string; value: string }[];
+        color: string;
+        links: { demo?: string; github?: string; case_study?: string };
+        image: string;
+    };
+    index: number;
+    reverse?: boolean;
+}
+
+export function ProjectBento({ project, index, reverse }: ProjectBentoProps) {
+    const colorClasses = {
+        orange: {
+            border: "border-orange-500/30",
+            bg: "bg-orange-500/5",
+            text: "text-orange-400",
+            icon: "bg-orange-500/10",
+        },
+        emerald: {
+            border: "border-emerald-500/30",
+            bg: "bg-emerald-500/5",
+            text: "text-emerald-400",
+            icon: "bg-emerald-500/10",
+        },
+        cyan: {
+            border: "border-cyan-500/30",
+            bg: "bg-cyan-500/5",
+            text: "text-cyan-400",
+            icon: "bg-cyan-500/10",
+        },
+    };
+
+    const colors = colorClasses[project.color as keyof typeof colorClasses];
+
+    return (
+        <motion.article
+            id={project.id}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, delay: index * 0.1 }}
+            className="scroll-mt-24"
+        >
+            {/* Project Number */}
+            <div className="flex items-center gap-3 mb-4">
+                <span className="text-slate-700 font-mono text-sm">
+                    #{String(index + 1).padStart(2, "0")}
+                </span>
+                <div className="flex-1 h-px bg-slate-800" />
+            </div>
+
+            {/* Bento Grid */}
+            <div
+                className={cn(
+                    "grid grid-cols-1 lg:grid-cols-12 gap-4",
+                    reverse && "lg:direction-rtl"
+                )}
+            >
+                {/* Main Card */}
+                <div
+                    className={cn(
+                        "lg:col-span-8 p-8 rounded-2xl border bg-slate-50/50 dark:bg-slate-900/50",
+                        colors.border,
+                        reverse && "lg:order-2"
+                    )}
+                >
+                    <div className="flex flex-col h-full">
+                        {/* Header */}
+                        <div className="mb-6">
+                            <h2 className={cn("text-3xl font-bold mb-2", colors.text)}>
+                                {project.title}
+                            </h2>
+                            <p className="text-lg text-slate-600 dark:text-slate-400">{project.subtitle}</p>
+                        </div>
+
+                        {/* Description */}
+                        <p className="text-slate-500 mb-6 leading-relaxed">
+                            {project.description}
+                        </p>
+
+                        {/* Features */}
+                        <div className="mb-6">
+                            <h3 className="text-sm font-mono text-slate-500 uppercase tracking-wider mb-3">
+                                Features
+                            </h3>
+                            <ul className="space-y-2">
+                                {project.features.map((feature, i) => (
+                                    <li key={i} className="flex items-start gap-2 text-slate-600 dark:text-slate-400">
+                                        <ChevronRight
+                                            className={cn("w-4 h-4 mt-0.5 flex-shrink-0", colors.text)}
+                                        />
+                                        <span>{feature}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        {/* Links */}
+                        <div className="mt-auto flex flex-wrap gap-3">
+                            {project.links.demo && (
+                                <a
+                                    href={project.links.demo}
+                                    className={cn(
+                                        "flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-colors",
+                                        colors.bg,
+                                        colors.text,
+                                        "hover:opacity-80"
+                                    )}
+                                >
+                                    <Play className="w-4 h-4" />
+                                    Live Demo
+                                </a>
+                            )}
+                            {project.links.github && (
+                                <a
+                                    href={project.links.github}
+                                    className="flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-slate-400 bg-slate-800/50 hover:text-slate-200 transition-colors"
+                                >
+                                    <Github className="w-4 h-4" />
+                                    Source Code
+                                </a>
+                            )}
+                            {project.links.case_study && (
+                                <a
+                                    href={project.links.case_study}
+                                    className="flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-slate-400 bg-slate-800/50 hover:text-slate-200 transition-colors"
+                                >
+                                    <FileCode className="w-4 h-4" />
+                                    Case Study
+                                </a>
+                            )}
+                        </div>
+                    </div>
+                </div>
+
+                {/* Side Cards */}
+                <div
+                    className={cn(
+                        "lg:col-span-4 flex flex-col gap-4",
+                        reverse && "lg:order-1"
+                    )}
+                >
+                    {/* Metrics Card */}
+                    <div
+                        className={cn(
+                            "p-6 rounded-2xl border bg-slate-900/50 flex-1",
+                            colors.border
+                        )}
+                    >
+                        <h3 className="text-sm font-mono text-slate-500 uppercase tracking-wider mb-4">
+                            Metrics
+                        </h3>
+                        <div className="space-y-4">
+                            {project.metrics.map((metric) => (
+                                <div key={metric.label}>
+                                    <div className="flex justify-between items-baseline">
+                                        <span className="text-sm text-slate-500">
+                                            {metric.label}
+                                        </span>
+                                        <span className={cn("text-2xl font-mono font-bold", colors.text)}>
+                                            {metric.value}
+                                        </span>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Tech Stack Card */}
+                    <div
+                        className={cn(
+                            "p-6 rounded-2xl border bg-slate-900/50 flex-1",
+                            colors.border
+                        )}
+                    >
+                        <h3 className="text-sm font-mono text-slate-500 uppercase tracking-wider mb-4">
+                            Tech Stack
+                        </h3>
+                        <div className="flex flex-wrap gap-2">
+                            {project.techStack.map((tech) => (
+                                <div
+                                    key={tech.name}
+                                    className="group relative"
+                                >
+                                    <span
+                                        className={cn(
+                                            "px-3 py-1.5 rounded-lg border font-mono text-sm inline-block",
+                                            colors.border,
+                                            colors.bg,
+                                            colors.text
+                                        )}
+                                    >
+                                        {tech.name}
+                                    </span>
+                                    {/* Tooltip */}
+                                    <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 rounded bg-slate-800 text-xs text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                                        {tech.category}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </motion.article>
+    );
+}
+
+// Updated Terminal Component to handle code snippets
+export function ProjectTerminal({
+    title,
+    code,
+    language = "javascript"
+}: {
+    title: string;
+    code: string;
+    language?: string;
+}) {
+    return (
+        <div className="rounded-xl border border-slate-800 bg-[#0B0F14] overflow-hidden shadow-2xl">
+            {/* Terminal Header */}
+            <div className="flex items-center justify-between px-4 py-3 bg-slate-900 border-b border-slate-800">
+                <div className="flex gap-2">
+                    <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                    <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                    <div className="w-3 h-3 rounded-full bg-green-500/80" />
+                </div>
+                <div className="flex items-center gap-2">
+                    <FileCode className="w-4 h-4 text-slate-500" />
+                    <span className="font-mono text-xs text-slate-400">
+                        {title.toLowerCase().replace(/\s/g, "-")}.{language === "go" ? "go" : language === "python" ? "py" : "js"}
+                    </span>
+                </div>
+                <div className="w-12" /> {/* Spacer for centering */}
+            </div>
+
+            {/* Code Content */}
+            <div className="p-4 overflow-x-auto">
+                <pre className="font-mono text-sm leading-relaxed">
+                    <code className="text-slate-300">
+                        {code.split('\n').map((line, i) => (
+                            <div key={i} className="table-row">
+                                <span className="table-cell text-slate-700 select-none pr-4 text-right w-8">{i + 1}</span>
+                                <span className="table-cell whitespace-pre">{line}</span>
+                            </div>
+                        ))}
+                    </code>
+                </pre>
+            </div>
+        </div>
+    );
+}
+
+================================================================================
+
+Filename: app/engineering/page.tsx
+Content:
+import type { Metadata } from "next";
+import { Navbar, Footer } from "@/components/layout";
+import { EngineeringHero, ProjectBento, ProjectTerminal } from "./components";
+
+export const metadata: Metadata = {
+    title: "Engineering | Rudra Garg",
+    description:
+        "Production-grade applications: real-time multiplayer games, geo-location services, and backend optimization case studies.",
+};
+
+// Engineering project data
+const projects = [
+    {
+        id: "portal-gambit",
+        title: "Portal Gambit",
+        subtitle: "Real-time Chess Variant with Recursive Logic",
+        description:
+            "A complex chess variant featuring portal mechanics that allow pieces to teleport across the board. The engine handles recursive move validation to prevent infinite loops during portal traversal, synchronized in real-time via Firebase.",
+        features: [
+            "Recursive move validation algorithm for portal traversal",
+            "Optimistic UI updates with Firebase transactions",
+            "P2P Voice Chat using WebRTC (PeerJS) signaling",
+            "Automated ELO calculation via Cloud Functions",
+        ],
+        techStack: [
+            { name: "React", category: "Frontend" },
+            { name: "Firebase", category: "Real-time DB" },
+            { name: "FastAPI", category: "Backend" },
+            { name: "PeerJS", category: "WebRTC" },
+            { name: "Docker", category: "DevOps" },
+        ],
+        metrics: [
+            { label: "Test Coverage", value: "15+ Suites" },
+            { label: "Latency", value: "<100ms" },
+            { label: "Voice Quality", value: "P2P HD" },
+        ],
+        color: "orange",
+        links: {
+            demo: "#", // Add link if available
+            github: "https://github.com/Rudra-Garg/portal-gambit",
+        },
+        image: "/projects/portal-gambit.png",
+        codeSnippet: `// CustomChessEngine.js: Handling "Simultaneous Existence"
+moves({ square, verbose, visited } = {}) {
+  // Prevent infinite recursion in portal loops
+  if (!visited) visited = { portals: new Set(), simulChecked: new Set() };
+  
+  const isOnPortal = this.portals[square] !== undefined;
+  if (isOnPortal && !visited.simulChecked.has(square)) {
+    visited.hasTraversedPortal = true; 
+    const linkedSquare = this.portals[square].linkedTo;
+    
+    // Virtual move: Place piece at exit to calculate potential captures
+    const tempPiece = { ...this.get(square) };
+    this.put(tempPiece, linkedSquare);
+    
+    // Recursive call from the new perspective
+    const linkedMoves = super.moves({ square: linkedSquare, verbose: true });
+    // ... merge moves and restore board state ...
+  }
+}`
+    },
+    {
+        id: "terraquest",
+        title: "TerraQuest",
+        subtitle: "High-Concurrency Geo-Gaming Platform",
+        description:
+            "A competitive geography game built with Go. Features a high-performance worker pool for ingesting and validating 81,000+ global locations concurrently, ensuring a massive dataset for multiplayer lobbies.",
+        features: [
+            "Concurrent data ingestion using Go Worker Pools",
+            "Atomic counters for thread-safe statistics",
+            "WebSocket lobbies with mutex-locked state management",
+            "Geodesic distance calculation for scoring",
+        ],
+        techStack: [
+            { name: "Go (Gin)", category: "Backend" },
+            { name: "Vue 3", category: "Frontend" },
+            { name: "PostgreSQL", category: "Database" },
+            { name: "Gorilla WS", category: "Real-time" },
+            { name: "GORM", category: "ORM" },
+        ],
+        metrics: [
+            { label: "Locations", value: "81,000+" },
+            { label: "Concurrency", value: "Worker Pool" },
+            { label: "Lobby Size", value: "8 Players" },
+        ],
+        color: "emerald",
+        links: {
+            demo: "#",
+            github: "https://github.com/Rudra-Garg/TerraQuest",
+        },
+        image: "/projects/terraquest.png",
+        codeSnippet: `// populate_locations.go: Worker Pool Pattern
+for i := 0; i < *workerCount; i++ {
+    workerWg.Add(1)
+    go func(workerID int) {
+        defer workerWg.Done()
+        for candidate := range jobs {
+            atomic.AddInt32(&totalProcessed, 1)
+            // Validate via Google Street View API
+            if dbErr := workerBatch.Add(newLocation); dbErr != nil {
+                atomic.AddInt32(&totalErrors, 1)
+            } else {
+                atomic.AddInt32(&totalValidated, 1)
+            }
+        }
+    }(i)
+}
+// Feed jobs to buffered channel
+for i := 0; i < numToProcess; i++ { jobs <- allCandidates[i] }`
+    },
+    {
+        id: "grig-internship",
+        title: "GRIG Technologies",
+        subtitle: "Backend Optimization & Microservices",
+        description:
+            "Optimized certificate generation pipeline by implementing asynchronous processing. Migrated legacy endpoints to a scalable microservice architecture using Flask and Firebase, resulting in a 98.3% reduction in processing time.",
+        features: [
+            "Async processing for PDF generation tasks",
+            "Microservice architecture for alerts (FastAPI)",
+            "Supabase object storage evaluation and prototype",
+            "CI/CD pipelines with GitHub Actions",
+        ],
+        techStack: [
+            { name: "Python", category: "Backend" },
+            { name: "Flask", category: "API" },
+            { name: "Firebase", category: "Database" },
+            { name: "Kubernetes", category: "Orchestration" },
+            { name: "Supabase", category: "Storage" },
+        ],
+        metrics: [
+            { label: "Time Reduction", value: "98.3%" },
+            { label: "Data Efficiency", value: "+40%" },
+            { label: "APIs Built", value: "10+" },
+        ],
+        color: "cyan",
+        links: {
+            case_study: "#",
+        },
+        image: "/projects/grig.png",
+        codeSnippet: `# Flask-RESTx API Structure (Architectural Sample)
+@api.route('/certificates/generate')
+class CertificateGeneration(Resource):
+    @api.expect(cert_model)
+    def post(self):
+        """Async generation trigger"""
+        data = request.json
+        # Offload heavy PDF rendering to worker queue
+        task_id = async_worker.enqueue(
+            render_certificate, 
+            user_id=data['uid'], 
+            template=data['template']
+        )
+        return {'task_id': task_id, 'status': 'processing'}, 202`
+    },
+];
+
+export default function EngineeringPage() {
+    return (
+        <>
+            <Navbar />
+            <main className="min-h-screen pt-16">
+                <EngineeringHero />
+
+                {/* Projects Grid */}
+                <section className="py-16">
+                    <div className="max-w-7xl mx-auto px-6">
+                        <div className="space-y-24">
+                            {projects.map((project, index) => (
+                                <div key={project.id} className="space-y-8">
+                                    <ProjectBento
+                                        project={project}
+                                        index={index}
+                                        reverse={index % 2 === 1}
+                                    />
+                                    {/* Terminal for Code Evidence */}
+                                    <div className="max-w-4xl mx-auto">
+                                        <ProjectTerminal 
+                                            title={project.title}
+                                            code={project.codeSnippet}
+                                            language={project.id === "terraquest" ? "go" : project.id === "grig-internship" ? "python" : "javascript"}
+                                        />
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            </main>
+            <Footer />
+        </>
+    );
+}
+
+================================================================================
+
+Filename: app/favicon.ico
+Content: [Binary file - cannot display content]
+
+
+Filename: app/globals.css
+Content:
+@import "tailwindcss";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/500.css";
+@import "@fontsource/jetbrains-mono/600.css";
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DESIGN SYSTEM: Engineered Intelligence
+   Portfolio: Rudra Garg - Systems Researcher & Full-Stack Engineer
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Light Theme (Default) */
+:root {
+  /* Core Palette - Soft warm white */
+  --background: #FAFBFC;
+  --background-rgb: 250, 251, 252;
+  --foreground: #1E293B;
+
+  /* Surface Colors - Subtle blue-gray tints */
+  --surface: #F1F5F9;
+  --surface-elevated: #FFFFFF;
+  --surface-overlay: rgba(255, 255, 255, 0.9);
+
+  /* Accent Colors - Richer cyan/teal */
+  --accent: #0891B2;
+  --accent-dim: #0E7490;
+  --accent-glow: rgba(8, 145, 178, 0.2);
+
+  /* Text Colors */
+  --text-primary: #0F172A;
+  --text-secondary: #334155;
+  --text-muted: #64748B;
+
+  /* Borders & Lines */
+  --border: #E2E8F0;
+  --border-accent: rgba(8, 145, 178, 0.4);
+
+  /* Status Colors */
+  --success: #059669;
+  --warning: #D97706;
+  --error: #DC2626;
+
+  /* Fonts */
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+
+  /* Spacing Scale */
+  --space-unit: 4px;
+
+  /* Animation */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+/* Dark Theme */
+.dark {
+  /* Core Palette */
+  --background: #0B0F14;
+  --background-rgb: 11, 15, 20;
+  --foreground: #E2E8F0;
+
+  /* Surface Colors */
+  --surface: #111827;
+  --surface-elevated: #1E293B;
+  --surface-overlay: rgba(17, 24, 39, 0.8);
+
+  /* Accent Colors */
+  --accent: #38BDF8;
+  --accent-dim: #0EA5E9;
+  --accent-glow: rgba(56, 189, 248, 0.15);
+
+  /* Text Colors */
+  --text-primary: #F1F5F9;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+
+  /* Borders & Lines */
+  --border: #1E293B;
+  --border-accent: rgba(56, 189, 248, 0.3);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-accent: var(--accent);
+  --color-accent-dim: var(--accent-dim);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-border: var(--border);
+  --color-border-accent: var(--border-accent);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BASE STYLES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Selection */
+::selection {
+  background: var(--accent);
+  color: var(--background);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TYPOGRAPHY
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--accent) 0%, #818CF8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   COMPONENT UTILITIES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Glass Effect */
+.glass {
+  background: var(--surface-overlay);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Glow Effects */
+.glow-accent {
+  box-shadow: 0 0 20px var(--accent-glow), 0 0 40px var(--accent-glow);
+}
+
+.glow-text {
+  text-shadow: 0 0 10px var(--accent-glow), 0 0 20px var(--accent-glow);
+}
+
+/* Border Glow */
+.border-glow {
+  position: relative;
+}
+
+.border-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--accent), transparent 50%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Terminal Style */
+.terminal-text {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  letter-spacing: 0.025em;
+}
+
+.terminal-cursor {
+  display: inline-block;
+  width: 0.5em;
+  height: 1.2em;
+  background: var(--accent);
+  animation: blink 1s step-end infinite;
+  vertical-align: text-bottom;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Grid Pattern Background - Theme Aware */
+.grid-pattern {
+  background-image:
+    linear-gradient(rgba(8, 145, 178, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(8, 145, 178, 0.06) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+.dark .grid-pattern {
+  background-image:
+    linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+}
+
+/* Scanline Effect */
+.scanlines::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.1) 2px,
+      rgba(0, 0, 0, 0.1) 4px);
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SCROLLBAR
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-muted);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.6s var(--ease-out-expo) forwards;
+}
+
+================================================================================
+
+Filename: app/layout.tsx
+Content:
+import type { Metadata } from "next";
+import { ThemeProvider } from "@/components/providers";
+import "./globals.css";
+
+export const metadata: Metadata = {
+  title: "Rudra Garg | Systems Researcher & Full-Stack Engineer",
+  description:
+    "Bridging the gap between academic theory and production reality. Systems research in Fog Computing, UAV Networks, and AI/ML, with production engineering in Next.js, Go, and distributed systems.",
+  keywords: [
+    "Systems Research",
+    "Full-Stack Engineer",
+    "Fog Computing",
+    "UAV Networks",
+    "Edge Computing",
+    "LSTM",
+    "Reinforcement Learning",
+    "Next.js",
+    "Go",
+    "Docker",
+    "Kubernetes",
+  ],
+  authors: [{ name: "Rudra Garg" }],
+  openGraph: {
+    title: "Rudra Garg | Systems Researcher & Full-Stack Engineer",
+    description:
+      "Bridging the gap between academic theory and production reality.",
+    type: "website",
+  },
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body className="min-h-screen bg-white dark:bg-[#0B0F14] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300">
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
+    </html>
+  );
+}
+
+
+================================================================================
+
+Filename: app/page.tsx
+Content:
+import { Hero, MetricsTicker, SectionPreview, TechStackPreview, NetworkBackground } from "@/components/sections";
+import { Navbar, Footer } from "@/components/layout";
+
+export default function Home() {
+  return (
+    <>
+      <Navbar />
+      {/* Global Background Layer */}
+      <NetworkBackground />
+
+      {/* Content Layer - relative z-10 ensures it sits above the fixed canvas */}
+      <main className="relative z-10">
+        <Hero />
+        <MetricsTicker />
+        <SectionPreview />
+        <TechStackPreview />
+      </main>
+
+      {/* Footer Layer */}
+      <div className="relative z-10 bg-[#FAFBFC] dark:bg-[#0B0F14] transition-colors duration-300">
+        <Footer />
+      </div>
+    </>
+  );
+}
+
+================================================================================
+
+Filename: app/research/components.tsx
+Content:
+"use client";
+
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
+import {
+    FlaskConical,
+    Cpu,
+    Network,
+    Brain,
+    FileText,
+    ExternalLink,
+    ChevronRight,
+} from "lucide-react";
+
+export function ResearchHero() {
+    return (
+        <section className="relative py-24 overflow-hidden">
+            {/* Background */}
+            <div className="absolute inset-0 grid-pattern opacity-30" />
+            <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/5 via-transparent to-transparent" />
+
+            <div className="relative max-w-7xl mx-auto px-6">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                >
+                    {/* Breadcrumb */}
+                    <div className="flex items-center gap-2 text-sm text-slate-500 mb-8">
+                        <a href="/" className="hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors">
+                            Home
+                        </a>
+                        <ChevronRight className="w-4 h-4" />
+                        <span className="text-cyan-600 dark:text-cyan-400">Research</span>
+                    </div>
+
+                    {/* Header */}
+                    <div className="flex items-center gap-4 mb-6">
+                        <div className="w-14 h-14 rounded-xl bg-cyan-500/10 flex items-center justify-center">
+                            <FlaskConical className="w-7 h-7 text-cyan-600 dark:text-cyan-400" />
+                        </div>
+                        <div>
+                            <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-100">
+                                Research Labs
+                            </h1>
+                            <p className="text-slate-500 font-mono text-sm mt-1">
+                                /experimental/reports
+                            </p>
+                        </div>
+                    </div>
+
+                    <p className="text-xl text-slate-600 dark:text-slate-400 max-w-3xl mb-12">
+                        Deep-dive systems research in distributed architectures, fog computing, and AI/ML.
+                        Each project is backed by rigorous simulations, technical reports, and quantifiable metrics.
+                    </p>
+
+                    {/* Research Areas */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        {[
+                            {
+                                icon: Network,
+                                label: "Distributed Systems",
+                                desc: "Fog Computing, Edge Networks",
+                            },
+                            {
+                                icon: Cpu,
+                                label: "UAV Networks",
+                                desc: "Mobility, Caching, RL Agents",
+                            },
+                            {
+                                icon: Brain,
+                                label: "AI/NLU",
+                                desc: "NER, Intent Classification",
+                            },
+                        ].map((area, index) => (
+                            <motion.div
+                                key={area.label}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
+                                className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/30"
+                            >
+                                <div className="flex items-center gap-3">
+                                    <area.icon className="w-5 h-5 text-cyan-600 dark:text-cyan-400" />
+                                    <div>
+                                        <p className="font-medium text-slate-800 dark:text-slate-200">{area.label}</p>
+                                        <p className="text-sm text-slate-500">{area.desc}</p>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </motion.div>
+            </div>
+        </section>
+    );
+}
+
+// ... ProjectCard (unchanged)
+
+interface ProjectDetailsProps {
+    project: {
+        id: string;
+        title: string;
+        subtitle: string;
+        description: string;
+        metrics: { label: string; value: string }[];
+        techStack: string[];
+        decisions: { decision: string; tradeoff: string; outcome: string }[];
+        architecture: string;
+        color: string;
+        status: string;
+    };
+    index: number;
+}
+
+export function ProjectDetails({ project, index }: ProjectDetailsProps) {
+    const colorClasses = {
+        cyan: {
+            border: "border-cyan-500/30",
+            bg: "bg-cyan-500/5",
+            text: "text-cyan-400",
+            glow: "shadow-cyan-500/10",
+        },
+        emerald: {
+            border: "border-emerald-500/30",
+            bg: "bg-emerald-500/5",
+            text: "text-emerald-400",
+            glow: "shadow-emerald-500/10",
+        },
+        violet: {
+            border: "border-violet-500/30",
+            bg: "bg-violet-500/5",
+            text: "text-violet-400",
+            glow: "shadow-violet-500/10",
+        },
+    };
+
+    const colors = colorClasses[project.color as keyof typeof colorClasses];
+
+    return (
+        <motion.article
+            id={project.id}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, delay: index * 0.1 }}
+            className="scroll-mt-24"
+        >
+            {/* Project Header */}
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
+                <div>
+                    <div className="flex items-center gap-3 mb-2">
+                        <span
+                            className={cn(
+                                "px-3 py-1 rounded-full text-xs font-mono border",
+                                colors.border,
+                                colors.bg,
+                                colors.text
+                            )}
+                        >
+                            {project.status}
+                        </span>
+                        <span className="text-slate-600 font-mono text-sm">
+                            #{String(index + 1).padStart(2, "0")}
+                        </span>
+                    </div>
+                    <h2 className={cn("text-4xl font-bold mb-2", colors.text)}>
+                        {project.title}
+                    </h2>
+                    <p className="text-xl text-slate-400">{project.subtitle}</p>
+                </div>
+
+                {/* Metrics summary */}
+                <div className="flex gap-6">
+                    {project.metrics.map((metric) => (
+                        <div key={metric.label} className="text-right">
+                            <p className={cn("text-2xl font-mono font-bold", colors.text)}>
+                                {metric.value}
+                            </p>
+                            <p className="text-xs text-slate-500">{metric.label}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            {/* Content Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                {/* Main Content */}
+                <div className="lg:col-span-2 space-y-6">
+                    {/* Description */}
+                    <div
+                        className={cn(
+                            "p-6 rounded-2xl border bg-slate-50/50 dark:bg-slate-900/50",
+                            colors.border
+                        )}
+                    >
+                        <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-3">
+                            Overview
+                        </h3>
+                        <p className="text-slate-400 leading-relaxed">
+                            {project.description}
+                        </p>
+                    </div>
+
+                    {/* Architecture Diagram */}
+                    <div
+                        className={cn(
+                            "p-6 rounded-2xl border bg-slate-900/50",
+                            colors.border
+                        )}
+                    >
+                        <h3 className="text-lg font-semibold text-slate-200 mb-4">
+                            Architecture
+                        </h3>
+                        <div className="overflow-x-auto">
+                            <pre className="font-mono text-xs text-slate-400 leading-relaxed whitespace-pre">
+                                {project.architecture}
+                            </pre>
+                        </div>
+                    </div>
+
+                    {/* Technical Decisions */}
+                    <div
+                        className={cn(
+                            "p-6 rounded-2xl border bg-slate-900/50",
+                            colors.border
+                        )}
+                    >
+                        <h3 className="text-lg font-semibold text-slate-200 mb-4">
+                            Technical Decisions
+                        </h3>
+                        <div className="overflow-x-auto">
+                            <table className="w-full text-sm">
+                                <thead>
+                                    <tr className="border-b border-slate-800">
+                                        <th className="text-left py-3 px-4 font-mono text-slate-500 uppercase tracking-wider text-xs">
+                                            Decision
+                                        </th>
+                                        <th className="text-left py-3 px-4 font-mono text-slate-500 uppercase tracking-wider text-xs">
+                                            Trade-off
+                                        </th>
+                                        <th className="text-left py-3 px-4 font-mono text-slate-500 uppercase tracking-wider text-xs">
+                                            Outcome
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {project.decisions.map((row, i) => (
+                                        <tr
+                                            key={i}
+                                            className="border-b border-slate-800/50 last:border-0"
+                                        >
+                                            <td className="py-4 px-4 text-slate-300 font-medium">
+                                                {row.decision}
+                                            </td>
+                                            <td className="py-4 px-4 text-slate-500">
+                                                {row.tradeoff}
+                                            </td>
+                                            <td className={cn("py-4 px-4", colors.text)}>
+                                                {row.outcome}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Sidebar */}
+                <div className="space-y-6">
+                    {/* Tech Stack */}
+                    <div
+                        className={cn(
+                            "p-6 rounded-2xl border bg-slate-900/50",
+                            colors.border
+                        )}
+                    >
+                        <h3 className="text-lg font-semibold text-slate-200 mb-4">
+                            Tech Stack
+                        </h3>
+                        <div className="flex flex-wrap gap-2">
+                            {project.techStack.map((tech) => (
+                                <span
+                                    key={tech}
+                                    className={cn(
+                                        "px-3 py-1.5 rounded-lg border font-mono text-sm",
+                                        colors.border,
+                                        colors.bg,
+                                        colors.text
+                                    )}
+                                >
+                                    {tech}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Quick Stats */}
+                    <div
+                        className={cn(
+                            "p-6 rounded-2xl border bg-slate-900/50",
+                            colors.border
+                        )}
+                    >
+                        <h3 className="text-lg font-semibold text-slate-200 mb-4">
+                            Key Metrics
+                        </h3>
+                        <div className="space-y-4">
+                            {project.metrics.map((metric) => (
+                                <div key={metric.label}>
+                                    <div className="flex justify-between items-baseline mb-1">
+                                        <span className="text-sm text-slate-500">
+                                            {metric.label}
+                                        </span>
+                                        <span className={cn("font-mono font-bold", colors.text)}>
+                                            {metric.value}
+                                        </span>
+                                    </div>
+                                    <div className="h-1 rounded-full bg-slate-800 overflow-hidden">
+                                        <div
+                                            className={cn("h-full rounded-full", colors.bg)}
+                                            style={{
+                                                width: metric.value.includes("%")
+                                                    ? metric.value.replace("~", "")
+                                                    : "100%",
+                                                background: `linear-gradient(90deg, var(--${project.color}-400), var(--${project.color}-600))`,
+                                            }}
+                                        />
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Links */}
+                    <div
+                        className={cn(
+                            "p-6 rounded-2xl border bg-slate-900/50",
+                            colors.border
+                        )}
+                    >
+                        <h3 className="text-lg font-semibold text-slate-200 mb-4">
+                            Resources
+                        </h3>
+                        <div className="space-y-2">
+                            <a
+                                href="#"
+                                className="flex items-center gap-2 p-3 rounded-lg bg-slate-800/50 text-slate-400 hover:text-cyan-400 transition-colors"
+                            >
+                                <FileText className="w-4 h-4" />
+                                <span className="text-sm">View Project Report</span>
+                                <ExternalLink className="w-3 h-3 ml-auto" />
+                            </a>
+                            <a
+                                href="#"
+                                className="flex items-center gap-2 p-3 rounded-lg bg-slate-800/50 text-slate-400 hover:text-cyan-400 transition-colors"
+                            >
+                                <Cpu className="w-4 h-4" />
+                                <span className="text-sm">Source Code</span>
+                                <ExternalLink className="w-3 h-3 ml-auto" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </motion.article>
+    );
+}
+
+================================================================================
+
+Filename: app/research/page.tsx
+Content:
+import type { Metadata } from "next";
+import { Navbar, Footer } from "@/components/layout";
+import { ResearchHero, ProjectDetails } from "./components";
+
+export const metadata: Metadata = {
+    title: "Research Labs | Rudra Garg",
+    description:
+        "Academic research projects in Fog Computing, UAV Edge Networks, and Voice NLU. Rigorous simulations, benchmarks, and technical reports.",
+};
+
+// Research project data
+const projects = [
+    {
+        id: "loki",
+        title: "LOKI",
+        subtitle: "Desktop-Native Voice Assistant with Hybrid NLU",
+        description:
+            "A privacy-first, offline-capable voice assistant that outperforms cloud-dependent alternatives in latency and system integration. Features a novel hybrid NLU engine that combines a fast embedding-based classifier with a local LLM fallback for complex intent understanding.",
+        metrics: [
+            { label: "NER F1-Score", value: "99.77%" },
+            { label: "Precision", value: "99.77%" },
+            { label: "Samples", value: "1389" },
+        ],
+        techStack: ["Python", "Faster-Whisper", "Sentence-Transformers", "Ollama (LLM)", "sklearn-crfsuite"],
+        decisions: [
+            {
+                decision: "Hybrid NLU Architecture",
+                tradeoff: "Complexity vs Latency/Accuracy",
+                outcome:
+                    "Used 'FastClassifier' (Embeddings) for common commands (<60ms) and 'LLMClassifier' (Ollama) only for complex queries, balancing speed and flexibility.",
+            },
+            {
+                decision: "Synthetic Data Generation",
+                tradeoff: "Realism vs Training Volume",
+                outcome:
+                    "Generated 1389 labeled sentences to train the CRF model, achieving 99.77% F1-score on parameter extraction without expensive manual labeling.",
+            },
+            {
+                decision: "Agent-Based Dispatch",
+                tradeoff: "Monolithic vs Modular",
+                outcome:
+                    "Decoupled NLU from execution. New capabilities (e.g., Volume Control, Calculator) can be added as independent agents without retraining the core model.",
+            },
+        ],
+        architecture: `┌─────────────────────────────────────────────────────────────┐
+│                    LOKI Hybrid NLU Pipeline                  │
+├─────────────────────────────────────────────────────────────┤
+│  ┌─────────────┐                                           │
+│  │ Voice Input │                                           │
+│  └──────┬──────┘                                           │
+│         │ (Faster-Whisper)                                 │
+│         ▼                                                  │
+│  ┌─────────────┐    Confidence > 0.6?    ┌────────────────┐│
+│  │ Transcript  │ ───────────┬──────────▶ │ FastClassifier ││
+│  └─────────────┘            │            │ (Embeddings)   ││
+│                             │            └───────┬────────┘│
+│                             │                    │         │
+│                             ▼                    │         │
+│                    ┌────────────────┐            │         │
+│                    │ LLM Fallback   │            │         │
+│                    │ (Ollama/Phi)   │            │         │
+│                    └────────┬───────┘            │         │
+│                             │                    │         │
+│                             ▼                    ▼         │
+│                    ┌────────────────────────────────────┐  │
+│                    │      Intent & Parameter Merger     │  │
+│                    └────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────┘`,
+        color: "violet",
+        status: "Project Completed",
+    },
+    {
+        id: "muceds",
+        title: "MUCEDS",
+        subtitle: "Multi-UAV Cost-Efficient Deployment Scheme",
+        description:
+            "A joint optimization framework for UAV-assisted Vehicular Edge Computing Networks (VECNs). Integrates realistic mobility modeling (SUMO) with Hierarchical Reinforcement Learning (HRL) and LSTM-based predictive caching to minimize latency and maximize system profit.",
+        metrics: [
+            { label: "Cache Hit Ratio", value: "~90%" },
+            { label: "Profit Increase", value: "4x vs Base" },
+            { label: "Latency", value: "~21 Steps" },
+        ],
+        techStack: ["Python", "PyTorch", "SUMO", "TraCI", "DDQN", "MADDPG", "LSTM"],
+        decisions: [
+            {
+                decision: "Hierarchical RL (HRL)",
+                tradeoff: "Training Stability vs Control Granularity",
+                outcome:
+                    "Decomposed problem: DDQN (Outer) optimizes UAV count (Strategic), while MADDPG (Inner) optimizes position (Tactical). Stabilized training convergence.",
+            },
+            {
+                decision: "Spatial-Temporal LSTM",
+                tradeoff: "Compute Overhead vs Reactive Caching",
+                outcome:
+                    "Predictive caching based on user request patterns increased Cache Hit Ratio from ~20% (Zipf) to ~90%, significantly reducing cloud backhaul costs.",
+            },
+            {
+                decision: "SUMO Integration",
+                tradeoff: "Simulation Complexity vs Realism",
+                outcome:
+                    "Replaced random waypoint models with real city topologies (Delhi, Mumbai). Proved UAVs could learn to track realistic traffic hotspots.",
+            },
+        ],
+        architecture: `┌─────────────────────────────────────────────────────────────┐
+│                    MUCEDS Control Loop                       │
+├─────────────────────────────────────────────────────────────┤
+│  ┌──────────────┐       ┌──────────────┐      ┌───────────┐ │
+│  │  SUMO World  │◀─────▶│ Python Agent │◀────▶│ Prediction│ │
+│  │ (Real Maps)  │       │ (HRL Control)│      │  (LSTM)   │ │
+│  └──────┬───────┘       └──────┬───────┘      └───────────┘ │
+│         │                      │                            │
+│         ▼                      ▼                            │
+│  Traffic Density        Action (Count, Vel)                 │
+│         │                      │                            │
+│         └──────────┬───────────┘                            │
+│                    ▼                                        │
+│           ┌──────────────────┐                              │
+│           │ System Reward    │                              │
+│           │ (Profit - Cost)  │                              │
+│           └──────────────────┘                              │
+└─────────────────────────────────────────────────────────────┘`,
+        color: "cyan",
+        status: "Simulation Study",
+    },
+    {
+        id: "gvmp",
+        title: "GVMP",
+        subtitle: "Gateway Validation Module Placement",
+        description:
+            "A novel sibling-aware placement strategy for Fog Computing. Unlike standard Edge-Ward placement which pushes tasks to the cloud when a node is full, GVMP validates resources on neighboring 'sibling' nodes via the gateway, keeping processing at the edge.",
+        metrics: [
+            { label: "Network Reduction", value: "95%" },
+            { label: "E2E Latency", value: "Low (Edge)" },
+            { label: "Load Balance", value: "Optimized" },
+        ],
+        techStack: ["iFogSim", "Docker", "Linux TC", "Prometheus", "Grafana"],
+        decisions: [
+            {
+                decision: "Sibling-Awareness",
+                tradeoff: "Search Complexity vs Network Load",
+                outcome:
+                    "Checking sibling nodes before cloud offloading reduced network usage by 89-95% compared to EWMP, as proven in iFogSim simulations.",
+            },
+            {
+                decision: "Virtual Testbed Validation",
+                tradeoff: "Implementation Effort vs Simulation Only",
+                outcome:
+                    "Built a 15-container Docker testbed with Linux Traffic Control (tc) to validate findings. Confirmed 16ms Edge latency vs 5600ms Cloud latency.",
+            },
+        ],
+        architecture: `┌─────────────────────────────────────────────────────────────┐
+│                    GVMP Placement Logic                      │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│       [Cloud]  <---- (3) Only if siblings full              │
+│          ▲                                                  │
+│          │                                                  │
+│      [Gateway]  <--- (2) Check Siblings via Gateway         │
+│      /       \                                              │
+│     /         \                                             │
+│ [Edge 1] -- [Edge 2]                                        │
+│    ▲           ▲                                            │
+│    │           │                                            │
+│  Task 1      (1) Try Local First                            │
+│                                                             │
+│  Result: Task stays in Fog Layer, avoiding Cloud Backhaul   │
+└─────────────────────────────────────────────────────────────┘`,
+        color: "emerald",
+        status: "Report Available",
+    },
+];
+
+export default function ResearchPage() {
+    return (
+        <>
+            <Navbar />
+            <main className="min-h-screen pt-16">
+                <ResearchHero />
+
+                {/* Projects */}
+                <section className="py-16">
+                    <div className="max-w-7xl mx-auto px-6">
+                        <div className="space-y-24">
+                            {projects.map((project, index) => (
+                                <ProjectDetails
+                                    key={project.id}
+                                    project={project}
+                                    index={index}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            </main>
+            <Footer />
+        </>
+    );
+}
+
+================================================================================
+
+Filename: components/layout/Navigation.tsx
+Content:
+"use client";
+
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { ThemeToggle } from "@/components/ui";
+import {
+    Menu,
+    X,
+    Cpu,
+    FlaskConical,
+    Wrench,
+    User,
+    Github,
+    Linkedin,
+    Mail,
+} from "lucide-react";
+
+const navigation = [
+    { name: "Research", href: "/research", icon: FlaskConical },
+    { name: "Engineering", href: "/engineering", icon: Wrench },
+    { name: "The Kernel", href: "/about", icon: User },
+];
+
+const socials = [
+    { name: "GitHub", href: "https://github.com/rudra-garg", icon: Github },
+    { name: "LinkedIn", href: "https://linkedin.com/in/rudra-garg", icon: Linkedin },
+    { name: "Email", href: "mailto:rudra@example.com", icon: Mail },
+];
+
+export function Navbar() {
+    const [isOpen, setIsOpen] = useState(false);
+
+    return (
+        <header className="fixed top-0 left-0 right-0 z-50">
+            {/* Backdrop blur */}
+            <div className="absolute inset-0 bg-[#FAFBFC]/90 dark:bg-[#0B0F14]/80 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800/50 shadow-sm dark:shadow-none transition-colors duration-300" />
+
+            <nav className="relative max-w-7xl mx-auto px-6">
+                <div className="flex items-center justify-between h-16">
+                    {/* Logo */}
+                    <Link
+                        href="/"
+                        className="flex items-center gap-2 text-slate-800 dark:text-slate-100 hover:text-cyan-700 dark:hover:text-cyan-400 transition-colors"
+                    >
+                        <Cpu className="w-6 h-6 text-cyan-700 dark:text-cyan-400" />
+                        <span className="font-mono font-bold text-lg">RG</span>
+                    </Link>
+
+                    {/* Desktop Navigation */}
+                    <div className="hidden md:flex items-center gap-1">
+                        {navigation.map((item) => (
+                            <Link
+                                key={item.name}
+                                href={item.href}
+                                className="flex items-center gap-2 px-4 py-2 text-sm text-slate-700 dark:text-slate-400 hover:text-cyan-700 dark:hover:text-cyan-400 rounded-lg hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-all"
+                            >
+                                <item.icon className="w-4 h-4" />
+                                {item.name}
+                            </Link>
+                        ))}
+                    </div>
+
+                    {/* Desktop Socials & Theme Toggle */}
+                    <div className="hidden md:flex items-center gap-2">
+                        {socials.map((item) => (
+                            <a
+                                key={item.name}
+                                href={item.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="p-2 text-slate-600 dark:text-slate-500 hover:text-cyan-700 dark:hover:text-cyan-400 rounded-lg hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-all"
+                                aria-label={item.name}
+                            >
+                                <item.icon className="w-5 h-5" />
+                            </a>
+                        ))}
+                        <div className="w-px h-6 bg-slate-300 dark:bg-slate-700 mx-1" />
+                        <ThemeToggle />
+                    </div>
+
+                    {/* Mobile Menu Button */}
+                    <div className="md:hidden flex items-center gap-2">
+                        <ThemeToggle />
+                        <button
+                            className="p-2 text-slate-700 dark:text-slate-400 hover:text-cyan-700 dark:hover:text-cyan-400 rounded-lg hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-all"
+                            onClick={() => setIsOpen(!isOpen)}
+                            aria-label="Toggle menu"
+                        >
+                            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                        </button>
+                    </div>
+                </div>
+            </nav>
+
+            {/* Mobile Menu */}
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="md:hidden relative bg-[#FAFBFC]/98 dark:bg-[#0B0F14]/95 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800/50 transition-colors duration-300"
+                    >
+                        <div className="px-6 py-4 space-y-2">
+                            {navigation.map((item) => (
+                                <Link
+                                    key={item.name}
+                                    href={item.href}
+                                    className="flex items-center gap-3 px-4 py-3 text-slate-800 dark:text-slate-300 hover:text-cyan-700 dark:hover:text-cyan-400 rounded-lg hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-all"
+                                    onClick={() => setIsOpen(false)}
+                                >
+                                    <item.icon className="w-5 h-5" />
+                                    {item.name}
+                                </Link>
+                            ))}
+
+                            <div className="pt-4 border-t border-slate-200/80 dark:border-slate-800">
+                                <div className="flex items-center gap-4">
+                                    {socials.map((item) => (
+                                        <a
+                                            key={item.name}
+                                            href={item.href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="p-2 text-slate-500 hover:text-cyan-500 dark:hover:text-cyan-400 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all"
+                                            aria-label={item.name}
+                                        >
+                                            <item.icon className="w-5 h-5" />
+                                        </a>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </header>
+    );
+}
+
+export function Footer() {
+    return (
+        <footer className="relative py-12 border-t border-slate-200/80 dark:border-slate-800/50 transition-colors duration-300">
+            <div className="max-w-7xl mx-auto px-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    {/* Brand */}
+                    <div>
+                        <Link href="/" className="flex items-center gap-2 mb-4">
+                            <Cpu className="w-6 h-6 text-cyan-700 dark:text-cyan-400" />
+                            <span className="font-mono font-bold text-lg text-slate-800 dark:text-slate-100">
+                                Rudra Garg
+                            </span>
+                        </Link>
+                        <p className="text-sm text-slate-600 dark:text-slate-500 max-w-xs">
+                            Systems Researcher & Full-Stack Engineer. Bridging theory and
+                            production.
+                        </p>
+                    </div>
+
+                    {/* Navigation */}
+                    <div>
+                        <h3 className="font-mono text-sm text-slate-700 dark:text-slate-400 uppercase tracking-wider mb-4">
+                            Navigation
+                        </h3>
+                        <ul className="space-y-2">
+                            {navigation.map((item) => (
+                                <li key={item.name}>
+                                    <Link
+                                        href={item.href}
+                                        className="text-sm text-slate-600 dark:text-slate-500 hover:text-cyan-700 dark:hover:text-cyan-400 transition-colors"
+                                    >
+                                        {item.name}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {/* Contact */}
+                    <div>
+                        <h3 className="font-mono text-sm text-slate-700 dark:text-slate-400 uppercase tracking-wider mb-4">
+                            Connect
+                        </h3>
+                        <div className="flex items-center gap-3">
+                            {socials.map((item) => (
+                                <a
+                                    key={item.name}
+                                    href={item.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="p-2 text-slate-600 dark:text-slate-500 hover:text-cyan-700 dark:hover:text-cyan-400 rounded-lg hover:bg-slate-100/80 dark:hover:bg-slate-800/50 transition-all"
+                                    aria-label={item.name}
+                                >
+                                    <item.icon className="w-5 h-5" />
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+                {/* Bottom */}
+                <div className="mt-12 pt-8 border-t border-slate-200/80 dark:border-slate-800/50 flex flex-col md:flex-row items-center justify-between gap-4">
+                    <p className="text-sm text-slate-600 dark:text-slate-600">
+                        © {new Date().getFullYear()} Rudra Garg. All rights reserved.
+                    </p>
+                    <p className="font-mono text-xs text-slate-500 dark:text-slate-700">
+                        Built with Next.js • Tailwind • Framer Motion
+                    </p>
+                </div>
+            </div>
+        </footer>
+    );
+}
+
+
+================================================================================
+
+Filename: components/layout/index.ts
+Content:
+export { Navbar, Footer } from "./Navigation";
+
+
+================================================================================
+
+Filename: components/sections/Hero.tsx
+Content:
+"use client";
+
+import { useEffect, useRef, useCallback } from "react";
+import { motion } from "framer-motion";
+
+interface Point {
+    x: number;
+    y: number;
+    vx: number;
+    vy: number;
+    baseX: number;
+    baseY: number;
+    size: number;
+    targetSize: number;
+}
+
+const SPACING = 30;
+const CONNECTION_DISTANCE = SPACING * 1.5;
+const MOUSE_RADIUS = 200; // Increased radius for better visibility behind text
+const SPRING_STIFFNESS = 0.05; // Softer spring for smoother background feel
+const FRICTION = 0.90;
+
+export function NetworkBackground() {
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+    const pointsRef = useRef<Point[]>([]);
+    const animationRef = useRef<number>(0);
+    // Mouse ref tracks viewport coordinates directly
+    const mouseRef = useRef({ x: -1000, y: -1000 });
+
+    const initPoints = useCallback((width: number, height: number) => {
+        const points: Point[] = [];
+        const cols = Math.ceil(width / SPACING) + 2; // Add buffer
+        const rows = Math.ceil(height / SPACING) + 2;
+
+        const offsetX = (width - (cols - 1) * SPACING) / 2;
+        const offsetY = (height - (rows - 1) * SPACING) / 2;
+
+        for (let i = 0; i < cols; i++) {
+            for (let j = 0; j < rows; j++) {
+                const x = offsetX + i * SPACING;
+                const y = offsetY + j * SPACING;
+                points.push({
+                    x,
+                    y,
+                    vx: 0,
+                    vy: 0,
+                    baseX: x,
+                    baseY: y,
+                    size: 1.5,
+                    targetSize: 1.5
+                });
+            }
+        }
+        return points;
+    }, []);
+
+    const draw = useCallback(
+        (ctx: CanvasRenderingContext2D, width: number, height: number) => {
+            ctx.clearRect(0, 0, width, height);
+
+            const points = pointsRef.current;
+            const mouse = mouseRef.current;
+
+            // Physics & Updates
+            for (let i = 0; i < points.length; i++) {
+                const p = points[i];
+
+                // Mouse Interaction (Global Window Coordinates)
+                const dx = mouse.x - p.x;
+                const dy = mouse.y - p.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+
+                if (dist < MOUSE_RADIUS) {
+                    const forceDirectionX = dx / dist;
+                    const forceDirectionY = dy / dist;
+                    const force = (MOUSE_RADIUS - dist) / MOUSE_RADIUS;
+                    // Move away from mouse
+                    const moveX = -forceDirectionX * force * 5;
+                    const moveY = -forceDirectionY * force * 5;
+
+                    p.vx += moveX;
+                    p.vy += moveY;
+                    p.targetSize = 3.5; // Zoom effect on hover
+                } else {
+                    p.targetSize = 1.5;
+                }
+
+                // Spring physics to return to base
+                const springX = (p.baseX - p.x) * SPRING_STIFFNESS;
+                const springY = (p.baseY - p.y) * SPRING_STIFFNESS;
+
+                p.vx += springX;
+                p.vy += springY;
+
+                // Friction
+                p.vx *= FRICTION;
+                p.vy *= FRICTION;
+
+                // Update position
+                p.x += p.vx;
+                p.y += p.vy;
+
+                // Smooth size transition
+                p.size += (p.targetSize - p.size) * 0.1;
+            }
+
+            // Draw Connections (Grid Lines)
+            ctx.beginPath();
+            // Check if dark mode by looking at document class
+            const isDark = document.documentElement.classList.contains('dark');
+            ctx.strokeStyle = isDark ? "rgba(56, 189, 248, 0.08)" : "rgba(14, 165, 233, 0.12)";
+            ctx.lineWidth = 0.5;
+
+            for (let i = 0; i < points.length; i++) {
+                const p1 = points[i];
+                // Check right neighbor and bottom neighbor (simulated)
+                // Since points are grid-ordered, we can optimize, but distance check is robust against distortion
+                for (let j = i + 1; j < points.length; j++) {
+                    const p2 = points[j];
+                    const dx = p1.x - p2.x;
+                    const dy = p1.y - p2.y;
+
+                    if (Math.abs(dx) > CONNECTION_DISTANCE || Math.abs(dy) > CONNECTION_DISTANCE) continue;
+
+                    const distSq = dx * dx + dy * dy;
+                    if (distSq < CONNECTION_DISTANCE * CONNECTION_DISTANCE) {
+                        ctx.moveTo(p1.x, p1.y);
+                        ctx.lineTo(p2.x, p2.y);
+                    }
+                }
+            }
+            ctx.stroke();
+
+            // Draw Nodes
+            for (let i = 0; i < points.length; i++) {
+                const p = points[i];
+                ctx.beginPath();
+                // Color shift based on size/activity and theme
+                if (p.size > 2) {
+                    ctx.fillStyle = isDark
+                        ? `rgba(56, 189, 248, ${0.4 + (p.size - 1.5) / 5})`
+                        : `rgba(14, 165, 233, ${0.5 + (p.size - 1.5) / 5})`;
+                } else {
+                    ctx.fillStyle = isDark ? "rgba(148, 163, 184, 0.1)" : "rgba(71, 85, 105, 0.15)";
+                }
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        },
+        []
+    );
+
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return;
+
+        const resizeCanvas = () => {
+            // Full viewport sizing
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            pointsRef.current = initPoints(canvas.width, canvas.height);
+        };
+
+        // Track mouse globally on window
+        const handleMouseMove = (e: MouseEvent) => {
+            mouseRef.current = {
+                x: e.clientX,
+                y: e.clientY,
+            };
+        };
+
+        const handleMouseLeave = () => {
+            mouseRef.current = { x: -1000, y: -1000 };
+        }
+
+        window.addEventListener("resize", resizeCanvas);
+        window.addEventListener("mousemove", handleMouseMove);
+        window.addEventListener("mouseout", handleMouseLeave);
+
+        // Initial setup
+        resizeCanvas();
+
+        const animate = () => {
+            if (canvas) {
+                draw(ctx, canvas.width, canvas.height);
+            }
+            animationRef.current = requestAnimationFrame(animate);
+        };
+
+        animationRef.current = requestAnimationFrame(animate);
+
+        return () => {
+            window.removeEventListener("resize", resizeCanvas);
+            window.removeEventListener("mousemove", handleMouseMove);
+            window.removeEventListener("mouseout", handleMouseLeave);
+            cancelAnimationFrame(animationRef.current);
+        };
+    }, [initPoints, draw]);
+
+    return (
+        <canvas
+            ref={canvasRef}
+            className="fixed inset-0 z-0 pointer-events-none"
+            style={{ width: "100vw", height: "100vh" }}
+        />
+    );
+}
+
+// Deprecated export for backward compatibility if needed, but we'll update index.ts
+export const NetworkCanvas = NetworkBackground;
+
+export function Hero() {
+    return (
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden z-10 pointer-events-none">
+            {/* Gradient Overlays - Better blending for both themes */}
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#FAFBFC]/50 to-[#FAFBFC] dark:via-transparent dark:to-[#0B0F14]/90 transition-colors duration-300" />
+
+            {/* Content */}
+            <div className="relative z-10 max-w-5xl mx-auto px-6 text-center pointer-events-auto">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                >
+                    {/* Terminal-style prefix */}
+                    <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border border-cyan-600/20 dark:border-cyan-500/20 bg-white/80 dark:bg-slate-900/50 backdrop-blur-md shadow-sm dark:shadow-none transition-colors duration-300">
+                        <span className="w-2 h-2 rounded-full bg-cyan-600 dark:bg-cyan-400 animate-pulse" />
+                        <span className="font-mono text-sm text-cyan-700 dark:text-cyan-400">
+                            systems.init()
+                        </span>
+                    </div>
+
+                    {/* Name */}
+                    <h1 className="text-5xl md:text-7xl font-bold mb-4 tracking-tight">
+                        <span className="text-slate-900 dark:text-slate-100">Rudra</span>{" "}
+                        <span className="text-gradient">Garg</span>
+                    </h1>
+
+                    {/* Title */}
+                    <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-400 mb-6 font-medium">
+                        Systems Researcher & Full-Stack Engineer
+                    </p>
+
+                    {/* Tagline */}
+                    <p className="text-lg md:text-xl text-slate-600 dark:text-slate-500 max-w-2xl mx-auto mb-8 leading-relaxed">
+                        Bridging the gap between{" "}
+                        <span className="text-cyan-700 dark:text-cyan-400 font-medium">academic theory</span> and{" "}
+                        <span className="text-cyan-700 dark:text-cyan-400 font-medium">production reality</span>
+                    </p>
+
+                    {/* CTA Buttons */}
+                    <motion.div
+                        className="flex flex-wrap gap-4 justify-center"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                    >
+                        <a
+                            href="/research"
+                            className="group relative px-6 py-3 font-medium text-white bg-cyan-700 dark:bg-cyan-500 rounded-lg overflow-hidden transition-all hover:bg-cyan-600 dark:hover:bg-cyan-400 shadow-lg shadow-cyan-700/25 dark:shadow-cyan-500/25 hover:shadow-xl hover:shadow-cyan-700/30 dark:hover:shadow-cyan-500/30"
+                        >
+                            <span className="relative z-10 flex items-center gap-2">
+                                <span>View Research</span>
+                                <svg
+                                    className="w-4 h-4 transition-transform group-hover:translate-x-1"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                                    />
+                                </svg>
+                            </span>
+                        </a>
+                        <a
+                            href="/engineering"
+                            className="group px-6 py-3 font-medium text-slate-700 dark:text-slate-300 border-2 border-slate-300 dark:border-slate-700 rounded-lg transition-all hover:border-cyan-600 dark:hover:border-cyan-500/50 hover:text-cyan-700 dark:hover:text-cyan-400 hover:bg-cyan-50 dark:hover:bg-slate-800/50"
+                        >
+                            <span className="flex items-center gap-2">
+                                <span>Engineering Work</span>
+                                <svg
+                                    className="w-4 h-4 transition-transform group-hover:translate-x-1"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                                    />
+                                </svg>
+                            </span>
+                        </a>
+                    </motion.div>
+                </motion.div>
+
+                {/* Scroll Indicator */}
+                <motion.div
+                    className="absolute bottom-8 left-1/2 -translate-x-1/2"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1, duration: 0.8 }}
+                >
+                    <div className="flex flex-col items-center gap-2 text-slate-400 dark:text-slate-600">
+                        <span className="text-[10px] font-mono uppercase tracking-widest">Initialize Scroll</span>
+                        <div className="w-px h-12 bg-gradient-to-b from-cyan-600/60 dark:from-cyan-500/50 to-transparent" />
+                    </div>
+                </motion.div>
+            </div>
+        </section>
+    );
+}
+
+================================================================================
+
+Filename: components/sections/MetricsTicker.tsx
+Content:
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
+
+interface Metric {
+    value: string;
+    label: string;
+    project: string;
+    icon: React.ReactNode;
+}
+
+const metrics: Metric[] = [
+    {
+        value: "98.3%",
+        label: "Processing Time Reduction",
+        project: "GRIG Technologies",
+        icon: (
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+        ),
+    },
+    {
+        value: "95%",
+        label: "Network Usage Reduction",
+        project: "Fog Computing / GVMP",
+        icon: (
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+            </svg>
+        ),
+    },
+    {
+        value: "99.77%",
+        label: "NER F1-Score",
+        project: "LOKI Voice Assistant",
+        icon: (
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+            </svg>
+        ),
+    },
+    {
+        value: "~90%",
+        label: "Cache Hit Ratio",
+        project: "UAV / MUCEDS",
+        icon: (
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+            </svg>
+        ),
+    },
+    {
+        value: "81,000+",
+        label: "Locations Validated",
+        project: "TerraQuest",
+        icon: (
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+        ),
+    },
+];
+
+function MetricCard({ metric, index }: { metric: Metric; index: number }) {
+    return (
+        <motion.div
+            className="flex-shrink-0 flex items-center gap-6 px-8 py-4 mx-4 rounded-xl border border-slate-200/80 dark:border-slate-800/50 bg-white/80 dark:bg-slate-900/30 backdrop-blur-sm shadow-sm dark:shadow-none"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.1, duration: 0.5 }}
+        >
+            <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-cyan-100 dark:bg-cyan-500/10 text-cyan-700 dark:text-cyan-400">
+                {metric.icon}
+            </div>
+            <div className="flex flex-col">
+                <span className="font-mono text-2xl md:text-3xl font-bold text-cyan-700 dark:text-cyan-400">
+                    {metric.value}
+                </span>
+                <span className="text-sm text-slate-700 dark:text-slate-400">{metric.label}</span>
+                <span className="text-xs text-slate-500 font-mono">{metric.project}</span>
+            </div>
+        </motion.div>
+    );
+}
+
+interface MetricsTickerProps {
+    className?: string;
+}
+
+export function MetricsTicker({ className }: MetricsTickerProps) {
+    const [isHovered, setIsHovered] = useState(false);
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    return (
+        <section className={cn("relative py-12 overflow-hidden", className)}>
+            {/* Section Header */}
+            <div className="max-w-7xl mx-auto px-6 mb-8">
+                <div className="flex items-center gap-3 mb-2">
+                    <div className="w-8 h-px bg-cyan-600/50 dark:bg-cyan-500/50" />
+                    <span className="font-mono text-sm text-cyan-700 dark:text-cyan-400 uppercase tracking-wider">
+                        Proof of Impact
+                    </span>
+                </div>
+                <h2 className="text-2xl md:text-3xl font-bold text-slate-800 dark:text-slate-100">
+                    Research & Engineering Metrics
+                </h2>
+            </div>
+
+            {/* Gradient Overlays for fade effect */}
+            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#FAFBFC] dark:from-[#0B0F14] to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#FAFBFC] dark:from-[#0B0F14] to-transparent z-10 pointer-events-none" />
+
+            {/* Ticker Container */}
+            <div
+                ref={containerRef}
+                className="relative flex"
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+            >
+                <motion.div
+                    className="flex"
+                    animate={{
+                        x: [0, -1920],
+                    }}
+                    transition={{
+                        x: {
+                            repeat: Infinity,
+                            repeatType: "loop",
+                            duration: 30,
+                            ease: "linear",
+                        },
+                    }}
+                    style={{
+                        animationPlayState: isHovered ? "paused" : "running",
+                    }}
+                >
+                    {/* First set of metrics */}
+                    {metrics.map((metric, index) => (
+                        <MetricCard key={`first-${index}`} metric={metric} index={index} />
+                    ))}
+                    {/* Duplicate for seamless loop */}
+                    {metrics.map((metric, index) => (
+                        <MetricCard key={`second-${index}`} metric={metric} index={index} />
+                    ))}
+                    {/* Triple for wider screens */}
+                    {metrics.map((metric, index) => (
+                        <MetricCard key={`third-${index}`} metric={metric} index={index} />
+                    ))}
+                </motion.div>
+            </div>
+
+            {/* Bottom border accent */}
+            <div className="max-w-7xl mx-auto px-6 mt-8">
+                <div className="h-px bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent" />
+            </div>
+        </section>
+    );
+}
+
+// Static version for above-the-fold or non-animated contexts
+export function MetricsGrid({ className }: { className?: string }) {
+    return (
+        <section className={cn("py-16", className)}>
+            <div className="max-w-7xl mx-auto px-6">
+                <div className="flex items-center gap-3 mb-2">
+                    <div className="w-8 h-px bg-cyan-600/50 dark:bg-cyan-500/50" />
+                    <span className="font-mono text-sm text-cyan-700 dark:text-cyan-400 uppercase tracking-wider">
+                        Key Metrics
+                    </span>
+                </div>
+                <h2 className="text-2xl md:text-3xl font-bold text-slate-800 dark:text-slate-100 mb-8">
+                    Research & Engineering Impact
+                </h2>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {metrics.map((metric, index) => (
+                        <motion.div
+                            key={index}
+                            className="group relative p-6 rounded-xl border border-slate-200/80 dark:border-slate-800 bg-white/80 dark:bg-slate-900/50 hover:border-cyan-500/30 transition-colors shadow-sm dark:shadow-none"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: index * 0.1, duration: 0.5 }}
+                        >
+                            <div className="flex items-start gap-4">
+                                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-cyan-100 dark:bg-cyan-500/10 text-cyan-700 dark:text-cyan-400 group-hover:bg-cyan-200 dark:group-hover:bg-cyan-500/20 transition-colors">
+                                    {metric.icon}
+                                </div>
+                                <div className="flex-1">
+                                    <span className="font-mono text-3xl font-bold text-cyan-700 dark:text-cyan-400">
+                                        {metric.value}
+                                    </span>
+                                    <p className="text-sm text-slate-700 dark:text-slate-400 mt-1">{metric.label}</p>
+                                    <p className="text-xs text-slate-500 font-mono mt-2">
+                                        {metric.project}
+                                    </p>
+                                </div>
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+}
+
+
+================================================================================
+
+Filename: components/sections/SectionPreview.tsx
+Content:
+"use client";
+
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { FlaskConical, Wrench, ArrowRight } from "lucide-react";
+
+const sections = [
+    {
+        title: "Research Labs",
+        description:
+            "Academic research projects in distributed systems, fog computing, UAV networks, and AI/ML. Backed by rigorous simulations and technical reports.",
+        href: "/research",
+        icon: FlaskConical,
+        color: "cyan",
+        projects: [
+            { name: "MUCEDS", tag: "UAV Edge Networks" },
+            { name: "GVMP", tag: "Fog Computing" },
+            { name: "LOKI", tag: "Voice NLU" },
+        ],
+    },
+    {
+        title: "Engineering",
+        description:
+            "Production-grade applications built for scale. Real-time systems, multiplayer games, and backend optimizations.",
+        href: "/engineering",
+        icon: Wrench,
+        color: "violet",
+        projects: [
+            { name: "Portal Gambit", tag: "Real-time Chess" },
+            { name: "TerraQuest", tag: "Geo-guesser" },
+            { name: "GRIG", tag: "Backend Optimization" },
+        ],
+    },
+];
+
+export function SectionPreview() {
+    return (
+        <section className="py-24 relative">
+            {/* Background accent */}
+            <div className="absolute inset-0 grid-pattern opacity-30" />
+
+            <div className="max-w-7xl mx-auto px-6 relative">
+                {/* Header */}
+                <div className="text-center mb-16">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                    >
+                        <span className="font-mono text-sm text-cyan-700 dark:text-cyan-400 uppercase tracking-wider">
+                            Explore
+                        </span>
+                        <h2 className="text-3xl md:text-4xl font-bold text-slate-800 dark:text-slate-100 mt-2">
+                            Two Sides of the Stack
+                        </h2>
+                        <p className="text-slate-600 dark:text-slate-500 mt-4 max-w-2xl mx-auto">
+                            From academic research and simulations to production-ready
+                            engineering. Different disciplines, unified by systems thinking.
+                        </p>
+                    </motion.div>
+                </div>
+
+                {/* Cards */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    {sections.map((section, index) => (
+                        <motion.div
+                            key={section.title}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6, delay: index * 0.1 }}
+                        >
+                            <Link href={section.href} className="group block h-full">
+                                <div
+                                    className={cn(
+                                        "relative h-full p-8 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/80 dark:bg-slate-900/50",
+                                        "hover:border-cyan-500/40 hover:bg-white dark:hover:bg-slate-900/80 transition-all duration-300",
+                                        "overflow-hidden shadow-sm dark:shadow-none hover:shadow-md dark:hover:shadow-none"
+                                    )}
+                                >
+                                    {/* Gradient overlay on hover */}
+                                    <div
+                                        className={cn(
+                                            "absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500",
+                                            section.color === "cyan"
+                                                ? "bg-gradient-to-br from-cyan-500/5 to-transparent"
+                                                : "bg-gradient-to-br from-violet-500/5 to-transparent"
+                                        )}
+                                    />
+
+                                    {/* Content */}
+                                    <div className="relative">
+                                        {/* Icon + Title */}
+                                        <div className="flex items-center gap-4 mb-4">
+                                            <div
+                                                className={cn(
+                                                    "w-12 h-12 rounded-xl flex items-center justify-center",
+                                                    section.color === "cyan"
+                                                        ? "bg-cyan-100 dark:bg-cyan-500/10 text-cyan-700 dark:text-cyan-400"
+                                                        : "bg-violet-100 dark:bg-violet-500/10 text-violet-700 dark:text-violet-400"
+                                                )}
+                                            >
+                                                <section.icon className="w-6 h-6" />
+                                            </div>
+                                            <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-100">
+                                                {section.title}
+                                            </h3>
+                                        </div>
+
+                                        {/* Description */}
+                                        <p className="text-slate-600 dark:text-slate-400 mb-6">{section.description}</p>
+
+                                        {/* Projects */}
+                                        <div className="flex flex-wrap gap-2 mb-6">
+                                            {section.projects.map((project) => (
+                                                <div
+                                                    key={project.name}
+                                                    className="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-700/50"
+                                                >
+                                                    <span className="font-mono text-sm text-slate-800 dark:text-slate-300">
+                                                        {project.name}
+                                                    </span>
+                                                    <span className="text-xs text-slate-500 ml-2">
+                                                        {project.tag}
+                                                    </span>
+                                                </div>
+                                            ))}
+                                        </div>
+
+                                        {/* CTA */}
+                                        <div
+                                            className={cn(
+                                                "flex items-center gap-2 font-medium",
+                                                section.color === "cyan"
+                                                    ? "text-cyan-700 dark:text-cyan-400"
+                                                    : "text-violet-700 dark:text-violet-400"
+                                            )}
+                                        >
+                                            <span>Explore {section.title}</span>
+                                            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </Link>
+                        </motion.div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+}
+
+================================================================================
+
+Filename: components/sections/TechStackPreview.tsx
+Content:
+"use client";
+
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
+
+const techStack = {
+    Infrastructure: [
+        { name: "Docker", level: "advanced" },
+        { name: "Kubernetes", level: "intermediate" },
+        { name: "Linux TC", level: "advanced" },
+        { name: "Prometheus", level: "intermediate" },
+    ],
+    Backend: [
+        { name: "Go (Gin)", level: "advanced" },
+        { name: "Python", level: "advanced" },
+        { name: "FastAPI", level: "advanced" },
+        { name: "PostgreSQL", level: "intermediate" },
+    ],
+    "AI/Research": [
+        { name: "PyTorch", level: "advanced" },
+        { name: "SUMO", level: "intermediate" },
+        { name: "Rasa NLU", level: "advanced" },
+        { name: "LSTM/RL", level: "intermediate" },
+    ],
+    Frontend: [
+        { name: "Next.js", level: "advanced" },
+        { name: "React", level: "advanced" },
+        { name: "Tailwind", level: "advanced" },
+        { name: "Framer", level: "intermediate" },
+    ],
+};
+
+const levelColors = {
+    advanced: "text-cyan-700 dark:text-cyan-400 border-cyan-300 dark:border-cyan-500/30 bg-cyan-50 dark:bg-cyan-500/10",
+    intermediate: "text-slate-700 dark:text-slate-400 border-slate-300 dark:border-slate-600/30 bg-slate-50 dark:bg-slate-700/30",
+};
+
+export function TechStackPreview() {
+    return (
+        <section className="py-24 relative">
+            <div className="max-w-7xl mx-auto px-6">
+                {/* Header */}
+                <motion.div
+                    className="mb-12"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                >
+                    <div className="flex items-center gap-3 mb-2">
+                        <div className="w-8 h-px bg-cyan-600/50 dark:bg-cyan-500/50" />
+                        <span className="font-mono text-sm text-cyan-700 dark:text-cyan-400 uppercase tracking-wider">
+                            Technical Arsenal
+                        </span>
+                    </div>
+                    <h2 className="text-3xl md:text-4xl font-bold text-slate-800 dark:text-slate-100">
+                        Stack Overview
+                    </h2>
+                </motion.div>
+
+                {/* Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {Object.entries(techStack).map(([category, items], categoryIndex) => (
+                        <motion.div
+                            key={category}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
+                            className="p-6 rounded-xl border border-slate-200/80 dark:border-slate-800 bg-white/80 dark:bg-slate-900/30 shadow-sm dark:shadow-none"
+                        >
+                            <h3 className="font-mono text-sm text-slate-700 dark:text-slate-500 uppercase tracking-wider mb-4">
+                                {category}
+                            </h3>
+                            <div className="space-y-2">
+                                {items.map((item, index) => (
+                                    <div
+                                        key={item.name}
+                                        className={cn(
+                                            "px-3 py-2 rounded-lg border font-mono text-sm",
+                                            levelColors[item.level as keyof typeof levelColors]
+                                        )}
+                                    >
+                                        {item.name}
+                                    </div>
+                                ))}
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
+
+                {/* Legend */}
+                <div className="mt-8 flex items-center justify-center gap-6 text-xs text-slate-600 dark:text-slate-600">
+                    <div className="flex items-center gap-2">
+                        <div className="w-3 h-3 rounded bg-cyan-100 dark:bg-cyan-500/20 border border-cyan-300 dark:border-cyan-500/30" />
+                        <span>Advanced</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <div className="w-3 h-3 rounded bg-slate-100 dark:bg-slate-700/30 border border-slate-300 dark:border-slate-600/30" />
+                        <span>Intermediate</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+}
+
+
+================================================================================
+
+Filename: components/sections/index.ts
+Content:
+export { Hero, NetworkBackground, NetworkCanvas } from "./Hero";
+export { MetricsTicker, MetricsGrid } from "./MetricsTicker";
+export { SectionPreview } from "./SectionPreview";
+export { TechStackPreview } from "./TechStackPreview";
+
+================================================================================
+
+Filename: eslint.config.mjs
+Content:
+import { defineConfig, globalIgnores } from "eslint/config";
+import nextVitals from "eslint-config-next/core-web-vitals";
+import nextTs from "eslint-config-next/typescript";
+
+const eslintConfig = defineConfig([
+  ...nextVitals,
+  ...nextTs,
+  // Override default ignores of eslint-config-next.
+  globalIgnores([
+    // Default ignores of eslint-config-next:
+    ".next/**",
+    "out/**",
+    "build/**",
+    "next-env.d.ts",
+  ]),
+]);
+
+export default eslintConfig;
+
+
+================================================================================
+
+Filename: lib/utils.ts
+Content:
+import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+/**
+ * Merge Tailwind CSS classes with clsx
+ * Handles conditional classes and deduplication
+ */
+export function cn(...inputs: ClassValue[]) {
+    return twMerge(clsx(inputs));
+}
+
+/**
+ * Format a number with commas for display
+ */
+export function formatNumber(num: number): string {
+    return new Intl.NumberFormat("en-US").format(num);
+}
+
+/**
+ * Delay utility for animations
+ */
+export function delay(ms: number): Promise<void> {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+/**
+ * Generate a random number between min and max
+ */
+export function randomBetween(min: number, max: number): number {
+    return Math.random() * (max - min) + min;
+}
+
+/**
+ * Clamp a number between min and max
+ */
+export function clamp(num: number, min: number, max: number): number {
+    return Math.min(Math.max(num, min), max);
+}
+
+/**
+ * Linear interpolation
+ */
+export function lerp(start: number, end: number, t: number): number {
+    return start + (end - start) * t;
+}
+
+/**
+ * Map a value from one range to another
+ */
+export function mapRange(
+    value: number,
+    inMin: number,
+    inMax: number,
+    outMin: number,
+    outMax: number
+): number {
+    return ((value - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
+}
+
+
+================================================================================
+
+Filename: next.config.ts
+Content:
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  /* config options here */
+};
+
+export default nextConfig;
+
+
+================================================================================
+
+Filename: package-lock.json
+Content:
 {
   "name": "portfolio",
   "version": "0.1.0",
@@ -6654,3 +10075,129 @@
     }
   }
 }
+
+
+================================================================================
+
+Filename: package.json
+Content:
+{
+  "name": "portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@fontsource/inter": "^5.2.8",
+    "@fontsource/jetbrains-mono": "^5.2.8",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.24.0",
+    "lucide-react": "^0.562.0",
+    "next": "16.1.1",
+    "next-themes": "^0.4.6",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "tailwind-merge": "^3.4.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.1.1",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
+
+
+================================================================================
+
+Filename: postcss.config.mjs
+Content:
+const config = {
+  plugins: {
+    "@tailwindcss/postcss": {},
+  },
+};
+
+export default config;
+
+
+================================================================================
+
+Filename: public/file.svg
+Content:
+<svg fill="none" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M14.5 13.5V5.41a1 1 0 0 0-.3-.7L9.8.29A1 1 0 0 0 9.08 0H1.5v13.5A2.5 2.5 0 0 0 4 16h8a2.5 2.5 0 0 0 2.5-2.5m-1.5 0v-7H8v-5H3v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1M9.5 5V2.12L12.38 5zM5.13 5h-.62v1.25h2.12V5zm-.62 3h7.12v1.25H4.5zm.62 3h-.62v1.25h7.12V11z" clip-rule="evenodd" fill="#666" fill-rule="evenodd"/></svg>
+
+================================================================================
+
+Filename: public/globe.svg
+Content:
+<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><g clip-path="url(#a)"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.27 14.1a6.5 6.5 0 0 0 3.67-3.45q-1.24.21-2.7.34-.31 1.83-.97 3.1M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.48-1.52a7 7 0 0 1-.96 0H7.5a4 4 0 0 1-.84-1.32q-.38-.89-.63-2.08a40 40 0 0 0 3.92 0q-.25 1.2-.63 2.08a4 4 0 0 1-.84 1.31zm2.94-4.76q1.66-.15 2.95-.43a7 7 0 0 0 0-2.58q-1.3-.27-2.95-.43a18 18 0 0 1 0 3.44m-1.27-3.54a17 17 0 0 1 0 3.64 39 39 0 0 1-4.3 0 17 17 0 0 1 0-3.64 39 39 0 0 1 4.3 0m1.1-1.17q1.45.13 2.69.34a6.5 6.5 0 0 0-3.67-3.44q.65 1.26.98 3.1M8.48 1.5l.01.02q.41.37.84 1.31.38.89.63 2.08a40 40 0 0 0-3.92 0q.25-1.2.63-2.08a4 4 0 0 1 .85-1.32 7 7 0 0 1 .96 0m-2.75.4a6.5 6.5 0 0 0-3.67 3.44 29 29 0 0 1 2.7-.34q.31-1.83.97-3.1M4.58 6.28q-1.66.16-2.95.43a7 7 0 0 0 0 2.58q1.3.27 2.95.43a18 18 0 0 1 0-3.44m.17 4.71q-1.45-.12-2.69-.34a6.5 6.5 0 0 0 3.67 3.44q-.65-1.27-.98-3.1" fill="#666"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h16v16H0z"/></clipPath></defs></svg>
+
+================================================================================
+
+Filename: public/next.svg
+Content:
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 394 80"><path fill="#000" d="M262 0h68.5v12.7h-27.2v66.6h-13.6V12.7H262V0ZM149 0v12.7H94v20.4h44.3v12.6H94v21h55v12.6H80.5V0h68.7zm34.3 0h-17.8l63.8 79.4h17.9l-32-39.7 32-39.6h-17.9l-23 28.6-23-28.6zm18.3 56.7-9-11-27.1 33.7h17.8l18.3-22.7z"/><path fill="#000" d="M81 79.3 17 0H0v79.3h13.6V17l50.2 62.3H81Zm252.6-.4c-1 0-1.8-.4-2.5-1s-1.1-1.6-1.1-2.6.3-1.8 1-2.5 1.6-1 2.6-1 1.8.3 2.5 1a3.4 3.4 0 0 1 .6 4.3 3.7 3.7 0 0 1-3 1.8zm23.2-33.5h6v23.3c0 2.1-.4 4-1.3 5.5a9.1 9.1 0 0 1-3.8 3.5c-1.6.8-3.5 1.3-5.7 1.3-2 0-3.7-.4-5.3-1s-2.8-1.8-3.7-3.2c-.9-1.3-1.4-3-1.4-5h6c.1.8.3 1.6.7 2.2s1 1.2 1.6 1.5c.7.4 1.5.5 2.4.5 1 0 1.8-.2 2.4-.6a4 4 0 0 0 1.6-1.8c.3-.8.5-1.8.5-3V45.5zm30.9 9.1a4.4 4.4 0 0 0-2-3.3 7.5 7.5 0 0 0-4.3-1.1c-1.3 0-2.4.2-3.3.5-.9.4-1.6 1-2 1.6a3.5 3.5 0 0 0-.3 4c.3.5.7.9 1.3 1.2l1.8 1 2 .5 3.2.8c1.3.3 2.5.7 3.7 1.2a13 13 0 0 1 3.2 1.8 8.1 8.1 0 0 1 3 6.5c0 2-.5 3.7-1.5 5.1a10 10 0 0 1-4.4 3.5c-1.8.8-4.1 1.2-6.8 1.2-2.6 0-4.9-.4-6.8-1.2-2-.8-3.4-2-4.5-3.5a10 10 0 0 1-1.7-5.6h6a5 5 0 0 0 3.5 4.6c1 .4 2.2.6 3.4.6 1.3 0 2.5-.2 3.5-.6 1-.4 1.8-1 2.4-1.7a4 4 0 0 0 .8-2.4c0-.9-.2-1.6-.7-2.2a11 11 0 0 0-2.1-1.4l-3.2-1-3.8-1c-2.8-.7-5-1.7-6.6-3.2a7.2 7.2 0 0 1-2.4-5.7 8 8 0 0 1 1.7-5 10 10 0 0 1 4.3-3.5c2-.8 4-1.2 6.4-1.2 2.3 0 4.4.4 6.2 1.2 1.8.8 3.2 2 4.3 3.4 1 1.4 1.5 3 1.5 5h-5.8z"/></svg>
+
+================================================================================
+
+Filename: public/vercel.svg
+Content:
+<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1155 1000"><path d="m577.3 0 577.4 1000H0z" fill="#fff"/></svg>
+
+================================================================================
+
+Filename: public/window.svg
+Content:
+<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" clip-rule="evenodd" d="M1.5 2.5h13v10a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1zM0 1h16v11.5a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 0 12.5zm3.75 4.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5M7 4.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0m1.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5" fill="#666"/></svg>
+
+================================================================================
+
+Filename: tsconfig.json
+Content:
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts",
+    "**/*.mts"
+  ],
+  "exclude": ["node_modules"]
+}
+
+
+================================================================================

@@ -17,9 +17,8 @@ import {
 export function EngineeringHero() {
     return (
         <section className="relative py-24 overflow-hidden">
-            {/* Background */}
             <div className="absolute inset-0 grid-pattern opacity-30" />
-            <div className="absolute inset-0 bg-gradient-to-b from-violet-500/5 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-transparent dark:from-violet-500/5 dark:via-transparent dark:to-transparent" />
 
             <div className="relative max-w-7xl mx-auto px-6">
                 <motion.div
@@ -27,22 +26,20 @@ export function EngineeringHero() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                 >
-                    {/* Breadcrumb */}
                     <div className="flex items-center gap-2 text-sm text-slate-500 mb-8">
-                        <a href="/" className="hover:text-cyan-400 transition-colors">
+                        <a href="/" className="hover:text-violet-600 dark:hover:text-cyan-400 transition-colors">
                             Home
                         </a>
                         <ChevronRight className="w-4 h-4" />
-                        <span className="text-violet-400">Engineering</span>
+                        <span className="text-violet-700 dark:text-violet-400 font-medium">Engineering</span>
                     </div>
 
-                    {/* Header */}
                     <div className="flex items-center gap-4 mb-6">
-                        <div className="w-14 h-14 rounded-xl bg-violet-500/10 flex items-center justify-center">
-                            <Wrench className="w-7 h-7 text-violet-400" />
+                        <div className="w-14 h-14 rounded-xl bg-violet-50 dark:bg-violet-500/10 flex items-center justify-center border border-violet-100 dark:border-transparent">
+                            <Wrench className="w-7 h-7 text-violet-600 dark:text-violet-400" />
                         </div>
                         <div>
-                            <h1 className="text-4xl md:text-5xl font-bold text-slate-100">
+                            <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-100">
                                 Engineering
                             </h1>
                             <p className="text-slate-500 font-mono text-sm mt-1">
@@ -51,12 +48,11 @@ export function EngineeringHero() {
                         </div>
                     </div>
 
-                    <p className="text-xl text-slate-400 max-w-3xl mb-12">
+                    <p className="text-xl text-slate-600 dark:text-slate-400 max-w-3xl mb-12">
                         Production-grade applications built for scale. Real-time systems,
                         multiplayer games, and backend optimizations with measurable impact.
                     </p>
 
-                    {/* Project Types */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         {[
                             {
@@ -80,12 +76,12 @@ export function EngineeringHero() {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
-                                className="p-4 rounded-xl border border-slate-800 bg-slate-900/30"
+                                className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/30 shadow-sm dark:shadow-none"
                             >
                                 <div className="flex items-center gap-3">
-                                    <area.icon className="w-5 h-5 text-violet-400" />
+                                    <area.icon className="w-5 h-5 text-violet-600 dark:text-violet-400" />
                                     <div>
-                                        <p className="font-medium text-slate-200">{area.label}</p>
+                                        <p className="font-medium text-slate-900 dark:text-slate-200">{area.label}</p>
                                         <p className="text-sm text-slate-500">{area.desc}</p>
                                     </div>
                                 </div>
@@ -118,22 +114,22 @@ interface ProjectBentoProps {
 export function ProjectBento({ project, index, reverse }: ProjectBentoProps) {
     const colorClasses = {
         orange: {
-            border: "border-orange-500/30",
-            bg: "bg-orange-500/5",
-            text: "text-orange-400",
-            icon: "bg-orange-500/10",
+            border: "border-orange-200 dark:border-orange-500/30",
+            bg: "bg-orange-50 dark:bg-orange-500/5",
+            text: "text-orange-600 dark:text-orange-400",
+            icon: "bg-orange-100 dark:bg-orange-500/10",
         },
         emerald: {
-            border: "border-emerald-500/30",
-            bg: "bg-emerald-500/5",
-            text: "text-emerald-400",
-            icon: "bg-emerald-500/10",
+            border: "border-emerald-200 dark:border-emerald-500/30",
+            bg: "bg-emerald-50 dark:bg-emerald-500/5",
+            text: "text-emerald-600 dark:text-emerald-400",
+            icon: "bg-emerald-100 dark:bg-emerald-500/10",
         },
         cyan: {
-            border: "border-cyan-500/30",
-            bg: "bg-cyan-500/5",
-            text: "text-cyan-400",
-            icon: "bg-cyan-500/10",
+            border: "border-cyan-200 dark:border-cyan-500/30",
+            bg: "bg-cyan-50 dark:bg-cyan-500/5",
+            text: "text-cyan-600 dark:text-cyan-400",
+            icon: "bg-cyan-100 dark:bg-cyan-500/10",
         },
     };
 
@@ -148,51 +144,45 @@ export function ProjectBento({ project, index, reverse }: ProjectBentoProps) {
             transition={{ duration: 0.8, delay: index * 0.1 }}
             className="scroll-mt-24"
         >
-            {/* Project Number */}
             <div className="flex items-center gap-3 mb-4">
-                <span className="text-slate-700 font-mono text-sm">
+                <span className="text-slate-500 font-mono text-sm">
                     #{String(index + 1).padStart(2, "0")}
                 </span>
-                <div className="flex-1 h-px bg-slate-800" />
+                <div className="flex-1 h-px bg-slate-200 dark:bg-slate-800" />
             </div>
 
-            {/* Bento Grid */}
             <div
                 className={cn(
                     "grid grid-cols-1 lg:grid-cols-12 gap-4",
                     reverse && "lg:direction-rtl"
                 )}
             >
-                {/* Main Card */}
                 <div
                     className={cn(
-                        "lg:col-span-8 p-8 rounded-2xl border bg-slate-900/50",
+                        "lg:col-span-8 p-8 rounded-2xl border bg-white dark:bg-slate-900/50 shadow-sm dark:shadow-none",
                         colors.border,
                         reverse && "lg:order-2"
                     )}
                 >
                     <div className="flex flex-col h-full">
-                        {/* Header */}
                         <div className="mb-6">
                             <h2 className={cn("text-3xl font-bold mb-2", colors.text)}>
                                 {project.title}
                             </h2>
-                            <p className="text-lg text-slate-400">{project.subtitle}</p>
+                            <p className="text-lg text-slate-700 dark:text-slate-400">{project.subtitle}</p>
                         </div>
 
-                        {/* Description */}
-                        <p className="text-slate-500 mb-6 leading-relaxed">
+                        <p className="text-slate-600 dark:text-slate-500 mb-6 leading-relaxed">
                             {project.description}
                         </p>
 
-                        {/* Features */}
                         <div className="mb-6">
                             <h3 className="text-sm font-mono text-slate-500 uppercase tracking-wider mb-3">
                                 Features
                             </h3>
                             <ul className="space-y-2">
                                 {project.features.map((feature, i) => (
-                                    <li key={i} className="flex items-start gap-2 text-slate-400">
+                                    <li key={i} className="flex items-start gap-2 text-slate-600 dark:text-slate-400">
                                         <ChevronRight
                                             className={cn("w-4 h-4 mt-0.5 flex-shrink-0", colors.text)}
                                         />
@@ -202,7 +192,6 @@ export function ProjectBento({ project, index, reverse }: ProjectBentoProps) {
                             </ul>
                         </div>
 
-                        {/* Links */}
                         <div className="mt-auto flex flex-wrap gap-3">
                             {project.links.demo && (
                                 <a
@@ -221,7 +210,7 @@ export function ProjectBento({ project, index, reverse }: ProjectBentoProps) {
                             {project.links.github && (
                                 <a
                                     href={project.links.github}
-                                    className="flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-slate-400 bg-slate-800/50 hover:text-slate-200 transition-colors"
+                                    className="flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800/50 hover:text-slate-900 dark:hover:text-slate-200 transition-colors"
                                 >
                                     <Github className="w-4 h-4" />
                                     Source Code
@@ -230,7 +219,7 @@ export function ProjectBento({ project, index, reverse }: ProjectBentoProps) {
                             {project.links.case_study && (
                                 <a
                                     href={project.links.case_study}
-                                    className="flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-slate-400 bg-slate-800/50 hover:text-slate-200 transition-colors"
+                                    className="flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800/50 hover:text-slate-900 dark:hover:text-slate-200 transition-colors"
                                 >
                                     <FileCode className="w-4 h-4" />
                                     Case Study
@@ -240,17 +229,15 @@ export function ProjectBento({ project, index, reverse }: ProjectBentoProps) {
                     </div>
                 </div>
 
-                {/* Side Cards */}
                 <div
                     className={cn(
                         "lg:col-span-4 flex flex-col gap-4",
                         reverse && "lg:order-1"
                     )}
                 >
-                    {/* Metrics Card */}
                     <div
                         className={cn(
-                            "p-6 rounded-2xl border bg-slate-900/50 flex-1",
+                            "p-6 rounded-2xl border bg-slate-50/50 dark:bg-slate-900/50 flex-1",
                             colors.border
                         )}
                     >
@@ -261,7 +248,7 @@ export function ProjectBento({ project, index, reverse }: ProjectBentoProps) {
                             {project.metrics.map((metric) => (
                                 <div key={metric.label}>
                                     <div className="flex justify-between items-baseline">
-                                        <span className="text-sm text-slate-500">
+                                        <span className="text-sm text-slate-600 dark:text-slate-500">
                                             {metric.label}
                                         </span>
                                         <span className={cn("text-2xl font-mono font-bold", colors.text)}>
@@ -273,10 +260,9 @@ export function ProjectBento({ project, index, reverse }: ProjectBentoProps) {
                         </div>
                     </div>
 
-                    {/* Tech Stack Card */}
                     <div
                         className={cn(
-                            "p-6 rounded-2xl border bg-slate-900/50 flex-1",
+                            "p-6 rounded-2xl border bg-slate-50/50 dark:bg-slate-900/50 flex-1",
                             colors.border
                         )}
                     >
@@ -299,8 +285,7 @@ export function ProjectBento({ project, index, reverse }: ProjectBentoProps) {
                                     >
                                         {tech.name}
                                     </span>
-                                    {/* Tooltip */}
-                                    <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 rounded bg-slate-800 text-xs text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                                    <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 rounded bg-slate-800 text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-10">
                                         {tech.category}
                                     </span>
                                 </div>
@@ -313,60 +298,43 @@ export function ProjectBento({ project, index, reverse }: ProjectBentoProps) {
     );
 }
 
-// Terminal-style project card variant
 export function ProjectTerminal({
-    project,
+    title,
+    code,
+    language = "javascript"
 }: {
-    project: {
-        title: string;
-        description: string;
-        techStack: string[];
-    };
+    title: string;
+    code: string;
+    language?: string;
 }) {
     return (
-        <div className="rounded-xl border border-slate-800 bg-slate-900/50 overflow-hidden">
-            {/* Terminal Header */}
-            <div className="flex items-center gap-2 px-4 py-3 bg-slate-800/50 border-b border-slate-700">
-                <div className="flex gap-1.5">
+        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-[#0B0F14] overflow-hidden shadow-2xl">
+            <div className="flex items-center justify-between px-4 py-3 bg-slate-900 border-b border-slate-800">
+                <div className="flex gap-2">
                     <div className="w-3 h-3 rounded-full bg-red-500/80" />
                     <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
                     <div className="w-3 h-3 rounded-full bg-green-500/80" />
                 </div>
-                <span className="font-mono text-xs text-slate-500 ml-2">
-                    ~/projects/{project.title.toLowerCase().replace(/\s/g, "-")}
-                </span>
+                <div className="flex items-center gap-2">
+                    <FileCode className="w-4 h-4 text-slate-500" />
+                    <span className="font-mono text-xs text-slate-400">
+                        {title.toLowerCase().replace(/\s/g, "-")}.{language === "go" ? "go" : language === "python" ? "py" : "js"}
+                    </span>
+                </div>
+                <div className="w-12" />
             </div>
 
-            {/* Terminal Content */}
-            <div className="p-4 font-mono text-sm">
-                <div className="text-slate-500">
-                    <span className="text-cyan-400">$</span> cat README.md
-                </div>
-                <div className="mt-2 text-slate-400">
-                    <span className="text-violet-400"># {project.title}</span>
-                    <br />
-                    <br />
-                    {project.description}
-                </div>
-                <div className="mt-4 text-slate-500">
-                    <span className="text-cyan-400">$</span> cat package.json | jq
-                    &apos;.dependencies&apos;
-                </div>
-                <div className="mt-2 text-slate-400">
-                    {"{"}
-                    {project.techStack.map((tech, i) => (
-                        <div key={tech} className="pl-4">
-                            <span className="text-emerald-400">&quot;{tech}&quot;</span>:{" "}
-                            <span className="text-orange-400">&quot;latest&quot;</span>
-                            {i < project.techStack.length - 1 ? "," : ""}
-                        </div>
-                    ))}
-                    {"}"}
-                </div>
-                <div className="mt-4 flex items-center text-slate-600">
-                    <span className="text-cyan-400">$</span>
-                    <span className="ml-2 terminal-cursor" />
-                </div>
+            <div className="p-4 overflow-x-auto">
+                <pre className="font-mono text-sm leading-relaxed">
+                    <code className="text-slate-300">
+                        {code.split('\n').map((line, i) => (
+                            <div key={i} className="table-row">
+                                <span className="table-cell text-slate-700 select-none pr-4 text-right w-8">{i + 1}</span>
+                                <span className="table-cell whitespace-pre">{line}</span>
+                            </div>
+                        ))}
+                    </code>
+                </pre>
             </div>
         </div>
     );

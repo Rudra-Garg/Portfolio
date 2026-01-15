@@ -31,8 +31,8 @@ const techStack = {
 };
 
 const levelColors = {
-    advanced: "text-cyan-400 border-cyan-500/30 bg-cyan-500/10",
-    intermediate: "text-slate-400 border-slate-600/30 bg-slate-700/30",
+    advanced: "text-cyan-700 dark:text-cyan-400 border-cyan-200 dark:border-cyan-500/30 bg-cyan-50 dark:bg-cyan-500/10",
+    intermediate: "text-slate-700 dark:text-slate-400 border-slate-200 dark:border-slate-600/30 bg-slate-50 dark:bg-slate-700/30",
 };
 
 export function TechStackPreview() {
@@ -48,12 +48,12 @@ export function TechStackPreview() {
                     transition={{ duration: 0.6 }}
                 >
                     <div className="flex items-center gap-3 mb-2">
-                        <div className="w-8 h-px bg-cyan-500/50" />
-                        <span className="font-mono text-sm text-cyan-400 uppercase tracking-wider">
+                        <div className="w-8 h-px bg-cyan-600 dark:bg-cyan-500/50" />
+                        <span className="font-mono text-sm text-cyan-700 dark:text-cyan-400 uppercase tracking-wider">
                             Technical Arsenal
                         </span>
                     </div>
-                    <h2 className="text-3xl md:text-4xl font-bold text-slate-100">
+                    <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-100">
                         Stack Overview
                     </h2>
                 </motion.div>
@@ -67,9 +67,9 @@ export function TechStackPreview() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
-                            className="p-6 rounded-xl border border-slate-800 bg-slate-900/30"
+                            className="p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/30 shadow-sm dark:shadow-none"
                         >
-                            <h3 className="font-mono text-sm text-slate-500 uppercase tracking-wider mb-4">
+                            <h3 className="font-mono text-sm text-slate-500 dark:text-slate-500 uppercase tracking-wider mb-4">
                                 {category}
                             </h3>
                             <div className="space-y-2">
@@ -90,13 +90,13 @@ export function TechStackPreview() {
                 </div>
 
                 {/* Legend */}
-                <div className="mt-8 flex items-center justify-center gap-6 text-xs text-slate-600">
+                <div className="mt-8 flex items-center justify-center gap-6 text-xs text-slate-500 dark:text-slate-600">
                     <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 rounded bg-cyan-500/20 border border-cyan-500/30" />
+                        <div className="w-3 h-3 rounded bg-cyan-100 dark:bg-cyan-500/20 border border-cyan-300 dark:border-cyan-500/30" />
                         <span>Advanced</span>
                     </div>
                     <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 rounded bg-slate-700/30 border border-slate-600/30" />
+                        <div className="w-3 h-3 rounded bg-slate-100 dark:bg-slate-700/30 border border-slate-300 dark:border-slate-600/30" />
                         <span>Intermediate</span>
                     </div>
                 </div>

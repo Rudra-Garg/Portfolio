@@ -12,7 +12,54 @@
    Portfolio: Rudra Garg - Systems Researcher & Full-Stack Engineer
    ═══════════════════════════════════════════════════════════════════════════ */
 
+/* Light Theme (Blueprint / Research Paper) */
 :root {
+  /* Core Palette - Pure White */
+  --background: #FFFFFF;
+  --background-rgb: 255, 255, 255;
+  --foreground: #0F172A;
+  /* Slate 900 - High Contrast */
+
+  /* Surface Colors */
+  --surface: #F8FAFC;
+  /* Slate 50 */
+  --surface-elevated: #FFFFFF;
+  --surface-overlay: rgba(255, 255, 255, 0.9);
+
+  /* Accent Colors - Engineered Cyan/Blue */
+  --accent: #0369A1;
+  /* Sky 700 - Darker for Light Mode Visibility */
+  --accent-dim: #0284C7;
+  /* Sky 600 */
+  --accent-glow: rgba(3, 105, 161, 0.1);
+
+  /* Text Colors */
+  --text-primary: #020617;
+  /* Slate 950 */
+  --text-secondary: #334155;
+  /* Slate 700 */
+  --text-muted: #64748B;
+  /* Slate 500 */
+
+  /* Borders & Lines */
+  --border: #E2E8F0;
+  /* Slate 200 */
+  --border-accent: rgba(3, 105, 161, 0.2);
+
+  /* Fonts */
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+
+  /* Spacing Scale */
+  --space-unit: 4px;
+
+  /* Animation */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+/* Dark Theme (Sci-Fi Terminal) */
+.dark {
   /* Core Palette */
   --background: #0B0F14;
   --background-rgb: 11, 15, 20;
@@ -25,6 +72,7 @@
 
   /* Accent Colors */
   --accent: #38BDF8;
+  /* Sky 400 */
   --accent-dim: #0EA5E9;
   --accent-glow: rgba(56, 189, 248, 0.15);
 
@@ -36,22 +84,6 @@
   /* Borders & Lines */
   --border: #1E293B;
   --border-accent: rgba(56, 189, 248, 0.3);
-
-  /* Status Colors */
-  --success: #10B981;
-  --warning: #F59E0B;
-  --error: #EF4444;
-
-  /* Fonts */
-  --font-sans: "Inter", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", "Fira Code", monospace;
-
-  /* Spacing Scale */
-  --space-unit: 4px;
-
-  /* Animation */
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
 }
 
 @theme inline {
@@ -94,7 +126,7 @@ body {
 /* Selection */
 ::selection {
   background: var(--accent);
-  color: var(--background);
+  color: #FFFFFF;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -105,7 +137,17 @@ body {
   font-family: var(--font-mono);
 }
 
+/* High Contrast Text Gradients */
 .text-gradient {
+  /* Light Mode: Dark Navy to Blue (Readable on White) */
+  background: linear-gradient(135deg, #0F172A 0%, var(--accent) 60%, #2563EB 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.dark .text-gradient {
+  /* Dark Mode: Cyan to Indigo Glow */
   background: linear-gradient(135deg, var(--accent) 0%, #818CF8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -173,8 +215,15 @@ body {
   }
 }
 
-/* Grid Pattern Background */
+/* Grid Pattern Background - Blueprint Style */
 .grid-pattern {
+  background-image:
+    linear-gradient(rgba(15, 23, 42, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.06) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.dark .grid-pattern {
   background-image:
     linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);

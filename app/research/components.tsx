@@ -15,9 +15,8 @@ import {
 export function ResearchHero() {
     return (
         <section className="relative py-24 overflow-hidden">
-            {/* Background */}
             <div className="absolute inset-0 grid-pattern opacity-30" />
-            <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/5 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-transparent dark:from-cyan-500/5 dark:via-transparent dark:to-transparent" />
 
             <div className="relative max-w-7xl mx-auto px-6">
                 <motion.div
@@ -25,37 +24,33 @@ export function ResearchHero() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                 >
-                    {/* Breadcrumb */}
                     <div className="flex items-center gap-2 text-sm text-slate-500 mb-8">
-                        <a href="/" className="hover:text-cyan-400 transition-colors">
+                        <a href="/" className="hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">
                             Home
                         </a>
                         <ChevronRight className="w-4 h-4" />
-                        <span className="text-cyan-400">Research</span>
+                        <span className="text-cyan-700 dark:text-cyan-400 font-medium">Research</span>
                     </div>
 
-                    {/* Header */}
                     <div className="flex items-center gap-4 mb-6">
-                        <div className="w-14 h-14 rounded-xl bg-cyan-500/10 flex items-center justify-center">
-                            <FlaskConical className="w-7 h-7 text-cyan-400" />
+                        <div className="w-14 h-14 rounded-xl bg-cyan-50 dark:bg-cyan-500/10 flex items-center justify-center border border-cyan-100 dark:border-transparent">
+                            <FlaskConical className="w-7 h-7 text-cyan-600 dark:text-cyan-400" />
                         </div>
                         <div>
-                            <h1 className="text-4xl md:text-5xl font-bold text-slate-100">
+                            <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-100">
                                 Research Labs
                             </h1>
                             <p className="text-slate-500 font-mono text-sm mt-1">
-                                /research/publications
+                                /experimental/reports
                             </p>
                         </div>
                     </div>
 
-                    <p className="text-xl text-slate-400 max-w-3xl mb-12">
-                        Academic research in distributed systems, fog computing, UAV
-                        networks, and AI/ML. Each project includes architecture decisions,
-                        trade-offs, and simulation-validated results.
+                    <p className="text-xl text-slate-600 dark:text-slate-400 max-w-3xl mb-12">
+                        Deep-dive systems research in distributed architectures, fog computing, and AI/ML.
+                        Each project is backed by rigorous simulations, technical reports, and quantifiable metrics.
                     </p>
 
-                    {/* Research Areas */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         {[
                             {
@@ -79,12 +74,12 @@ export function ResearchHero() {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
-                                className="p-4 rounded-xl border border-slate-800 bg-slate-900/30"
+                                className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/30 shadow-sm dark:shadow-none"
                             >
                                 <div className="flex items-center gap-3">
-                                    <area.icon className="w-5 h-5 text-cyan-400" />
+                                    <area.icon className="w-5 h-5 text-cyan-600 dark:text-cyan-400" />
                                     <div>
-                                        <p className="font-medium text-slate-200">{area.label}</p>
+                                        <p className="font-medium text-slate-900 dark:text-slate-200">{area.label}</p>
                                         <p className="text-sm text-slate-500">{area.desc}</p>
                                     </div>
                                 </div>
@@ -94,99 +89,6 @@ export function ResearchHero() {
                 </motion.div>
             </div>
         </section>
-    );
-}
-
-interface ProjectCardProps {
-    project: {
-        id: string;
-        title: string;
-        subtitle: string;
-        description: string;
-        metrics: { label: string; value: string }[];
-        techStack: string[];
-        color: string;
-        status: string;
-    };
-    index: number;
-}
-
-export function ProjectCard({ project, index }: ProjectCardProps) {
-    const colorClasses = {
-        cyan: "border-cyan-500/30 bg-cyan-500/5",
-        emerald: "border-emerald-500/30 bg-emerald-500/5",
-        violet: "border-violet-500/30 bg-violet-500/5",
-    };
-
-    const textColorClasses = {
-        cyan: "text-cyan-400",
-        emerald: "text-emerald-400",
-        violet: "text-violet-400",
-    };
-
-    return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: index * 0.1 }}
-            className={cn(
-                "p-6 rounded-2xl border",
-                colorClasses[project.color as keyof typeof colorClasses]
-            )}
-        >
-            {/* Header */}
-            <div className="flex items-start justify-between mb-4">
-                <div>
-                    <div className="flex items-center gap-2 mb-1">
-                        <h3
-                            className={cn(
-                                "text-2xl font-bold",
-                                textColorClasses[project.color as keyof typeof textColorClasses]
-                            )}
-                        >
-                            {project.title}
-                        </h3>
-                        <span className="px-2 py-0.5 rounded-full text-xs font-mono bg-slate-800 text-slate-400">
-                            {project.status}
-                        </span>
-                    </div>
-                    <p className="text-slate-400">{project.subtitle}</p>
-                </div>
-            </div>
-
-            {/* Description */}
-            <p className="text-slate-500 mb-6">{project.description}</p>
-
-            {/* Metrics */}
-            <div className="grid grid-cols-3 gap-4 mb-6">
-                {project.metrics.map((metric) => (
-                    <div key={metric.label} className="text-center">
-                        <p
-                            className={cn(
-                                "text-2xl font-mono font-bold",
-                                textColorClasses[project.color as keyof typeof textColorClasses]
-                            )}
-                        >
-                            {metric.value}
-                        </p>
-                        <p className="text-xs text-slate-500">{metric.label}</p>
-                    </div>
-                ))}
-            </div>
-
-            {/* Tech Stack */}
-            <div className="flex flex-wrap gap-2">
-                {project.techStack.map((tech) => (
-                    <span
-                        key={tech}
-                        className="px-2 py-1 rounded-md bg-slate-800/50 text-xs font-mono text-slate-400"
-                    >
-                        {tech}
-                    </span>
-                ))}
-            </div>
-        </motion.div>
     );
 }
 
@@ -209,21 +111,21 @@ interface ProjectDetailsProps {
 export function ProjectDetails({ project, index }: ProjectDetailsProps) {
     const colorClasses = {
         cyan: {
-            border: "border-cyan-500/30",
-            bg: "bg-cyan-500/5",
-            text: "text-cyan-400",
+            border: "border-cyan-200 dark:border-cyan-500/30",
+            bg: "bg-cyan-50 dark:bg-cyan-500/5",
+            text: "text-cyan-600 dark:text-cyan-400",
             glow: "shadow-cyan-500/10",
         },
         emerald: {
-            border: "border-emerald-500/30",
-            bg: "bg-emerald-500/5",
-            text: "text-emerald-400",
+            border: "border-emerald-200 dark:border-emerald-500/30",
+            bg: "bg-emerald-50 dark:bg-emerald-500/5",
+            text: "text-emerald-600 dark:text-emerald-400",
             glow: "shadow-emerald-500/10",
         },
         violet: {
-            border: "border-violet-500/30",
-            bg: "bg-violet-500/5",
-            text: "text-violet-400",
+            border: "border-violet-200 dark:border-violet-500/30",
+            bg: "bg-violet-50 dark:bg-violet-500/5",
+            text: "text-violet-600 dark:text-violet-400",
             glow: "shadow-violet-500/10",
         },
     };
@@ -239,7 +141,6 @@ export function ProjectDetails({ project, index }: ProjectDetailsProps) {
             transition={{ duration: 0.8, delay: index * 0.1 }}
             className="scroll-mt-24"
         >
-            {/* Project Header */}
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
                 <div>
                     <div className="flex items-center gap-3 mb-2">
@@ -253,17 +154,16 @@ export function ProjectDetails({ project, index }: ProjectDetailsProps) {
                         >
                             {project.status}
                         </span>
-                        <span className="text-slate-600 font-mono text-sm">
+                        <span className="text-slate-500 font-mono text-sm">
                             #{String(index + 1).padStart(2, "0")}
                         </span>
                     </div>
                     <h2 className={cn("text-4xl font-bold mb-2", colors.text)}>
                         {project.title}
                     </h2>
-                    <p className="text-xl text-slate-400">{project.subtitle}</p>
+                    <p className="text-xl text-slate-600 dark:text-slate-400">{project.subtitle}</p>
                 </div>
 
-                {/* Metrics summary */}
                 <div className="flex gap-6">
                     {project.metrics.map((metric) => (
                         <div key={metric.label} className="text-right">
@@ -276,29 +176,25 @@ export function ProjectDetails({ project, index }: ProjectDetailsProps) {
                 </div>
             </div>
 
-            {/* Content Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                {/* Main Content */}
                 <div className="lg:col-span-2 space-y-6">
-                    {/* Description */}
                     <div
                         className={cn(
-                            "p-6 rounded-2xl border bg-slate-900/50",
+                            "p-6 rounded-2xl border bg-white dark:bg-slate-900/50 shadow-sm dark:shadow-none",
                             colors.border
                         )}
                     >
-                        <h3 className="text-lg font-semibold text-slate-200 mb-3">
+                        <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-200 mb-3">
                             Overview
                         </h3>
-                        <p className="text-slate-400 leading-relaxed">
+                        <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
                             {project.description}
                         </p>
                     </div>
 
-                    {/* Architecture Diagram */}
                     <div
                         className={cn(
-                            "p-6 rounded-2xl border bg-slate-900/50",
+                            "p-6 rounded-2xl border bg-slate-900 dark:bg-slate-900/50",
                             colors.border
                         )}
                     >
@@ -312,20 +208,19 @@ export function ProjectDetails({ project, index }: ProjectDetailsProps) {
                         </div>
                     </div>
 
-                    {/* Technical Decisions */}
                     <div
                         className={cn(
-                            "p-6 rounded-2xl border bg-slate-900/50",
+                            "p-6 rounded-2xl border bg-white dark:bg-slate-900/50 shadow-sm dark:shadow-none",
                             colors.border
                         )}
                     >
-                        <h3 className="text-lg font-semibold text-slate-200 mb-4">
+                        <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-200 mb-4">
                             Technical Decisions
                         </h3>
                         <div className="overflow-x-auto">
                             <table className="w-full text-sm">
                                 <thead>
-                                    <tr className="border-b border-slate-800">
+                                    <tr className="border-b border-slate-200 dark:border-slate-800">
                                         <th className="text-left py-3 px-4 font-mono text-slate-500 uppercase tracking-wider text-xs">
                                             Decision
                                         </th>
@@ -341,12 +236,12 @@ export function ProjectDetails({ project, index }: ProjectDetailsProps) {
                                     {project.decisions.map((row, i) => (
                                         <tr
                                             key={i}
-                                            className="border-b border-slate-800/50 last:border-0"
+                                            className="border-b border-slate-100 dark:border-slate-800/50 last:border-0"
                                         >
-                                            <td className="py-4 px-4 text-slate-300 font-medium">
+                                            <td className="py-4 px-4 text-slate-700 dark:text-slate-300 font-medium">
                                                 {row.decision}
                                             </td>
-                                            <td className="py-4 px-4 text-slate-500">
+                                            <td className="py-4 px-4 text-slate-600 dark:text-slate-500">
                                                 {row.tradeoff}
                                             </td>
                                             <td className={cn("py-4 px-4", colors.text)}>
@@ -360,16 +255,14 @@ export function ProjectDetails({ project, index }: ProjectDetailsProps) {
                     </div>
                 </div>
 
-                {/* Sidebar */}
                 <div className="space-y-6">
-                    {/* Tech Stack */}
                     <div
                         className={cn(
-                            "p-6 rounded-2xl border bg-slate-900/50",
+                            "p-6 rounded-2xl border bg-white dark:bg-slate-900/50 shadow-sm dark:shadow-none",
                             colors.border
                         )}
                     >
-                        <h3 className="text-lg font-semibold text-slate-200 mb-4">
+                        <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-200 mb-4">
                             Tech Stack
                         </h3>
                         <div className="flex flex-wrap gap-2">
@@ -389,35 +282,34 @@ export function ProjectDetails({ project, index }: ProjectDetailsProps) {
                         </div>
                     </div>
 
-                    {/* Quick Stats */}
                     <div
                         className={cn(
-                            "p-6 rounded-2xl border bg-slate-900/50",
+                            "p-6 rounded-2xl border bg-white dark:bg-slate-900/50 shadow-sm dark:shadow-none",
                             colors.border
                         )}
                     >
-                        <h3 className="text-lg font-semibold text-slate-200 mb-4">
+                        <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-200 mb-4">
                             Key Metrics
                         </h3>
                         <div className="space-y-4">
                             {project.metrics.map((metric) => (
                                 <div key={metric.label}>
                                     <div className="flex justify-between items-baseline mb-1">
-                                        <span className="text-sm text-slate-500">
+                                        <span className="text-sm text-slate-600 dark:text-slate-500">
                                             {metric.label}
                                         </span>
                                         <span className={cn("font-mono font-bold", colors.text)}>
                                             {metric.value}
                                         </span>
                                     </div>
-                                    <div className="h-1 rounded-full bg-slate-800 overflow-hidden">
+                                    <div className="h-1 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
                                         <div
                                             className={cn("h-full rounded-full", colors.bg)}
                                             style={{
                                                 width: metric.value.includes("%")
                                                     ? metric.value.replace("~", "")
                                                     : "100%",
-                                                background: `linear-gradient(90deg, var(--${project.color}-400), var(--${project.color}-600))`,
+                                                background: `linear-gradient(90deg, var(--${project.color}-500), var(--${project.color}-600))`,
                                             }}
                                         />
                                     </div>
@@ -426,31 +318,30 @@ export function ProjectDetails({ project, index }: ProjectDetailsProps) {
                         </div>
                     </div>
 
-                    {/* Links */}
                     <div
                         className={cn(
-                            "p-6 rounded-2xl border bg-slate-900/50",
+                            "p-6 rounded-2xl border bg-white dark:bg-slate-900/50 shadow-sm dark:shadow-none",
                             colors.border
                         )}
                     >
-                        <h3 className="text-lg font-semibold text-slate-200 mb-4">
+                        <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-200 mb-4">
                             Resources
                         </h3>
                         <div className="space-y-2">
                             <a
                                 href="#"
-                                className="flex items-center gap-2 p-3 rounded-lg bg-slate-800/50 text-slate-400 hover:text-cyan-400 transition-colors"
+                                className="flex items-center gap-2 p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors"
                             >
                                 <FileText className="w-4 h-4" />
-                                <span className="text-sm">View Paper</span>
+                                <span className="text-sm">View Project Report</span>
                                 <ExternalLink className="w-3 h-3 ml-auto" />
                             </a>
                             <a
                                 href="#"
-                                className="flex items-center gap-2 p-3 rounded-lg bg-slate-800/50 text-slate-400 hover:text-cyan-400 transition-colors"
+                                className="flex items-center gap-2 p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors"
                             >
                                 <Cpu className="w-4 h-4" />
-                                <span className="text-sm">GitHub Repository</span>
+                                <span className="text-sm">Source Code</span>
                                 <ExternalLink className="w-3 h-3 ml-auto" />
                             </a>
                         </div>

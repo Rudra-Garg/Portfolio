@@ -9,7 +9,7 @@ const sections = [
     {
         title: "Research Labs",
         description:
-            "Academic research in distributed systems, fog computing, UAV networks, and AI/ML. Peer-reviewed publications and simulation-validated results.",
+            "Academic research projects in distributed systems, fog computing, UAV networks, and AI/ML. Backed by rigorous simulations and technical reports.",
         href: "/research",
         icon: FlaskConical,
         color: "cyan",
@@ -49,13 +49,13 @@ export function SectionPreview() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
                     >
-                        <span className="font-mono text-sm text-cyan-400 uppercase tracking-wider">
+                        <span className="font-mono text-sm text-cyan-700 dark:text-cyan-400 uppercase tracking-wider">
                             Explore
                         </span>
-                        <h2 className="text-3xl md:text-4xl font-bold text-slate-100 mt-2">
+                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-100 mt-2">
                             Two Sides of the Stack
                         </h2>
-                        <p className="text-slate-500 mt-4 max-w-2xl mx-auto">
+                        <p className="text-slate-600 dark:text-slate-500 mt-4 max-w-2xl mx-auto">
                             From academic research and simulations to production-ready
                             engineering. Different disciplines, unified by systems thinking.
                         </p>
@@ -75,9 +75,9 @@ export function SectionPreview() {
                             <Link href={section.href} className="group block h-full">
                                 <div
                                     className={cn(
-                                        "relative h-full p-8 rounded-2xl border border-slate-800 bg-slate-900/50",
-                                        "hover:border-cyan-500/30 hover:bg-slate-900/80 transition-all duration-300",
-                                        "overflow-hidden"
+                                        "relative h-full p-8 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50",
+                                        "hover:border-cyan-500/40 transition-all duration-300",
+                                        "overflow-hidden shadow-sm dark:shadow-none hover:shadow-md dark:hover:shadow-none"
                                     )}
                                 >
                                     {/* Gradient overlay on hover */}
@@ -98,31 +98,31 @@ export function SectionPreview() {
                                                 className={cn(
                                                     "w-12 h-12 rounded-xl flex items-center justify-center",
                                                     section.color === "cyan"
-                                                        ? "bg-cyan-500/10 text-cyan-400"
-                                                        : "bg-violet-500/10 text-violet-400"
+                                                        ? "bg-cyan-50 dark:bg-cyan-500/10 text-cyan-700 dark:text-cyan-400"
+                                                        : "bg-violet-50 dark:bg-violet-500/10 text-violet-700 dark:text-violet-400"
                                                 )}
                                             >
                                                 <section.icon className="w-6 h-6" />
                                             </div>
-                                            <h3 className="text-2xl font-bold text-slate-100">
+                                            <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
                                                 {section.title}
                                             </h3>
                                         </div>
 
                                         {/* Description */}
-                                        <p className="text-slate-400 mb-6">{section.description}</p>
+                                        <p className="text-slate-600 dark:text-slate-400 mb-6">{section.description}</p>
 
                                         {/* Projects */}
                                         <div className="flex flex-wrap gap-2 mb-6">
                                             {section.projects.map((project) => (
                                                 <div
                                                     key={project.name}
-                                                    className="px-3 py-1.5 rounded-lg bg-slate-800/50 border border-slate-700/50"
+                                                    className="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50"
                                                 >
-                                                    <span className="font-mono text-sm text-slate-300">
+                                                    <span className="font-mono text-sm text-slate-700 dark:text-slate-300">
                                                         {project.name}
                                                     </span>
-                                                    <span className="text-xs text-slate-600 ml-2">
+                                                    <span className="text-xs text-slate-500 ml-2">
                                                         {project.tag}
                                                     </span>
                                                 </div>
@@ -134,8 +134,8 @@ export function SectionPreview() {
                                             className={cn(
                                                 "flex items-center gap-2 font-medium",
                                                 section.color === "cyan"
-                                                    ? "text-cyan-400"
-                                                    : "text-violet-400"
+                                                    ? "text-cyan-700 dark:text-cyan-400"
+                                                    : "text-violet-700 dark:text-violet-400"
                                             )}
                                         >
                                             <span>Explore {section.title}</span>

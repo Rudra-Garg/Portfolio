@@ -1,204 +1,172 @@
 import type { Metadata } from "next";
 import { Navbar, Footer } from "@/components/layout";
-import { ResearchHero, ProjectCard, ProjectDetails } from "./components";
+import { ResearchHero, ProjectDetails } from "./components";
 
 export const metadata: Metadata = {
     title: "Research Labs | Rudra Garg",
     description:
-        "Academic research in Fog Computing, UAV Edge Networks, and Voice NLU. Peer-reviewed publications and simulation-validated results.",
+        "Academic research projects in Fog Computing, UAV Edge Networks, and Voice NLU. Rigorous simulations, benchmarks, and technical reports.",
 };
 
 // Research project data
 const projects = [
     {
-        id: "muceds",
-        title: "MUCEDS",
-        subtitle: "Multi-UAV Cooperative Edge Data Storage",
+        id: "loki",
+        title: "LOKI",
+        subtitle: "Desktop-Native Voice Assistant with Hybrid NLU",
         description:
-            "Hierarchical Reinforcement Learning framework for intelligent content caching in UAV-assisted edge computing networks. Combines DDQN for UAV trajectory optimization with MADDPG for cooperative caching decisions.",
+            "A privacy-first, offline-capable voice assistant that outperforms cloud-dependent alternatives in latency and system integration. Features a novel hybrid NLU engine that combines a fast embedding-based classifier with a local LLM fallback for complex intent understanding.",
         metrics: [
-            { label: "Cache Hit Ratio", value: "~90%" },
-            { label: "Latency Reduction", value: "45%" },
-            { label: "UAV Nodes Simulated", value: "50+" },
+            { label: "NER F1-Score", value: "99.77%" },
+            { label: "Precision", value: "99.77%" },
+            { label: "Samples", value: "1389" },
         ],
-        techStack: ["Python", "PyTorch", "SUMO", "LSTM", "DDQN", "MADDPG"],
+        techStack: ["Python", "Faster-Whisper", "Sentence-Transformers", "Ollama (LLM)", "sklearn-crfsuite"],
         decisions: [
             {
-                decision: "LSTM-based Content Prediction",
-                tradeoff: "Higher computational overhead vs rule-based heuristics",
+                decision: "Hybrid NLU Architecture",
+                tradeoff: "Complexity vs Latency/Accuracy",
                 outcome:
-                    "90% cache hit ratio by accurately predicting user request patterns",
+                    "Used 'FastClassifier' (Embeddings) for common commands (<60ms) and 'LLMClassifier' (Ollama) only for complex queries, balancing speed and flexibility.",
             },
             {
-                decision: "Hierarchical RL (DDQN + MADDPG)",
-                tradeoff: "Training complexity vs single-agent approaches",
+                decision: "Synthetic Data Generation",
+                tradeoff: "Realism vs Training Volume",
                 outcome:
-                    "Decomposed trajectory and caching decisions for better convergence",
+                    "Generated 1389 labeled sentences to train the CRF model, achieving 99.77% F1-score on parameter extraction without expensive manual labeling.",
             },
             {
-                decision: "SUMO for Realistic Mobility",
-                tradeoff: "Simulation fidelity vs simplified random waypoint models",
+                decision: "Agent-Based Dispatch",
+                tradeoff: "Monolithic vs Modular",
                 outcome:
-                    "Validated results under realistic urban vehicular traffic patterns",
+                    "Decoupled NLU from execution. New capabilities (e.g., Volume Control, Calculator) can be added as independent agents without retraining the core model.",
             },
         ],
         architecture: `┌─────────────────────────────────────────────────────────────┐
-│                    MUCEDS Architecture                       │
+│                    LOKI Hybrid NLU Pipeline                  │
 ├─────────────────────────────────────────────────────────────┤
-│  ┌─────────┐    ┌─────────┐    ┌─────────┐                 │
-│  │  UAV 1  │    │  UAV 2  │    │  UAV N  │   ← MADDPG      │
-│  └────┬────┘    └────┬────┘    └────┬────┘     Agents      │
-│       │              │              │                       │
-│       └──────────────┼──────────────┘                       │
-│                      │                                      │
-│              ┌───────▼───────┐                             │
-│              │  Edge Server  │  ← DDQN Controller          │
-│              │   + Cache     │                              │
-│              └───────┬───────┘                             │
-│                      │                                      │
-│              ┌───────▼───────┐                             │
-│              │  LSTM Module  │  ← Content Prediction       │
-│              └───────┬───────┘                             │
-│                      │                                      │
-│   ┌──────────────────┼──────────────────┐                  │
-│   ▼                  ▼                  ▼                  │
-│ ┌────┐            ┌────┐            ┌────┐                │
-│ │User│            │User│            │User│   ← Requests   │
-│ └────┘            └────┘            └────┘                │
+│  ┌─────────────┐                                           │
+│  │ Voice Input │                                           │
+│  └──────┬──────┘                                           │
+│         │ (Faster-Whisper)                                 │
+│         ▼                                                  │
+│  ┌─────────────┐    Confidence > 0.6?    ┌────────────────┐│
+│  │ Transcript  │ ───────────┬──────────▶ │ FastClassifier ││
+│  └─────────────┘            │            │ (Embeddings)   ││
+│                             │            └───────┬────────┘│
+│                             │                    │         │
+│                             ▼                    │         │
+│                    ┌────────────────┐            │         │
+│                    │ LLM Fallback   │            │         │
+│                    │ (Ollama/Phi)   │            │         │
+│                    └────────┬───────┘            │         │
+│                             │                    │         │
+│                             ▼                    ▼         │
+│                    ┌────────────────────────────────────┐  │
+│                    │      Intent & Parameter Merger     │  │
+│                    └────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────┘`,
+        color: "violet",
+        status: "Project Completed",
+    },
+    {
+        id: "muceds",
+        title: "MUCEDS",
+        subtitle: "Multi-UAV Cost-Efficient Deployment Scheme",
+        description:
+            "A joint optimization framework for UAV-assisted Vehicular Edge Computing Networks (VECNs). Integrates realistic mobility modeling (SUMO) with Hierarchical Reinforcement Learning (HRL) and LSTM-based predictive caching to minimize latency and maximize system profit.",
+        metrics: [
+            { label: "Cache Hit Ratio", value: "~90%" },
+            { label: "Profit Increase", value: "4x vs Base" },
+            { label: "Latency", value: "~21 Steps" },
+        ],
+        techStack: ["Python", "PyTorch", "SUMO", "TraCI", "DDQN", "MADDPG", "LSTM"],
+        decisions: [
+            {
+                decision: "Hierarchical RL (HRL)",
+                tradeoff: "Training Stability vs Control Granularity",
+                outcome:
+                    "Decomposed problem: DDQN (Outer) optimizes UAV count (Strategic), while MADDPG (Inner) optimizes position (Tactical). Stabilized training convergence.",
+            },
+            {
+                decision: "Spatial-Temporal LSTM",
+                tradeoff: "Compute Overhead vs Reactive Caching",
+                outcome:
+                    "Predictive caching based on user request patterns increased Cache Hit Ratio from ~20% (Zipf) to ~90%, significantly reducing cloud backhaul costs.",
+            },
+            {
+                decision: "SUMO Integration",
+                tradeoff: "Simulation Complexity vs Realism",
+                outcome:
+                    "Replaced random waypoint models with real city topologies (Delhi, Mumbai). Proved UAVs could learn to track realistic traffic hotspots.",
+            },
+        ],
+        architecture: `┌─────────────────────────────────────────────────────────────┐
+│                    MUCEDS Control Loop                       │
+├─────────────────────────────────────────────────────────────┤
+│  ┌──────────────┐       ┌──────────────┐      ┌───────────┐ │
+│  │  SUMO World  │◀─────▶│ Python Agent │◀────▶│ Prediction│ │
+│  │ (Real Maps)  │       │ (HRL Control)│      │  (LSTM)   │ │
+│  └──────┬───────┘       └──────┬───────┘      └───────────┘ │
+│         │                      │                            │
+│         ▼                      ▼                            │
+│  Traffic Density        Action (Count, Vel)                 │
+│         │                      │                            │
+│         └──────────┬───────────┘                            │
+│                    ▼                                        │
+│           ┌──────────────────┐                              │
+│           │ System Reward    │                              │
+│           │ (Profit - Cost)  │                              │
+│           └──────────────────┘                              │
 └─────────────────────────────────────────────────────────────┘`,
         color: "cyan",
-        status: "Under Review",
+        status: "Simulation Study",
     },
     {
         id: "gvmp",
         title: "GVMP",
-        subtitle: "Global View-Based Module Placement for Fog Computing",
+        subtitle: "Gateway Validation Module Placement",
         description:
-            "Novel sibling-aware service placement algorithm for fog computing that leverages global network topology knowledge to minimize inter-module communication latency. Validated on a 15-container Docker testbed with Linux TC for network emulation.",
+            "A novel sibling-aware placement strategy for Fog Computing. Unlike standard Edge-Ward placement which pushes tasks to the cloud when a node is full, GVMP validates resources on neighboring 'sibling' nodes via the gateway, keeping processing at the edge.",
         metrics: [
             { label: "Network Reduction", value: "95%" },
-            { label: "Docker Containers", value: "15" },
-            { label: "Fog Nodes", value: "6" },
+            { label: "E2E Latency", value: "Low (Edge)" },
+            { label: "Load Balance", value: "Optimized" },
         ],
-        techStack: ["Python", "Docker", "Linux TC", "NetworkX", "Prometheus"],
+        techStack: ["iFogSim", "Docker", "Linux TC", "Prometheus", "Grafana"],
         decisions: [
             {
-                decision: "Sibling-Aware Placement",
-                tradeoff: "Additional placement constraints vs greedy approaches",
+                decision: "Sibling-Awareness",
+                tradeoff: "Search Complexity vs Network Load",
                 outcome:
-                    "95% network usage reduction by co-locating communicating modules",
+                    "Checking sibling nodes before cloud offloading reduced network usage by 89-95% compared to EWMP, as proven in iFogSim simulations.",
             },
             {
-                decision: "Linux TC for Network Emulation",
-                tradeoff: "OS-level complexity vs application-level simulation",
+                decision: "Virtual Testbed Validation",
+                tradeoff: "Implementation Effort vs Simulation Only",
                 outcome:
-                    "Realistic latency/bandwidth constraints matching fog deployments",
-            },
-            {
-                decision: "Global View vs Distributed",
-                tradeoff: "Central coordination overhead vs local optimization",
-                outcome:
-                    "Better global optimum for module placement in small-scale fog",
+                    "Built a 15-container Docker testbed with Linux Traffic Control (tc) to validate findings. Confirmed 16ms Edge latency vs 5600ms Cloud latency.",
             },
         ],
         architecture: `┌─────────────────────────────────────────────────────────────┐
-│                    GVMP Architecture                         │
+│                    GVMP Placement Logic                      │
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
-│  Cloud Layer                                                │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │              Central Orchestrator                    │   │
-│  │         (Global View + Placement Engine)            │   │
-│  └───────────────────────┬─────────────────────────────┘   │
-│                          │                                  │
-│  Fog Layer               │                                  │
-│  ┌───────┐  ┌───────┐  ┌─▼─────┐  ┌───────┐  ┌───────┐   │
-│  │Fog #1 │──│Fog #2 │──│Fog #3 │──│Fog #4 │──│Fog #5 │   │
-│  │ [M1]  │  │[M2,M3]│  │ [M4]  │  │ [M5]  │  │[M6,M7]│   │
-│  └───┬───┘  └───┬───┘  └───┬───┘  └───┬───┘  └───┬───┘   │
-│      │          │          │          │          │        │
-│  Edge Layer (Linux TC - Latency Emulation)                 │
-│  ┌──────────────────────────────────────────────────────┐  │
-│  │    IoT Devices    │    Sensors    │    Actuators     │  │
-│  └──────────────────────────────────────────────────────┘  │
+│       [Cloud]  <---- (3) Only if siblings full              │
+│          ▲                                                  │
+│          │                                                  │
+│      [Gateway]  <--- (2) Check Siblings via Gateway         │
+│      /       \                                              │
+│     /         \                                             │
+│ [Edge 1] -- [Edge 2]                                        │
+│    ▲           ▲                                            │
+│    │           │                                            │
+│  Task 1      (1) Try Local First                            │
 │                                                             │
-│  Docker Testbed: 15 containers across 6 fog nodes          │
+│  Result: Task stays in Fog Layer, avoiding Cloud Backhaul   │
 └─────────────────────────────────────────────────────────────┘`,
         color: "emerald",
-        status: "Published",
-    },
-    {
-        id: "loki",
-        title: "LOKI",
-        subtitle: "Privacy-First Voice Assistant with Hybrid NLU",
-        description:
-            "Offline-first voice assistant using a hybrid NLU pipeline: fast local embeddings for common intents with LLM fallback for complex queries. Custom CRF-based Named Entity Recognition achieving 99.77% weighted F1-score.",
-        metrics: [
-            { label: "NER F1-Score", value: "99.77%" },
-            { label: "Local Accuracy", value: "94%" },
-            { label: "Response Time", value: "<200ms" },
-        ],
-        techStack: ["Python", "Rasa NLU", "spaCy", "CRF", "Sentence Transformers"],
-        decisions: [
-            {
-                decision: "Hybrid Local + LLM Pipeline",
-                tradeoff: "System complexity vs pure cloud or pure local approaches",
-                outcome:
-                    "94% queries handled locally with <200ms latency, LLM fallback for edge cases",
-            },
-            {
-                decision: "Custom CRF for NER",
-                tradeoff: "Training data requirements vs off-the-shelf NER",
-                outcome:
-                    "99.77% F1-score on domain-specific entities (dates, locations, commands)",
-            },
-            {
-                decision: "Sentence Transformers for Intent",
-                tradeoff: "Embedding model size vs keyword matching",
-                outcome:
-                    "Semantic understanding of paraphrased commands without explicit training",
-            },
-        ],
-        architecture: `┌─────────────────────────────────────────────────────────────┐
-│                    LOKI NLU Pipeline                         │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│  ┌─────────────┐                                           │
-│  │ Voice Input │                                           │
-│  └──────┬──────┘                                           │
-│         │                                                   │
-│         ▼                                                   │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │              Speech-to-Text (Whisper)                │   │
-│  └──────────────────────┬──────────────────────────────┘   │
-│                         │                                   │
-│         ┌───────────────┴───────────────┐                  │
-│         │                               │                  │
-│         ▼                               ▼                  │
-│  ┌─────────────┐                 ┌─────────────┐          │
-│  │ Local NLU   │                 │  CRF-based  │          │
-│  │ (Embeddings)│                 │     NER     │          │
-│  └──────┬──────┘                 └──────┬──────┘          │
-│         │                               │                  │
-│         ▼                               │                  │
-│  ┌─────────────┐                        │                  │
-│  │ Confidence  │──── Low ────┐         │                  │
-│  │   Check     │             │         │                  │
-│  └──────┬──────┘             │         │                  │
-│         │ High               ▼         │                  │
-│         │           ┌─────────────┐    │                  │
-│         │           │ LLM Fallback│    │                  │
-│         │           └──────┬──────┘    │                  │
-│         │                  │           │                  │
-│         └────────┬─────────┘           │                  │
-│                  │                     │                  │
-│                  ▼                     ▼                  │
-│         ┌────────────────────────────────────┐           │
-│         │         Action Executor            │           │
-│         └────────────────────────────────────┘           │
-└─────────────────────────────────────────────────────────────┘`,
-        color: "violet",
-        status: "In Development",
+        status: "Report Available",
     },
 ];
 

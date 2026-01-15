@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Navbar, Footer } from "@/components/layout";
-import { EngineeringHero, ProjectBento } from "./components";
+import { EngineeringHero, ProjectBento, ProjectTerminal } from "./components";
 
 export const metadata: Metadata = {
     title: "Engineering | Rudra Garg",
@@ -13,100 +13,145 @@ const projects = [
     {
         id: "portal-gambit",
         title: "Portal Gambit",
-        subtitle: "Real-time Chess Variant with Voice Chat",
+        subtitle: "Real-time Chess Variant with Recursive Logic",
         description:
-            "A multiplayer chess variant featuring portal mechanics for piece teleportation. Built with real-time WebSocket communication and integrated WebRTC voice chat for player communication during matches.",
+            "A complex chess variant featuring portal mechanics that allow pieces to teleport across the board. The engine handles recursive move validation to prevent infinite loops during portal traversal, synchronized in real-time via Firebase.",
         features: [
-            "Custom chess rules engine with portal mechanics",
-            "Real-time game state synchronization",
-            "WebRTC peer-to-peer voice chat",
-            "ELO-based matchmaking system",
-            "Spectator mode with live commentary",
+            "Recursive move validation algorithm for portal traversal",
+            "Optimistic UI updates with Firebase transactions",
+            "P2P Voice Chat using WebRTC (PeerJS) signaling",
+            "Automated ELO calculation via Cloud Functions",
         ],
         techStack: [
-            { name: "FastAPI", category: "Backend" },
             { name: "React", category: "Frontend" },
-            { name: "WebSocket", category: "Real-time" },
-            { name: "WebRTC", category: "Voice" },
-            { name: "Redis", category: "Cache" },
-            { name: "PostgreSQL", category: "Database" },
+            { name: "Firebase", category: "Real-time DB" },
+            { name: "FastAPI", category: "Backend" },
+            { name: "PeerJS", category: "WebRTC" },
+            { name: "Docker", category: "DevOps" },
         ],
         metrics: [
-            { label: "Concurrent Games", value: "100+" },
-            { label: "Latency", value: "<50ms" },
-            { label: "Voice Quality", value: "HD" },
+            { label: "Test Coverage", value: "15+ Suites" },
+            { label: "Latency", value: "<100ms" },
+            { label: "Voice Quality", value: "P2P HD" },
         ],
         color: "orange",
         links: {
-            demo: "#",
-            github: "#",
+            demo: "#", // Add link if available
+            github: "https://github.com/Rudra-Garg/portal-gambit",
         },
         image: "/projects/portal-gambit.png",
+        codeSnippet: `// CustomChessEngine.js: Handling "Simultaneous Existence"
+moves({ square, verbose, visited } = {}) {
+  // Prevent infinite recursion in portal loops
+  if (!visited) visited = { portals: new Set(), simulChecked: new Set() };
+  
+  const isOnPortal = this.portals[square] !== undefined;
+  if (isOnPortal && !visited.simulChecked.has(square)) {
+    visited.hasTraversedPortal = true; 
+    const linkedSquare = this.portals[square].linkedTo;
+    
+    // Virtual move: Place piece at exit to calculate potential captures
+    const tempPiece = { ...this.get(square) };
+    this.put(tempPiece, linkedSquare);
+    
+    // Recursive call from the new perspective
+    const linkedMoves = super.moves({ square: linkedSquare, verbose: true });
+    // ... merge moves and restore board state ...
+  }
+}`
     },
     {
         id: "terraquest",
         title: "TerraQuest",
-        subtitle: "Multiplayer Geo-guesser Game",
+        subtitle: "High-Concurrency Geo-Gaming Platform",
         description:
-            "A competitive geography game where players guess locations from Google Street View imagery. Features real-time multiplayer lobbies, leaderboards, and validated 81,000+ unique locations worldwide.",
+            "A competitive geography game built with Go. Features a high-performance worker pool for ingesting and validating 81,000+ global locations concurrently, ensuring a massive dataset for multiplayer lobbies.",
         features: [
-            "Google Street View API integration",
-            "Real-time multiplayer lobbies (up to 8 players)",
-            "Scoring based on distance and time",
-            "Global leaderboards and statistics",
-            "Custom game modes and location sets",
+            "Concurrent data ingestion using Go Worker Pools",
+            "Atomic counters for thread-safe statistics",
+            "WebSocket lobbies with mutex-locked state management",
+            "Geodesic distance calculation for scoring",
         ],
         techStack: [
             { name: "Go (Gin)", category: "Backend" },
-            { name: "WebSocket", category: "Real-time" },
+            { name: "Vue 3", category: "Frontend" },
             { name: "PostgreSQL", category: "Database" },
-            { name: "Redis", category: "Cache" },
-            { name: "React", category: "Frontend" },
-            { name: "Google APIs", category: "External" },
+            { name: "Gorilla WS", category: "Real-time" },
+            { name: "GORM", category: "ORM" },
         ],
         metrics: [
             { label: "Locations", value: "81,000+" },
-            { label: "Players", value: "8/lobby" },
-            { label: "Uptime", value: "99.9%" },
+            { label: "Concurrency", value: "Worker Pool" },
+            { label: "Lobby Size", value: "8 Players" },
         ],
         color: "emerald",
         links: {
             demo: "#",
-            github: "#",
+            github: "https://github.com/Rudra-Garg/TerraQuest",
         },
         image: "/projects/terraquest.png",
+        codeSnippet: `// populate_locations.go: Worker Pool Pattern
+for i := 0; i < *workerCount; i++ {
+    workerWg.Add(1)
+    go func(workerID int) {
+        defer workerWg.Done()
+        for candidate := range jobs {
+            atomic.AddInt32(&totalProcessed, 1)
+            // Validate via Google Street View API
+            if dbErr := workerBatch.Add(newLocation); dbErr != nil {
+                atomic.AddInt32(&totalErrors, 1)
+            } else {
+                atomic.AddInt32(&totalValidated, 1)
+            }
+        }
+    }(i)
+}
+// Feed jobs to buffered channel
+for i := 0; i < numToProcess; i++ { jobs <- allCandidates[i] }`
     },
     {
         id: "grig-internship",
         title: "GRIG Technologies",
-        subtitle: "Backend Optimization Case Study",
+        subtitle: "Backend Optimization & Microservices",
         description:
-            "Internship project focused on certificate generation pipeline optimization. Identified bottlenecks in PDF rendering and database queries, implementing caching strategies and async processing that reduced generation time by 98.3%.",
+            "Optimized certificate generation pipeline by implementing asynchronous processing. Migrated legacy endpoints to a scalable microservice architecture using Flask and Firebase, resulting in a 98.3% reduction in processing time.",
         features: [
-            "Profiling and bottleneck identification",
-            "Async PDF generation with worker queues",
-            "Database query optimization (N+1 elimination)",
-            "Redis caching layer for templates",
-            "Batch processing for bulk generation",
+            "Async processing for PDF generation tasks",
+            "Microservice architecture for alerts (FastAPI)",
+            "Supabase object storage evaluation and prototype",
+            "CI/CD pipelines with GitHub Actions",
         ],
         techStack: [
             { name: "Python", category: "Backend" },
-            { name: "Celery", category: "Queue" },
-            { name: "Redis", category: "Cache" },
-            { name: "PostgreSQL", category: "Database" },
-            { name: "Docker", category: "Infrastructure" },
-            { name: "Prometheus", category: "Monitoring" },
+            { name: "Flask", category: "API" },
+            { name: "Firebase", category: "Database" },
+            { name: "Kubernetes", category: "Orchestration" },
+            { name: "Supabase", category: "Storage" },
         ],
         metrics: [
             { label: "Time Reduction", value: "98.3%" },
-            { label: "Throughput", value: "50x" },
-            { label: "P99 Latency", value: "<2s" },
+            { label: "Data Efficiency", value: "+40%" },
+            { label: "APIs Built", value: "10+" },
         ],
         color: "cyan",
         links: {
             case_study: "#",
         },
         image: "/projects/grig.png",
+        codeSnippet: `# Flask-RESTx API Structure (Architectural Sample)
+@api.route('/certificates/generate')
+class CertificateGeneration(Resource):
+    @api.expect(cert_model)
+    def post(self):
+        """Async generation trigger"""
+        data = request.json
+        # Offload heavy PDF rendering to worker queue
+        task_id = async_worker.enqueue(
+            render_certificate, 
+            user_id=data['uid'], 
+            template=data['template']
+        )
+        return {'task_id': task_id, 'status': 'processing'}, 202`
     },
 ];
 
@@ -120,14 +165,23 @@ export default function EngineeringPage() {
                 {/* Projects Grid */}
                 <section className="py-16">
                     <div className="max-w-7xl mx-auto px-6">
-                        <div className="space-y-16">
+                        <div className="space-y-24">
                             {projects.map((project, index) => (
-                                <ProjectBento
-                                    key={project.id}
-                                    project={project}
-                                    index={index}
-                                    reverse={index % 2 === 1}
-                                />
+                                <div key={project.id} className="space-y-8">
+                                    <ProjectBento
+                                        project={project}
+                                        index={index}
+                                        reverse={index % 2 === 1}
+                                    />
+                                    {/* Terminal for Code Evidence */}
+                                    <div className="max-w-4xl mx-auto">
+                                        <ProjectTerminal 
+                                            title={project.title}
+                                            code={project.codeSnippet}
+                                            language={project.id === "terraquest" ? "go" : project.id === "grig-internship" ? "python" : "javascript"}
+                                        />
+                                    </div>
+                                </div>
                             ))}
                         </div>
                     </div>
