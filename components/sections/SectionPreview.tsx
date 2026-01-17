@@ -38,7 +38,7 @@ export function SectionPreview() {
     return (
         <section className="py-24 relative">
             {/* Background accent */}
-            <div className="absolute inset-0 grid-pattern opacity-30" />
+            {/* Background accent - Removed in favor of global grid */}
 
             <div className="max-w-7xl mx-auto px-6 relative">
                 {/* Header */}
@@ -49,7 +49,7 @@ export function SectionPreview() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
                     >
-                        <span className="font-mono text-sm text-cyan-700 dark:text-cyan-400 uppercase tracking-wider">
+                        <span className="font-mono text-sm text-sky-700 dark:text-cyan-400 uppercase tracking-wider">
                             Explore
                         </span>
                         <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-100 mt-2">
@@ -75,9 +75,9 @@ export function SectionPreview() {
                             <Link href={section.href} className="group block h-full">
                                 <div
                                     className={cn(
-                                        "relative h-full p-8 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50",
-                                        "hover:border-cyan-500/40 transition-all duration-300",
-                                        "overflow-hidden shadow-sm dark:shadow-none hover:shadow-md dark:hover:shadow-none"
+                                        "relative h-full p-8 rounded-2xl liquid-glass",
+                                        "hover:border-sky-500/40 transition-all duration-300",
+                                        "overflow-hidden shadow-md hover:shadow-xl dark:shadow-none"
                                     )}
                                 >
                                     {/* Gradient overlay on hover */}
@@ -85,7 +85,7 @@ export function SectionPreview() {
                                         className={cn(
                                             "absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500",
                                             section.color === "cyan"
-                                                ? "bg-gradient-to-br from-cyan-500/5 to-transparent"
+                                                ? "bg-gradient-to-br from-sky-500/5 to-transparent"
                                                 : "bg-gradient-to-br from-violet-500/5 to-transparent"
                                         )}
                                     />
@@ -98,7 +98,7 @@ export function SectionPreview() {
                                                 className={cn(
                                                     "w-12 h-12 rounded-xl flex items-center justify-center",
                                                     section.color === "cyan"
-                                                        ? "bg-cyan-50 dark:bg-cyan-500/10 text-cyan-700 dark:text-cyan-400"
+                                                        ? "bg-sky-50 dark:bg-cyan-500/10 text-sky-700 dark:text-cyan-400"
                                                         : "bg-violet-50 dark:bg-violet-500/10 text-violet-700 dark:text-violet-400"
                                                 )}
                                             >
@@ -110,7 +110,7 @@ export function SectionPreview() {
                                         </div>
 
                                         {/* Description */}
-                                        <p className="text-slate-600 dark:text-slate-400 mb-6">{section.description}</p>
+                                        <p className="text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">{section.description}</p>
 
                                         {/* Projects */}
                                         <div className="flex flex-wrap gap-2 mb-6">
@@ -134,7 +134,7 @@ export function SectionPreview() {
                                             className={cn(
                                                 "flex items-center gap-2 font-medium",
                                                 section.color === "cyan"
-                                                    ? "text-cyan-700 dark:text-cyan-400"
+                                                    ? "text-sky-700 dark:text-cyan-400"
                                                     : "text-violet-700 dark:text-violet-400"
                                             )}
                                         >

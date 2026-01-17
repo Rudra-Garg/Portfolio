@@ -67,16 +67,16 @@ const metrics: Metric[] = [
 function MetricCard({ metric, index }: { metric: Metric; index: number }) {
     return (
         <motion.div
-            className="flex-shrink-0 flex items-center gap-6 px-8 py-4 mx-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/30 backdrop-blur-sm shadow-sm dark:shadow-none"
+            className="flex-shrink-0 flex items-center gap-6 px-8 py-4 mx-4 rounded-xl liquid-glass"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1, duration: 0.5 }}
         >
-            <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-cyan-50 dark:bg-cyan-500/10 text-cyan-700 dark:text-cyan-400 border border-cyan-100 dark:border-transparent">
+            <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-sky-50 dark:bg-cyan-500/10 text-sky-700 dark:text-cyan-400 border border-sky-100 dark:border-transparent">
                 {metric.icon}
             </div>
             <div className="flex flex-col">
-                <span className="font-mono text-2xl md:text-3xl font-bold text-cyan-700 dark:text-cyan-400">
+                <span className="font-mono text-2xl md:text-3xl font-bold text-sky-700 dark:text-cyan-400">
                     {metric.value}
                 </span>
                 <span className="text-sm text-slate-700 dark:text-slate-400">{metric.label}</span>
@@ -99,8 +99,8 @@ export function MetricsTicker({ className }: MetricsTickerProps) {
             {/* Section Header */}
             <div className="max-w-7xl mx-auto px-6 mb-8">
                 <div className="flex items-center gap-3 mb-2">
-                    <div className="w-8 h-px bg-cyan-600 dark:bg-cyan-500/50" />
-                    <span className="font-mono text-sm text-cyan-700 dark:text-cyan-400 uppercase tracking-wider">
+                    <div className="w-8 h-px bg-sky-600 dark:bg-cyan-500/50" />
+                    <span className="font-mono text-sm text-sky-700 dark:text-cyan-400 uppercase tracking-wider">
                         Proof of Impact
                     </span>
                 </div>
@@ -109,19 +109,15 @@ export function MetricsTicker({ className }: MetricsTickerProps) {
                 </h2>
             </div>
 
-            {/* Gradient Overlays - Updated for White Background */}
-            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white dark:from-[#0B0F14] to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white dark:from-[#0B0F14] to-transparent z-10 pointer-events-none" />
-
-            {/* Ticker Container */}
+            {/* Ticker Container with CSS Mask for clean fade */}
             <div
                 ref={containerRef}
-                className="relative flex"
+                className="relative flex [mask-image:linear-gradient(to_right,transparent,black_128px,black_calc(100%-128px),transparent)]"
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
             >
                 <motion.div
-                    className="flex"
+                    className="flex py-4"
                     animate={{
                         x: [0, -1920],
                     }}
@@ -154,7 +150,7 @@ export function MetricsTicker({ className }: MetricsTickerProps) {
 
             {/* Bottom border accent */}
             <div className="max-w-7xl mx-auto px-6 mt-8">
-                <div className="h-px bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent" />
+                <div className="h-px bg-gradient-to-r from-transparent via-sky-500/30 to-transparent" />
             </div>
         </section>
     );
@@ -166,8 +162,8 @@ export function MetricsGrid({ className }: { className?: string }) {
         <section className={cn("py-16", className)}>
             <div className="max-w-7xl mx-auto px-6">
                 <div className="flex items-center gap-3 mb-2">
-                    <div className="w-8 h-px bg-cyan-600/50 dark:bg-cyan-500/50" />
-                    <span className="font-mono text-sm text-cyan-700 dark:text-cyan-400 uppercase tracking-wider">
+                    <div className="w-8 h-px bg-sky-600/50 dark:bg-cyan-500/50" />
+                    <span className="font-mono text-sm text-sky-700 dark:text-cyan-400 uppercase tracking-wider">
                         Key Metrics
                     </span>
                 </div>
@@ -179,18 +175,18 @@ export function MetricsGrid({ className }: { className?: string }) {
                     {metrics.map((metric, index) => (
                         <motion.div
                             key={index}
-                            className="group relative p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 hover:border-cyan-500/30 transition-colors shadow-sm dark:shadow-none"
+                            className="group relative p-6 rounded-xl liquid-glass hover:border-sky-500/30 transition-colors shadow-sm dark:shadow-none"
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1, duration: 0.5 }}
                         >
                             <div className="flex items-start gap-4">
-                                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-cyan-100 dark:bg-cyan-500/10 text-cyan-700 dark:text-cyan-400 group-hover:bg-cyan-200 dark:group-hover:bg-cyan-500/20 transition-colors">
+                                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-sky-100 dark:bg-cyan-500/10 text-sky-700 dark:text-cyan-400 group-hover:bg-sky-200 dark:group-hover:bg-cyan-500/20 transition-colors">
                                     {metric.icon}
                                 </div>
                                 <div className="flex-1">
-                                    <span className="font-mono text-3xl font-bold text-cyan-700 dark:text-cyan-400">
+                                    <span className="font-mono text-3xl font-bold text-sky-700 dark:text-cyan-400">
                                         {metric.value}
                                     </span>
                                     <p className="text-sm text-slate-700 dark:text-slate-400 mt-1">{metric.label}</p>

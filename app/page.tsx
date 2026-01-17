@@ -5,8 +5,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      {/* Global Background Layer */}
-      <NetworkBackground />
+      {/* Global Background Layer - REMOVED, now inside Hero */}
 
       {/* Content Layer - relative z-10 ensures it sits above the fixed canvas */}
       <main className="relative z-10">
