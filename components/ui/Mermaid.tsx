@@ -84,7 +84,6 @@ export function Mermaid({ chart, className }: MermaidProps) {
         limitToBounds={false}
         wheel={{ step: 0.1 }}
         doubleClick={{ disabled: true }}
-        wrapperStyle={{ width: "100%", height: "100%", cursor: "grab" }}
       >
         {({ zoomIn, zoomOut, resetTransform }) => (
           <>
@@ -116,7 +115,7 @@ export function Mermaid({ chart, className }: MermaidProps) {
 
             {/* Diagram Canvas */}
             <TransformComponent
-              wrapperStyle={{ width: "100%", height: "100%" }}
+              wrapperStyle={{ width: "100%", height: "100%", cursor: "grab" }}
               contentStyle={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}
             >
               <div
