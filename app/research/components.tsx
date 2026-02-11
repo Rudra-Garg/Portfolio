@@ -11,7 +11,9 @@ import {
     ExternalLink,
     ChevronRight,
 } from "lucide-react";
+import { Mermaid } from "@/components/ui"; // Import Mermaid
 
+// ... ResearchHero remains unchanged ...
 export function ResearchHero() {
     return (
         <section className="relative py-24 overflow-hidden">
@@ -101,9 +103,13 @@ interface ProjectDetailsProps {
         metrics: { label: string; value: string }[];
         techStack: string[];
         decisions: { decision: string; tradeoff: string; outcome: string }[];
-        architecture: string;
+        architecture: string; // This now holds Mermaid syntax
         color: string;
         status: string;
+        links: {
+            github?: string;
+            report?: string;
+        };
     };
     index: number;
 }
@@ -192,20 +198,20 @@ export function ProjectDetails({ project, index }: ProjectDetailsProps) {
                         </p>
                     </div>
 
+                    {/* Mermaid Diagram */}
                     <div
                         className={cn(
-                            "p-6 rounded-2xl border bg-slate-900 dark:bg-slate-900/50",
+                            "rounded-2xl border bg-white dark:bg-slate-900/50 overflow-hidden",
                             colors.border
                         )}
                     >
-                        <h3 className="text-lg font-semibold text-slate-200 mb-4">
-                            Architecture
-                        </h3>
-                        <div className="overflow-x-auto">
-                            <pre className="font-mono text-xs text-slate-400 leading-relaxed whitespace-pre">
-                                {project.architecture}
-                            </pre>
+                        <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/80">
+                            <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-200">
+                                System Architecture
+                            </h3>
                         </div>
+                        {/* Interactive Mermaid Component */}
+                        <Mermaid chart={project.architecture} />
                     </div>
 
                     <div
@@ -328,22 +334,31 @@ export function ProjectDetails({ project, index }: ProjectDetailsProps) {
                             Resources
                         </h3>
                         <div className="space-y-2">
-                            <a
-                                href="#"
-                                className="flex items-center gap-2 p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors"
-                            >
-                                <FileText className="w-4 h-4" />
-                                <span className="text-sm">View Project Report</span>
-                                <ExternalLink className="w-3 h-3 ml-auto" />
-                            </a>
-                            <a
-                                href="#"
-                                className="flex items-center gap-2 p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors"
-                            >
-                                <Cpu className="w-4 h-4" />
-                                <span className="text-sm">Source Code</span>
-                                <ExternalLink className="w-3 h-3 ml-auto" />
-                            </a>
+                            {project.links.report && (
+                                <a
+                                    href={project.links.report}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-2 p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors"
+                                >
+                                    <FileText className="w-4 h-4" />
+                                    <span className="text-sm">View Project Report</span>
+                                    <ExternalLink className="w-3 h-3 ml-auto" />
+                                </a>
+                            )}
+                            
+                            {project.links.github && (
+                                <a
+                                    href={project.links.github}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-2 p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors"
+                                >
+                                    <Cpu className="w-4 h-4" />
+                                    <span className="text-sm">Source Code</span>
+                                    <ExternalLink className="w-3 h-3 ml-auto" />
+                                </a>
+                            )}
                         </div>
                     </div>
                 </div>
