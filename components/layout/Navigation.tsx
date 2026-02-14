@@ -26,7 +26,7 @@ const navigation = [
 const socials = [
     { name: "GitHub", href: "https://github.com/rudra-garg", icon: Github },
     { name: "LinkedIn", href: "https://linkedin.com/in/rudra-garg", icon: Linkedin },
-    { name: "Email", href: "mailto:rudra@example.com", icon: Mail },
+    { name: "Email", href: "mailto:hi@rudragarg.dev", icon: Mail },
 ];
 
 export function Navbar() {
