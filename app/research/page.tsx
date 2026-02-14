@@ -22,10 +22,10 @@ const projects = [
             { label: "Training Samples", value: "1389" },
         ],
         techStack: [
-            "Python", 
-            "Faster-Whisper", 
-            "Sentence-Transformers", 
-            "Ollama (Dolphin-Phi)", 
+            "Python",
+            "Faster-Whisper",
+            "Sentence-Transformers",
+            "Ollama (Dolphin-Phi)",
             "sklearn-crfsuite"
         ],
         decisions: [
@@ -92,10 +92,10 @@ const projects = [
             { label: "Latency", value: "~21 Steps" },
         ],
         techStack: [
-            "Python", 
-            "PyTorch", 
-            "SUMO (TraCI)", 
-            "DDQN & MADDPG", 
+            "Python",
+            "PyTorch",
+            "SUMO (TraCI)",
+            "DDQN & MADDPG",
             "Spatial-Temporal LSTM"
         ],
         decisions: [
@@ -143,7 +143,7 @@ const projects = [
         status: "Simulation Study",
         links: {
             github: "https://github.com/Rudra-Garg/UAV",
-            report: "/reports/muceds.pdf",
+            report: "/reports/UAV.pdf",
         }
     },
     {
@@ -158,10 +158,10 @@ const projects = [
             { label: "Cloud Latency", value: "~5600ms" },
         ],
         techStack: [
-            "Docker Compose", 
-            "Linux Traffic Control (tc)", 
-            "Prometheus/Grafana", 
-            "Python (Flask)", 
+            "Docker Compose",
+            "Linux Traffic Control (tc)",
+            "Prometheus/Grafana",
+            "Python (Flask)",
             "Redis"
         ],
         decisions: [
@@ -218,7 +218,7 @@ const projects = [
         status: "Testbed Validated",
         links: {
             github: "https://github.com/Rudra-Garg/CS300",
-            report: "/reports/fog-computing.pdf",
+            report: "/reports/docker.pdf",
         }
     },
 ];
@@ -227,25 +227,30 @@ export default function ResearchPage() {
     return (
         <>
             <Navbar />
-            <main className="min-h-screen pt-16">
-                <ResearchHero />
+            <main className="relative min-h-screen pt-16">
+                <div className="absolute inset-0 grid-pattern opacity-30 pointer-events-none" />
+                <div className="relative">
+                    <ResearchHero />
 
-                {/* Projects */}
-                <section className="py-16">
-                    <div className="max-w-7xl mx-auto px-6">
-                        <div className="space-y-24">
-                            {projects.map((project, index) => (
-                                <ProjectDetails
-                                    key={project.id}
-                                    project={project}
-                                    index={index}
-                                />
-                            ))}
+                    {/* Projects */}
+                    <section className="py-16">
+                        <div className="max-w-7xl mx-auto px-6">
+                            <div className="space-y-24">
+                                {projects.map((project, index) => (
+                                    <ProjectDetails
+                                        key={project.id}
+                                        project={project}
+                                        index={index}
+                                    />
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                </section>
+                    </section>
+                </div>
             </main>
-            <Footer />
+            <div className="relative z-10 bg-[#FAFBFC] dark:bg-[#0B0F14] transition-colors duration-300">
+                <Footer />
+            </div>
         </>
     );
 }

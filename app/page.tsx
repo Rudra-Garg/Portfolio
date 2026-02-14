@@ -10,9 +10,14 @@ export default function Home() {
       {/* Content Layer - relative z-10 ensures it sits above the fixed canvas */}
       <main className="relative z-10">
         <Hero />
-        <MetricsTicker />
-        <SectionPreview />
-        <TechStackPreview />
+        <div className="relative">
+          <div className="absolute inset-0 grid-pattern opacity-30 pointer-events-none" />
+          <div className="relative">
+            <MetricsTicker />
+            <SectionPreview />
+            <TechStackPreview />
+          </div>
+        </div>
       </main>
 
       {/* Footer Layer */}

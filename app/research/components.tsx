@@ -11,14 +11,13 @@ import {
     ExternalLink,
     ChevronRight,
 } from "lucide-react";
-import { Mermaid } from "@/components/ui"; // Import Mermaid
+import { Mermaid, PDFViewer, usePDFViewer } from "@/components/ui";
 
 // ... ResearchHero remains unchanged ...
 export function ResearchHero() {
     return (
         <section className="relative py-24 overflow-hidden">
-            <div className="absolute inset-0 grid-pattern opacity-30" />
-            <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-transparent dark:from-cyan-500/5 dark:via-transparent dark:to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-b from-cyan-100/60 via-transparent to-transparent dark:from-cyan-500/5 dark:via-transparent dark:to-transparent" />
 
             <div className="relative max-w-7xl mx-auto px-6">
                 <motion.div
@@ -115,6 +114,8 @@ interface ProjectDetailsProps {
 }
 
 export function ProjectDetails({ project, index }: ProjectDetailsProps) {
+    const { viewer, openPDF, closePDF } = usePDFViewer();
+
     const colorClasses = {
         cyan: {
             border: "border-cyan-200 dark:border-cyan-500/30",
@@ -335,18 +336,16 @@ export function ProjectDetails({ project, index }: ProjectDetailsProps) {
                         </h3>
                         <div className="space-y-2">
                             {project.links.report && (
-                                <a
-                                    href={project.links.report}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center gap-2 p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors"
+                                <button
+                                    onClick={() => openPDF(project.links.report!, project.title + " Report")}
+                                    className="flex items-center gap-2 p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors cursor-pointer w-full"
                                 >
                                     <FileText className="w-4 h-4" />
                                     <span className="text-sm">View Project Report</span>
                                     <ExternalLink className="w-3 h-3 ml-auto" />
-                                </a>
+                                </button>
                             )}
-                            
+
                             {project.links.github && (
                                 <a
                                     href={project.links.github}
@@ -363,6 +362,13 @@ export function ProjectDetails({ project, index }: ProjectDetailsProps) {
                     </div>
                 </div>
             </div>
+
+            <PDFViewer
+                file={viewer?.file || ""}
+                title={viewer?.title || ""}
+                isOpen={!!viewer}
+                onClose={closePDF}
+            />
         </motion.article>
     );
 }

@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { Navbar, Footer } from "@/components/layout";
-import { EngineeringHero, ProjectBento, ProjectTerminal } from "./components";
+import { EngineeringHero, ProjectBento } from "./components";
+import { Mermaid } from "@/components/ui";
 
 export const metadata: Metadata = {
     title: "Engineering | Rudra Garg",
     description:
-        "Production-grade applications: real-time multiplayer games, geo-location services, and backend optimization case studies.",
+        "Production-grade applications: real-time multiplayer games, geo-location services, and AI-driven platforms.",
 };
 
 // Engineering project data
@@ -13,145 +14,141 @@ const projects = [
     {
         id: "portal-gambit",
         title: "Portal Gambit",
-        subtitle: "Real-time Chess Variant with Recursive Logic",
+        subtitle: "Non-Euclidean Real-Time Chess Engine",
         description:
-            "A complex chess variant featuring portal mechanics that allow pieces to teleport across the board. The engine handles recursive move validation to prevent infinite loops during portal traversal, synchronized in real-time via Firebase.",
+            "A complex chess variant engineered with a custom recursive pathfinding algorithm to handle portal traversals. Features a server-offset synchronized timer system and P2P voice chat via WebRTC, ensuring competitive integrity in a distributed environment.",
         features: [
-            "Recursive move validation algorithm for portal traversal",
-            "Optimistic UI updates with Firebase transactions",
-            "P2P Voice Chat using WebRTC (PeerJS) signaling",
-            "Automated ELO calculation via Cloud Functions",
+            "Recursive Move Validation (Graph Traversal)",
+            "Optimistic UI with Firebase Atomic Transactions",
+            "P2P Signaling via Firestore (No dedicated turn server)",
+            "Server-Authority Time Synchronization",
         ],
         techStack: [
-            { name: "React", category: "Frontend" },
+            { name: "React 18", category: "Frontend" },
             { name: "Firebase", category: "Real-time DB" },
             { name: "FastAPI", category: "Backend" },
             { name: "PeerJS", category: "WebRTC" },
-            { name: "Docker", category: "DevOps" },
+            { name: "Vite", category: "Build Tool" },
         ],
         metrics: [
             { label: "Test Coverage", value: "15+ Suites" },
             { label: "Latency", value: "<100ms" },
-            { label: "Voice Quality", value: "P2P HD" },
+            { label: "Voice Sync", value: "P2P UDP" },
         ],
         color: "orange",
+        demoAspect: "video" as const,
         links: {
-            demo: "#", // Add link if available
-            github: "https://github.com/Rudra-Garg/portal-gambit",
+            github: "https://github.com/Rudra-Garg/portal-gambit-frontend",
         },
-        image: "/projects/portal-gambit.png",
-        codeSnippet: `// CustomChessEngine.js: Handling "Simultaneous Existence"
-moves({ square, verbose, visited } = {}) {
-  // Prevent infinite recursion in portal loops
-  if (!visited) visited = { portals: new Set(), simulChecked: new Set() };
-  
-  const isOnPortal = this.portals[square] !== undefined;
-  if (isOnPortal && !visited.simulChecked.has(square)) {
-    visited.hasTraversedPortal = true; 
-    const linkedSquare = this.portals[square].linkedTo;
-    
-    // Virtual move: Place piece at exit to calculate potential captures
-    const tempPiece = { ...this.get(square) };
-    this.put(tempPiece, linkedSquare);
-    
-    // Recursive call from the new perspective
-    const linkedMoves = super.moves({ square: linkedSquare, verbose: true });
-    // ... merge moves and restore board state ...
-  }
-}`
+        demoMedia: "/demos/portal-gambit.gif",
+        architecture: `
+        sequenceDiagram
+            participant P1 as Player 1
+            participant FB as Firebase RTDB
+            participant P2 as Player 2
+            participant Peer as PeerJS/WebRTC
+
+            Note over P1, P2: Game State Synchronization
+            P1->>FB: Atomic Move Transaction (FEN)
+            FB-->>P1: Ack (Optimistic Update)
+            FB-->>P2: Push New State
+            
+            Note over P1, P2: P2P Voice Layer
+            P1->>FB: Signal Offer (SDP)
+            FB->>P2: Relay Signal
+            P2->>FB: Signal Answer
+            P1<->>P2: P2P Audio Stream (UDP)
+        `
     },
     {
         id: "terraquest",
         title: "TerraQuest",
-        subtitle: "High-Concurrency Geo-Gaming Platform",
+        subtitle: "Concurrent Geo-Spatial Gaming Platform",
         description:
-            "A competitive geography game built with Go. Features a high-performance worker pool for ingesting and validating 81,000+ global locations concurrently, ensuring a massive dataset for multiplayer lobbies.",
+            "A high-throughput multiplayer engine built in Go. Leverages Goroutines and Worker Pools to concurrently process and validate 81,000+ global locations from Google Street View API, storing them in a PostGIS-optimized database.",
         features: [
-            "Concurrent data ingestion using Go Worker Pools",
-            "Atomic counters for thread-safe statistics",
-            "WebSocket lobbies with mutex-locked state management",
-            "Geodesic distance calculation for scoring",
+            "Go Worker Pools for Mass Data Ingestion",
+            "Thread-safe Lobby Management (RWMutex)",
+            "Exponential Decay Scoring Algorithm",
+            "Dual-Map Engine (Leaflet + StreetView SDK)",
         ],
         techStack: [
             { name: "Go (Gin)", category: "Backend" },
             { name: "Vue 3", category: "Frontend" },
             { name: "PostgreSQL", category: "Database" },
             { name: "Gorilla WS", category: "Real-time" },
-            { name: "GORM", category: "ORM" },
+            { name: "Pinia", category: "State" },
         ],
         metrics: [
-            { label: "Locations", value: "81,000+" },
+            { label: "Data Points", value: "81,000+" },
             { label: "Concurrency", value: "Worker Pool" },
-            { label: "Lobby Size", value: "8 Players" },
+            { label: "Map FPS", value: "60 FPS" },
         ],
         color: "emerald",
         links: {
-            demo: "#",
             github: "https://github.com/Rudra-Garg/TerraQuest",
         },
-        image: "/projects/terraquest.png",
-        codeSnippet: `// populate_locations.go: Worker Pool Pattern
-for i := 0; i < *workerCount; i++ {
-    workerWg.Add(1)
-    go func(workerID int) {
-        defer workerWg.Done()
-        for candidate := range jobs {
-            atomic.AddInt32(&totalProcessed, 1)
-            // Validate via Google Street View API
-            if dbErr := workerBatch.Add(newLocation); dbErr != nil {
-                atomic.AddInt32(&totalErrors, 1)
-            } else {
-                atomic.AddInt32(&totalValidated, 1)
-            }
-        }
-    }(i)
-}
-// Feed jobs to buffered channel
-for i := 0; i < numToProcess; i++ { jobs <- allCandidates[i] }`
+        architecture: `
+        graph TD
+            Client("Vue 3 Client") -->|WS: Game State| GoHub["Go WebSocket Hub"]
+            Client -->|HTTP: Auth| Gin["Gin API Gateway"]
+            
+            subgraph Backend ["Go Backend System"]
+                GoHub --> Match["Lobby Manager (Mutex)"]
+                Gin --> DB[("PostgreSQL/GORM")]
+                
+                subgraph Data Pipeline
+                    Worker["Worker Pool"] -->|Concurrent Req| GMaps["Google Maps API"]
+                    Worker -->|Batch Insert| DB
+                end
+            end
+            
+            style Backend fill:#1e293b,stroke:#10b981,stroke-width:2px
+        `
     },
     {
-        id: "grig-internship",
-        title: "GRIG Technologies",
-        subtitle: "Backend Optimization & Microservices",
+        id: "pilgrim-ai",
+        title: "Pilgrim AI",
+        subtitle: "Hybrid Mental Health Architecture",
         description:
-            "Optimized certificate generation pipeline by implementing asynchronous processing. Migrated legacy endpoints to a scalable microservice architecture using Flask and Firebase, resulting in a 98.3% reduction in processing time.",
+            "A multi-platform mental health ecosystem integrating Google Vertex AI for empathetic counseling. Features a decentralized 3-tier architecture with a context-aware session management system hosted on Google App Engine.",
         features: [
-            "Async processing for PDF generation tasks",
-            "Microservice architecture for alerts (FastAPI)",
-            "Supabase object storage evaluation and prototype",
-            "CI/CD pipelines with GitHub Actions",
+            "Context-Aware Chat Persistence (Session ID)",
+            "Few-Shot Prompt Engineering (PaLM 2)",
+            "Geospatial Resource Discovery (Collision-Aware)",
+            "Cross-Platform State (Flutter GetX + Web)",
         ],
         techStack: [
-            { name: "Python", category: "Backend" },
-            { name: "Flask", category: "API" },
-            { name: "Firebase", category: "Database" },
-            { name: "Kubernetes", category: "Orchestration" },
-            { name: "Supabase", category: "Storage" },
+            { name: "Flutter", category: "Mobile" },
+            { name: "Flask", category: "Backend" },
+            { name: "Vertex AI", category: "LLM" },
+            { name: "App Engine", category: "Cloud" },
+            { name: "Google Maps", category: "GIS" },
         ],
         metrics: [
-            { label: "Time Reduction", value: "98.3%" },
-            { label: "Data Efficiency", value: "+40%" },
-            { label: "APIs Built", value: "10+" },
+            { label: "Uptime", value: "99.9%" },
+            { label: "Platforms", value: "Mobile/Web" },
+            { label: "AI Model", value: "PaLM 2" },
         ],
         color: "cyan",
+        demoAspect: "mobile" as const,
         links: {
-            case_study: "#",
+            github: "https://github.com/Rudra-Garg/PILGRIMAI",
         },
-        image: "/projects/grig.png",
-        codeSnippet: `# Flask-RESTx API Structure (Architectural Sample)
-@api.route('/certificates/generate')
-class CertificateGeneration(Resource):
-    @api.expect(cert_model)
-    def post(self):
-        """Async generation trigger"""
-        data = request.json
-        # Offload heavy PDF rendering to worker queue
-        task_id = async_worker.enqueue(
-            render_certificate, 
-            user_id=data['uid'], 
-            template=data['template']
-        )
-        return {'task_id': task_id, 'status': 'processing'}, 202`
+        demoMedia: "/demos/pilgrim.gif",
+        architecture: `
+        graph LR
+            Mobile("Flutter App") -->|REST/JSON| API["Flask Backend"]
+            Web("React Web") -->|REST/JSON| API
+            
+            subgraph GCP ["Google Cloud Platform"]
+                API -->|Session Context| Vertex["Vertex AI (PaLM 2)"]
+                API -->|Geospatial Query| Maps["Google Maps Platform"]
+                API -->|Auto-Scaling| GAE["App Engine"]
+            end
+            
+            style GCP fill:#1e293b,stroke:#06b6d4,stroke-width:2px
+        `
     },
 ];
 
@@ -159,35 +156,44 @@ export default function EngineeringPage() {
     return (
         <>
             <Navbar />
-            <main className="min-h-screen pt-16">
-                <EngineeringHero />
+            <main className="relative min-h-screen pt-16">
+                <div className="absolute inset-0 grid-pattern opacity-30 pointer-events-none" />
+                <div className="relative">
+                    <EngineeringHero />
 
-                {/* Projects Grid */}
-                <section className="py-16">
-                    <div className="max-w-7xl mx-auto px-6">
-                        <div className="space-y-24">
-                            {projects.map((project, index) => (
-                                <div key={project.id} className="space-y-8">
-                                    <ProjectBento
-                                        project={project}
-                                        index={index}
-                                        reverse={index % 2 === 1}
-                                    />
-                                    {/* Terminal for Code Evidence */}
-                                    <div className="max-w-4xl mx-auto">
-                                        <ProjectTerminal 
-                                            title={project.title}
-                                            code={project.codeSnippet}
-                                            language={project.id === "terraquest" ? "go" : project.id === "grig-internship" ? "python" : "javascript"}
+                    {/* Projects Grid */}
+                    <section className="py-16">
+                        <div className="max-w-7xl mx-auto px-6">
+                            <div className="space-y-24">
+                                {projects.map((project, index) => (
+                                    <div key={project.id} className="space-y-12">
+                                        <ProjectBento
+                                            project={project}
+                                            index={index}
+                                            reverse={index % 2 === 1}
                                         />
+                                        {/* Architecture Diagram */}
+                                        {project.demoMedia && (
+                                            <div className="max-w-4xl mx-auto">
+                                                <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/30 overflow-hidden">
+                                                    <div className="px-4 py-2 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 flex items-center gap-2">
+                                                        <div className="w-3 h-3 rounded-full bg-slate-300 dark:bg-slate-600" />
+                                                        <span className="text-xs font-mono text-slate-500 uppercase tracking-wider">System Architecture</span>
+                                                    </div>
+                                                    <Mermaid chart={project.architecture} className="border-0 rounded-none bg-transparent" />
+                                                </div>
+                                            </div>
+                                        )}
                                     </div>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                </section>
+                    </section>
+                </div>
             </main>
-            <Footer />
+            <div className="relative z-10 bg-[#FAFBFC] dark:bg-[#0B0F14] transition-colors duration-300">
+                <Footer />
+            </div>
         </>
     );
 }

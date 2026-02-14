@@ -44,10 +44,10 @@ export function Navbar() {
     return (
         <header
             className={cn(
-                "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b",
+                "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b bg-[#FAFBFC]/80 dark:bg-[#0B0F14]/80 backdrop-blur-xl",
                 scrolled
-                    ? "bg-[#FAFBFC]/80 dark:bg-[#0B0F14]/80 backdrop-blur-xl border-slate-200/50 dark:border-slate-800/50 py-3"
-                    : "bg-transparent border-transparent py-5"
+                    ? "border-slate-200/50 dark:border-slate-800/50 py-3"
+                    : "border-transparent py-5"
             )}
         >
             <nav className="max-w-7xl mx-auto px-6 flex items-center justify-between">

@@ -35,7 +35,7 @@ const metrics: Metric[] = [
     {
         value: "99.77%",
         label: "NER F1-Score",
-        project: "LOKI Voice Assistant",
+        project: "LOKI / NLP Engine",
         icon: (
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
@@ -45,7 +45,7 @@ const metrics: Metric[] = [
     {
         value: "~90%",
         label: "Cache Hit Ratio",
-        project: "UAV / MUCEDS",
+        project: "MUCEDS / UAV Networks",
         icon: (
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
@@ -55,7 +55,7 @@ const metrics: Metric[] = [
     {
         value: "81,000+",
         label: "Locations Validated",
-        project: "TerraQuest",
+        project: "TerraQuest / Go",
         icon: (
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -79,8 +79,8 @@ function MetricCard({ metric, index }: { metric: Metric; index: number }) {
                 <span className="font-mono text-2xl md:text-3xl font-bold text-sky-700 dark:text-cyan-400">
                     {metric.value}
                 </span>
-                <span className="text-sm text-slate-700 dark:text-slate-400">{metric.label}</span>
-                <span className="text-xs text-slate-500 font-mono">{metric.project}</span>
+                <span className="text-sm text-slate-700 dark:text-slate-400 font-medium">{metric.label}</span>
+                <span className="text-xs text-slate-500 font-mono mt-0.5">{metric.project}</span>
             </div>
         </motion.div>
     );
@@ -125,7 +125,7 @@ export function MetricsTicker({ className }: MetricsTickerProps) {
                         x: {
                             repeat: Infinity,
                             repeatType: "loop",
-                            duration: 30,
+                            duration: 45, // Slowed down for readability
                             ease: "linear",
                         },
                     }}

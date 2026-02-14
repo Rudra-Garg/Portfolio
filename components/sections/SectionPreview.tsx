@@ -9,27 +9,27 @@ const sections = [
     {
         title: "Research Labs",
         description:
-            "Academic research projects in distributed systems, fog computing, UAV networks, and AI/ML. Backed by rigorous simulations and technical reports.",
+            "Academic research in Fog Computing, UAV Edge Networks, and Privacy-First NLP. Validated via SUMO simulations, Linux kernel emulation, and rigorous benchmarking.",
         href: "/research",
         icon: FlaskConical,
         color: "cyan",
         projects: [
-            { name: "MUCEDS", tag: "UAV Edge Networks" },
-            { name: "GVMP", tag: "Fog Computing" },
-            { name: "LOKI", tag: "Voice NLU" },
+            { name: "LOKI", tag: "Hybrid NLP Engine" },
+            { name: "MUCEDS", tag: "UAV/RL Optimization" },
+            { name: "Fog Testbed", tag: "GVMP Strategy" },
         ],
     },
     {
         title: "Engineering",
         description:
-            "Production-grade applications built for scale. Real-time systems, multiplayer games, and backend optimizations.",
+            "Production-grade systems built for scale. Featuring concurrent Go backends, non-Euclidean game engines, and cross-platform mobile architectures.",
         href: "/engineering",
         icon: Wrench,
         color: "violet",
         projects: [
-            { name: "Portal Gambit", tag: "Real-time Chess" },
-            { name: "TerraQuest", tag: "Geo-guesser" },
-            { name: "GRIG", tag: "Backend Optimization" },
+            { name: "Portal Gambit", tag: "Recursive Chess Physics" },
+            { name: "TerraQuest", tag: "Concurrent Go System" },
+            { name: "Pilgrim AI", tag: "GCP/Vertex AI" },
         ],
     },
 ];
@@ -37,9 +37,6 @@ const sections = [
 export function SectionPreview() {
     return (
         <section className="py-24 relative">
-            {/* Background accent */}
-            {/* Background accent - Removed in favor of global grid */}
-
             <div className="max-w-7xl mx-auto px-6 relative">
                 {/* Header */}
                 <div className="text-center mb-16">
@@ -56,8 +53,8 @@ export function SectionPreview() {
                             Two Sides of the Stack
                         </h2>
                         <p className="text-slate-600 dark:text-slate-500 mt-4 max-w-2xl mx-auto">
-                            From academic research and simulations to production-ready
-                            engineering. Different disciplines, unified by systems thinking.
+                            From academic research simulations to production-ready engineering. 
+                            Different disciplines, unified by systems thinking.
                         </p>
                     </motion.div>
                 </div>
@@ -110,7 +107,9 @@ export function SectionPreview() {
                                         </div>
 
                                         {/* Description */}
-                                        <p className="text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">{section.description}</p>
+                                        <p className="text-slate-600 dark:text-slate-400 mb-6 leading-relaxed min-h-[48px]">
+                                            {section.description}
+                                        </p>
 
                                         {/* Projects */}
                                         <div className="flex flex-wrap gap-2 mb-6">

@@ -79,8 +79,8 @@ export function NetworkBackground() {
             }
 
             ctx.beginPath();
-            // CRITICAL FIX: Much darker lines for Light Mode visibility
-            ctx.strokeStyle = isDark ? "rgba(56, 189, 248, 0.05)" : "rgba(148, 163, 184, 0.15)"; // Lighter Slate (Slate 400)
+            // Balanced line visibility: subtle in light, slightly more visible in dark
+            ctx.strokeStyle = isDark ? "rgba(56, 189, 248, 0.08)" : "rgba(148, 163, 184, 0.08)";
             ctx.lineWidth = 0.5;
 
             for (let i = 0; i < points.length; i++) {
@@ -104,9 +104,9 @@ export function NetworkBackground() {
                 if (p.size > 2) {
                     ctx.fillStyle = isDark
                         ? `rgba(56, 189, 248, ${0.4 + (p.size - 1.5) / 5})`
-                        : `rgba(2, 132, 199, ${0.6 + (p.size - 1.5) / 5})`;
+                        : `rgba(2, 132, 199, ${0.35 + (p.size - 1.5) / 5})`;
                 } else {
-                    ctx.fillStyle = isDark ? "rgba(148, 163, 184, 0.05)" : "rgba(148, 163, 184, 0.2)"; // Lighter Slate (Slate 400)
+                    ctx.fillStyle = isDark ? "rgba(148, 163, 184, 0.08)" : "rgba(148, 163, 184, 0.1)";
                 }
                 ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
                 ctx.fill();
@@ -234,9 +234,9 @@ export function Hero() {
                     >
                         <a
                             href="/research"
-                            className="group relative px-6 py-3 font-medium rounded-lg overflow-hidden liquid-metal"
+                            className="group px-6 py-3 font-medium text-slate-700 dark:text-slate-300 rounded-lg transition-all hover:text-sky-700 dark:hover:text-cyan-400 liquid-glass hover:bg-white/50"
                         >
-                            <span className="relative z-10 flex items-center gap-2">
+                            <span className="flex items-center gap-2">
                                 <span>View Research</span>
                                 <svg
                                     className="w-4 h-4 transition-transform group-hover:translate-x-1"

@@ -4,29 +4,31 @@ import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const techStack = {
-    Infrastructure: [
-        { name: "Docker", level: "advanced" },
-        { name: "Kubernetes", level: "intermediate" },
-        { name: "Linux TC", level: "advanced" },
-        { name: "Prometheus", level: "intermediate" },
-    ],
-    Backend: [
-        { name: "Go (Gin)", level: "advanced" },
+    "Languages": [
         { name: "Python", level: "advanced" },
-        { name: "FastAPI", level: "advanced" },
-        { name: "PostgreSQL", level: "intermediate" },
+        { name: "C++", level: "advanced" },
+        { name: "Java", level: "intermediate" },
+        { name: "Go (Golang)", level: "intermediate" },
+        { name: "JavaScript (ES6+)", level: "intermediate" },
     ],
-    "AI/Research": [
-        { name: "PyTorch", level: "advanced" },
-        { name: "SUMO", level: "intermediate" },
-        { name: "Rasa NLU", level: "advanced" },
-        { name: "LSTM/RL", level: "intermediate" },
+    "Frameworks & Tech": [
+        { name: "Flask / FastAPI", level: "advanced" },
+        { name: "React / Vue 3", level: "advanced" },
+        { name: "Gin Gonic", level: "intermediate" },
+        { name: "Temporal", level: "intermediate" },
+        { name: "Flutter", level: "intermediate" },
     ],
-    Frontend: [
-        { name: "Next.js", level: "advanced" },
-        { name: "React", level: "advanced" },
-        { name: "Tailwind", level: "advanced" },
-        { name: "Framer", level: "intermediate" },
+    "Cloud & Databases": [
+        { name: "GCP / AWS / Azure", level: "advanced" },
+        { name: "PostgreSQL / MySQL", level: "advanced" },
+        { name: "Firebase / Supabase", level: "advanced" },
+        { name: "MongoDB", level: "intermediate" },
+    ],
+    "Tools & Observability": [
+        { name: "Docker / Linux", level: "advanced" },
+        { name: "Git / GitHub", level: "advanced" },
+        { name: "Postman / Swagger", level: "advanced" },
+        { name: "Prometheus / Grafana", level: "intermediate" },
     ],
 };
 
@@ -73,11 +75,11 @@ export function TechStackPreview() {
                                 {category}
                             </h3>
                             <div className="space-y-2">
-                                {items.map((item, index) => (
+                                {items.map((item) => (
                                     <div
                                         key={item.name}
                                         className={cn(
-                                            "px-3 py-2 rounded-lg border font-mono text-sm",
+                                            "px-3 py-2 rounded-lg border font-mono text-xs font-medium",
                                             levelColors[item.level as keyof typeof levelColors]
                                         )}
                                     >
@@ -87,18 +89,6 @@ export function TechStackPreview() {
                             </div>
                         </motion.div>
                     ))}
-                </div>
-
-                {/* Legend */}
-                <div className="mt-8 flex items-center justify-center gap-6 text-xs text-slate-500 dark:text-slate-600">
-                    <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 rounded bg-sky-100 dark:bg-cyan-500/20 border border-sky-300 dark:border-cyan-500/30" />
-                        <span>Advanced</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 rounded bg-slate-100 dark:bg-slate-700/30 border border-slate-300 dark:border-slate-600/30" />
-                        <span>Intermediate</span>
-                    </div>
                 </div>
             </div>
         </section>

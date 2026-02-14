@@ -15,13 +15,16 @@ import {
     Network,
     Layers,
     Activity,
+    Download,
 } from "lucide-react";
+import { PDFViewer, usePDFViewer } from "@/components/ui";
 
 export function KernelHero() {
+    const { viewer, openPDF, closePDF } = usePDFViewer();
+
     return (
         <section className="relative py-24 overflow-hidden">
-            <div className="absolute inset-0 grid-pattern opacity-30" />
-            <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-transparent dark:from-emerald-500/5 dark:via-transparent dark:to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-b from-emerald-100/60 via-transparent to-transparent dark:from-emerald-500/5 dark:via-transparent dark:to-transparent" />
 
             <div className="relative max-w-7xl mx-auto px-6">
                 <motion.div
@@ -52,6 +55,8 @@ export function KernelHero() {
                                 </span>
                             </div>
 
+
+
                             <p className="text-xl text-slate-600 dark:text-slate-400 mb-4">
                                 Systems Researcher & Full-Stack Engineer
                             </p>
@@ -72,12 +77,27 @@ export function KernelHero() {
                             </div>
 
                             <p className="text-slate-500 font-mono text-sm mt-4">
-                                CGPA: <span className="text-emerald-700 dark:text-emerald-400 font-bold">8.29</span>
+                                Semester 7 CGPA: <span className="text-emerald-700 dark:text-emerald-400 font-bold">8.42</span>
                             </p>
+
+                            <button
+                                onClick={() => openPDF("/resume.pdf", "Resume")}
+                                className="inline-flex items-center gap-2 px-4 py-2 mt-4 mb-2 text-sm font-medium rounded-lg border border-emerald-200 dark:border-emerald-500/30 bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-500/20 transition-colors cursor-pointer"
+                            >
+                                <Download className="w-4 h-4" />
+                                Resume
+                            </button>
                         </div>
                     </div>
                 </motion.div>
             </div>
+
+            <PDFViewer
+                file={viewer?.file || ""}
+                title={viewer?.title || ""}
+                isOpen={!!viewer}
+                onClose={closePDF}
+            />
         </section>
     );
 }

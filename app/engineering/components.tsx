@@ -2,23 +2,24 @@
 
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { Mermaid } from "@/components/ui";
 import {
     Wrench,
     Gamepad2,
     Globe,
     Zap,
     ChevronRight,
-    ExternalLink,
     Github,
-    Play,
     FileCode,
+    Cpu,
 } from "lucide-react";
+import Image from "next/image";
+import { PDFViewer, usePDFViewer } from "@/components/ui";
 
 export function EngineeringHero() {
     return (
         <section className="relative py-24 overflow-hidden">
-            <div className="absolute inset-0 grid-pattern opacity-30" />
-            <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-transparent dark:from-violet-500/5 dark:via-transparent dark:to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-b from-violet-100/60 via-transparent to-transparent dark:from-violet-500/5 dark:via-transparent dark:to-transparent" />
 
             <div className="relative max-w-7xl mx-auto px-6">
                 <motion.div
@@ -43,32 +44,31 @@ export function EngineeringHero() {
                                 Engineering
                             </h1>
                             <p className="text-slate-500 font-mono text-sm mt-1">
-                                /products/shipped
+                                /systems/archived
                             </p>
                         </div>
                     </div>
 
                     <p className="text-xl text-slate-600 dark:text-slate-400 max-w-3xl mb-12">
-                        Production-grade applications built for scale. Real-time systems,
-                        multiplayer games, and backend optimizations with measurable impact.
+                        System architectures and engineering prototypes. While live backends are offline, these archives demonstrate the rigorous engineering behind the gameplay.
                     </p>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         {[
                             {
                                 icon: Gamepad2,
-                                label: "Real-time Gaming",
-                                desc: "WebSocket, WebRTC, Game State",
+                                label: "Game Systems",
+                                desc: "Entity Component Systems, State Sync",
                             },
                             {
                                 icon: Globe,
-                                label: "Web Applications",
-                                desc: "Full-stack, APIs, Databases",
+                                label: "Distributed Logic",
+                                desc: "P2P, WebSockets, Sharding",
                             },
                             {
                                 icon: Zap,
                                 label: "Performance",
-                                desc: "Optimization, Caching, Async",
+                                desc: "Worker Pools, Binary Protocols",
                             },
                         ].map((area, index) => (
                             <motion.div
@@ -105,13 +105,17 @@ interface ProjectBentoProps {
         metrics: { label: string; value: string }[];
         color: string;
         links: { demo?: string; github?: string; case_study?: string };
-        image: string;
+        demoMedia?: string;
+        demoAspect?: "video" | "mobile" | "square";
+        architecture?: string;
     };
     index: number;
     reverse?: boolean;
 }
 
 export function ProjectBento({ project, index, reverse }: ProjectBentoProps) {
+    const { viewer, openPDF, closePDF } = usePDFViewer();
+
     const colorClasses = {
         orange: {
             border: "border-orange-200 dark:border-orange-500/30",
@@ -133,7 +137,7 @@ export function ProjectBento({ project, index, reverse }: ProjectBentoProps) {
         },
     };
 
-    const colors = colorClasses[project.color as keyof typeof colorClasses];
+    const colors = colorClasses[project.color as keyof typeof colorClasses] || colorClasses.cyan;
 
     return (
         <motion.article
@@ -144,198 +148,155 @@ export function ProjectBento({ project, index, reverse }: ProjectBentoProps) {
             transition={{ duration: 0.8, delay: index * 0.1 }}
             className="scroll-mt-24"
         >
-            <div className="flex items-center gap-3 mb-4">
+            <div className="flex items-center gap-3 mb-6">
                 <span className="text-slate-500 font-mono text-sm">
                     #{String(index + 1).padStart(2, "0")}
                 </span>
                 <div className="flex-1 h-px bg-slate-200 dark:bg-slate-800" />
+                <span className="text-xs font-mono text-slate-400 uppercase tracking-widest">
+                    System Archived
+                </span>
             </div>
 
-            <div
-                className={cn(
-                    "grid grid-cols-1 lg:grid-cols-12 gap-4",
-                    reverse && "lg:direction-rtl"
-                )}
-            >
-                <div
-                    className={cn(
-                        "lg:col-span-8 p-8 rounded-2xl border bg-white dark:bg-slate-900/50 shadow-sm dark:shadow-none",
-                        colors.border,
-                        reverse && "lg:order-2"
-                    )}
-                >
-                    <div className="flex flex-col h-full">
-                        <div className="mb-6">
-                            <h2 className={cn("text-3xl font-bold mb-2", colors.text)}>
+            <div className={cn("grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12", reverse && "lg:direction-rtl")}>
+                {/* Left Column: Context & Details */}
+                <div className={cn("flex flex-col h-full", reverse && "lg:order-2")}>
+                    <div className="mb-6">
+                        <div className="flex items-center justify-between gap-4">
+                            <h2 className={cn("text-3xl md:text-4xl font-bold", colors.text)}>
                                 {project.title}
                             </h2>
-                            <p className="text-lg text-slate-700 dark:text-slate-400">{project.subtitle}</p>
-                        </div>
-
-                        <p className="text-slate-600 dark:text-slate-500 mb-6 leading-relaxed">
-                            {project.description}
-                        </p>
-
-                        <div className="mb-6">
-                            <h3 className="text-sm font-mono text-slate-500 uppercase tracking-wider mb-3">
-                                Features
-                            </h3>
-                            <ul className="space-y-2">
-                                {project.features.map((feature, i) => (
-                                    <li key={i} className="flex items-start gap-2 text-slate-600 dark:text-slate-400">
-                                        <ChevronRight
-                                            className={cn("w-4 h-4 mt-0.5 flex-shrink-0", colors.text)}
-                                        />
-                                        <span>{feature}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        <div className="mt-auto flex flex-wrap gap-3">
-                            {project.links.demo && (
-                                <a
-                                    href={project.links.demo}
-                                    className={cn(
-                                        "flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-colors",
-                                        colors.bg,
-                                        colors.text,
-                                        "hover:opacity-80"
-                                    )}
-                                >
-                                    <Play className="w-4 h-4" />
-                                    Live Demo
-                                </a>
-                            )}
                             {project.links.github && (
                                 <a
                                     href={project.links.github}
-                                    className="flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800/50 hover:text-slate-900 dark:hover:text-slate-200 transition-colors"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg font-medium text-sm text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800/50 hover:text-slate-900 dark:hover:text-slate-200 transition-colors shrink-0"
                                 >
                                     <Github className="w-4 h-4" />
-                                    Source Code
-                                </a>
-                            )}
-                            {project.links.case_study && (
-                                <a
-                                    href={project.links.case_study}
-                                    className="flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800/50 hover:text-slate-900 dark:hover:text-slate-200 transition-colors"
-                                >
-                                    <FileCode className="w-4 h-4" />
-                                    Case Study
+                                    Source
                                 </a>
                             )}
                         </div>
+                        <p className="text-lg text-slate-700 dark:text-slate-400 font-medium mt-2">
+                            {project.subtitle}
+                        </p>
                     </div>
-                </div>
 
-                <div
-                    className={cn(
-                        "lg:col-span-4 flex flex-col gap-4",
-                        reverse && "lg:order-1"
-                    )}
-                >
-                    <div
-                        className={cn(
-                            "p-6 rounded-2xl border bg-slate-50/50 dark:bg-slate-900/50 flex-1",
-                            colors.border
-                        )}
-                    >
+                    <p className="text-slate-600 dark:text-slate-500 mb-8 leading-relaxed">
+                        {project.description}
+                    </p>
+
+                    <div className="mb-8">
                         <h3 className="text-sm font-mono text-slate-500 uppercase tracking-wider mb-4">
-                            Metrics
+                            Key Engineering
                         </h3>
-                        <div className="space-y-4">
-                            {project.metrics.map((metric) => (
-                                <div key={metric.label}>
-                                    <div className="flex justify-between items-baseline">
-                                        <span className="text-sm text-slate-600 dark:text-slate-500">
-                                            {metric.label}
-                                        </span>
-                                        <span className={cn("text-2xl font-mono font-bold", colors.text)}>
-                                            {metric.value}
-                                        </span>
-                                    </div>
-                                </div>
+                        <ul className="space-y-2">
+                            {project.features.map((feature, i) => (
+                                <li key={i} className="flex items-start gap-2 text-slate-600 dark:text-slate-400">
+                                    <ChevronRight className={cn("w-4 h-4 mt-0.5 flex-shrink-0", colors.text)} />
+                                    <span>{feature}</span>
+                                </li>
                             ))}
-                        </div>
+                        </ul>
                     </div>
 
-                    <div
-                        className={cn(
-                            "p-6 rounded-2xl border bg-slate-50/50 dark:bg-slate-900/50 flex-1",
-                            colors.border
-                        )}
-                    >
-                        <h3 className="text-sm font-mono text-slate-500 uppercase tracking-wider mb-4">
-                            Tech Stack
-                        </h3>
-                        <div className="flex flex-wrap gap-2">
-                            {project.techStack.map((tech) => (
-                                <div
-                                    key={tech.name}
-                                    className="group relative"
-                                >
-                                    <span
-                                        className={cn(
-                                            "px-3 py-1.5 rounded-lg border font-mono text-sm inline-block",
-                                            colors.border,
-                                            colors.bg,
-                                            colors.text
-                                        )}
-                                    >
-                                        {tech.name}
-                                    </span>
-                                    <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 rounded bg-slate-800 text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-10">
-                                        {tech.category}
-                                    </span>
+                    <div className="grid grid-cols-3 gap-4 mb-8 p-4 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800">
+                        {project.metrics.map((metric) => (
+                            <div key={metric.label}>
+                                <div className={cn("text-lg font-mono font-bold mb-1", colors.text)}>
+                                    {metric.value}
                                 </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </motion.article>
-    );
-}
-
-export function ProjectTerminal({
-    title,
-    code,
-    language = "javascript"
-}: {
-    title: string;
-    code: string;
-    language?: string;
-}) {
-    return (
-        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-[#0B0F14] overflow-hidden shadow-2xl">
-            <div className="flex items-center justify-between px-4 py-3 bg-slate-900 border-b border-slate-800">
-                <div className="flex gap-2">
-                    <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                    <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                    <div className="w-3 h-3 rounded-full bg-green-500/80" />
-                </div>
-                <div className="flex items-center gap-2">
-                    <FileCode className="w-4 h-4 text-slate-500" />
-                    <span className="font-mono text-xs text-slate-400">
-                        {title.toLowerCase().replace(/\s/g, "-")}.{language === "go" ? "go" : language === "python" ? "py" : "js"}
-                    </span>
-                </div>
-                <div className="w-12" />
-            </div>
-
-            <div className="p-4 overflow-x-auto">
-                <pre className="font-mono text-sm leading-relaxed">
-                    <code className="text-slate-300">
-                        {code.split('\n').map((line, i) => (
-                            <div key={i} className="table-row">
-                                <span className="table-cell text-slate-700 select-none pr-4 text-right w-8">{i + 1}</span>
-                                <span className="table-cell whitespace-pre">{line}</span>
+                                <div className="text-xs text-slate-500 leading-tight">
+                                    {metric.label}
+                                </div>
                             </div>
                         ))}
-                    </code>
-                </pre>
+                    </div>
+
+                    {project.links.case_study && (
+                        <div className="mt-auto pt-6 border-t border-slate-200 dark:border-slate-800 flex flex-wrap gap-3">
+                            <button
+                                onClick={() => openPDF(project.links.case_study!, project.title + " Case Study")}
+                                className="flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800/50 hover:text-slate-900 dark:hover:text-slate-200 transition-colors cursor-pointer"
+                            >
+                                <FileCode className="w-4 h-4" />
+                                Technical Study
+                            </button>
+                        </div>
+                    )}
+                </div>
+
+                {/* Right Column: Visual Evidence (GIF) */}
+                <div className={cn("flex flex-col gap-6", reverse && "lg:order-1")}>
+                    <div className="relative rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 overflow-hidden shadow-2xl group">
+                        {/* Browser Bar */}
+                        <div className="h-8 bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 flex items-center px-4 gap-2">
+                            <div className="flex gap-1.5">
+                                <div className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
+                                <div className="w-2.5 h-2.5 rounded-full bg-amber-400/80" />
+                                <div className="w-2.5 h-2.5 rounded-full bg-emerald-400/80" />
+                            </div>
+                            <div className="ml-4 flex-1 h-4 rounded-full bg-slate-100 dark:bg-slate-800/50" />
+                        </div>
+
+                        {/* Media Container */}
+                        <div className={cn(
+                            "relative bg-slate-200 dark:bg-slate-900",
+                            project.demoAspect === "mobile" ? "aspect-[9/16] max-h-[500px] mx-auto w-auto" :
+                                project.demoAspect === "video" ? "aspect-video" :
+                                    "aspect-[4/3]"
+                        )}>
+                            {project.demoMedia ? (
+                                <Image
+                                    src={project.demoMedia}
+                                    alt={`${project.title} Demo`}
+                                    fill
+                                    className={cn(
+                                        project.demoAspect === "mobile" ? "object-contain" : "object-cover"
+                                    )}
+                                    unoptimized
+                                />
+                            ) : project.architecture ? (
+                                <div className="absolute inset-0 w-full h-full bg-slate-50 dark:bg-slate-900">
+                                    <Mermaid chart={project.architecture} className="h-full w-full" />
+                                </div>
+                            ) : (
+                                <div className="absolute inset-0 flex items-center justify-center text-slate-400">
+                                    <Cpu className="w-12 h-12 opacity-20" />
+                                </div>
+                            )}
+
+                            {/* Overlay Gradient
+                            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" /> */}
+                        </div>
+                    </div>
+
+                    {/* Tech Stack Pills - Moved under visual for balance */}
+                    <div className="flex flex-wrap gap-2">
+                        {project.techStack.map((tech) => (
+                            <span
+                                key={tech.name}
+                                className={cn(
+                                    "px-3 py-1.5 rounded-lg border font-mono text-xs",
+                                    colors.border,
+                                    colors.bg,
+                                    colors.text
+                                )}
+                            >
+                                {tech.name}
+                            </span>
+                        ))}
+                    </div>
+                </div>
             </div>
-        </div>
+
+            <PDFViewer
+                file={viewer?.file || ""}
+                title={viewer?.title || ""}
+                isOpen={!!viewer}
+                onClose={closePDF}
+            />
+        </motion.article>
     );
 }

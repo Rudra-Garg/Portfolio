@@ -36,7 +36,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="min-h-screen bg-slate-50 dark:bg-[#0B0F14] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300">
-        <div className="fixed inset-0 grid-pattern pointer-events-none -z-10" />
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
