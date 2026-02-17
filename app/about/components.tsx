@@ -81,7 +81,7 @@ export function KernelHero() {
                             </p>
 
                             <button
-                                onClick={() => openPDF("/resume.pdf", "Resume")}
+                                onClick={() => openPDF("/resume", "Resume")}
                                 className="inline-flex items-center gap-2 px-4 py-2 mt-4 mb-2 text-sm font-medium rounded-lg border border-emerald-200 dark:border-emerald-500/30 bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-500/20 transition-colors cursor-pointer"
                             >
                                 <Download className="w-4 h-4" />

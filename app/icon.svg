@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Background -->
+  <rect width="512" height="512" rx="110" fill="#0B0F14"/>
+  
+  <!-- CPU Icon -->
+  <!-- Main chip body -->
+  <rect x="130" y="130" width="252" height="252" rx="20" 
+        fill="none" stroke="#38BDF8" stroke-width="20"/>
+  
+  <!-- Inner square -->
+  <rect x="193" y="193" width="126" height="126" rx="10"
+        fill="none" stroke="#38BDF8" stroke-width="16"/>
+  
+  <!-- Top pins -->
+  <line x1="193" y1="130" x2="193" y2="80" stroke="#38BDF8" stroke-width="16" stroke-linecap="round"/>
+  <line x1="256" y1="130" x2="256" y2="80" stroke="#38BDF8" stroke-width="16" stroke-linecap="round"/>
+  <line x1="319" y1="130" x2="319" y2="80" stroke="#38BDF8" stroke-width="16" stroke-linecap="round"/>
+  
+  <!-- Bottom pins -->
+  <line x1="193" y1="382" x2="193" y2="432" stroke="#38BDF8" stroke-width="16" stroke-linecap="round"/>
+  <line x1="256" y1="382" x2="256" y2="432" stroke="#38BDF8" stroke-width="16" stroke-linecap="round"/>
+  <line x1="319" y1="382" x2="319" y2="432" stroke="#38BDF8" stroke-width="16" stroke-linecap="round"/>
+  
+  <!-- Left pins -->
+  <line x1="130" y1="193" x2="80" y2="193" stroke="#38BDF8" stroke-width="16" stroke-linecap="round"/>
+  <line x1="130" y1="256" x2="80" y2="256" stroke="#38BDF8" stroke-width="16" stroke-linecap="round"/>
+  <line x1="130" y1="319" x2="80" y2="319" stroke="#38BDF8" stroke-width="16" stroke-linecap="round"/>
+  
+  <!-- Right pins -->
+  <line x1="382" y1="193" x2="432" y2="193" stroke="#38BDF8" stroke-width="16" stroke-linecap="round"/>
+  <line x1="382" y1="256" x2="432" y2="256" stroke="#38BDF8" stroke-width="16" stroke-linecap="round"/>
+  <line x1="382" y1="319" x2="432" y2="319" stroke="#38BDF8" stroke-width="16" stroke-linecap="round"/>
+</svg>
