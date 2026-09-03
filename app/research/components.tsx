@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import {
     FlaskConical,
@@ -10,6 +11,7 @@ import {
     FileText,
     ExternalLink,
     ChevronRight,
+    X,
 } from "lucide-react";
 import { Mermaid } from "@/components/ui";
 
@@ -113,7 +115,49 @@ interface ProjectDetailsProps {
     index: number;
 }
 
+function PdfModal({ url, onClose }: { url: string; onClose: () => void }) {
+    return (
+        <AnimatePresence>
+            <motion.div
+                key="pdf-backdrop"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+                onClick={onClose}
+            >
+                <motion.div
+                    key="pdf-panel"
+                    initial={{ opacity: 0, scale: 0.96, y: 16 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.96, y: 16 }}
+                    transition={{ duration: 0.2 }}
+                    className="relative w-full max-w-5xl h-[88vh] bg-slate-900 border border-slate-700 rounded-xl overflow-hidden shadow-2xl"
+                    onClick={(e) => e.stopPropagation()}
+                >
+                    <div className="flex items-center justify-between px-4 py-2 border-b border-slate-700 bg-slate-950">
+                        <span className="text-xs font-mono text-slate-400">{url}</span>
+                        <button
+                            onClick={onClose}
+                            className="p-1.5 rounded-md text-slate-400 hover:text-slate-100 hover:bg-slate-700 transition-colors"
+                        >
+                            <X className="w-4 h-4" />
+                        </button>
+                    </div>
+                    <iframe
+                        src={url}
+                        className="w-full h-[calc(100%-40px)]"
+                        title="Project Report"
+                    />
+                </motion.div>
+            </motion.div>
+        </AnimatePresence>
+    );
+}
+
 export function ProjectDetails({ project, index }: ProjectDetailsProps) {
+    const [pdfUrl, setPdfUrl] = useState<string | null>(null);
+
     const colorClasses = {
         cyan: {
             border: "border-cyan-200 dark:border-cyan-500/30",
@@ -334,17 +378,16 @@ export function ProjectDetails({ project, index }: ProjectDetailsProps) {
                         </h3>
                         <div className="space-y-2">
                             {project.links.report && (
-                                <a
-                                    href={project.links.report}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center gap-2 p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors w-full"
+                                <button
+                                    onClick={() => setPdfUrl(project.links.report!)}
+                                    className="flex items-center gap-2 p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors w-full text-left"
                                 >
                                     <FileText className="w-4 h-4" />
                                     <span className="text-sm">View Project Report</span>
                                     <ExternalLink className="w-3 h-3 ml-auto" />
-                                </a>
+                                </button>
                             )}
+                            {pdfUrl && <PdfModal url={pdfUrl} onClose={() => setPdfUrl(null)} />}
 
                             {project.links.github && (
                                 <a
