@@ -17,9 +17,9 @@ const projects = [
         description:
             "A privacy-centric voice assistant that performs 100% local inference. It addresses the latency and privacy issues of cloud-based assistants by employing a novel dual-layer intent classification system: utilizing high-speed vector embeddings for common commands and falling back to a local Quantized LLM for complex semantic understanding.",
         metrics: [
-            { label: "NER F1-Score", value: "99.77%" },
-            { label: "Fast-Path Latency", value: "<60ms" },
-            { label: "Training Samples", value: "1389" },
+            { label: "Weighted NER F1", value: "0.9977" },
+            { label: "Offline Inference", value: "<500ms" },
+            { label: "Intent Fast-Path", value: "<60ms" },
         ],
         techStack: [
             "Python",
@@ -77,7 +77,7 @@ const projects = [
         status: "Project Completed",
         links: {
             github: "https://github.com/Rudra-Garg/NLP-Project",
-            report: "/reports/loki.pdf",
+            report: "/reports/Loki.pdf",
         }
     },
     {
@@ -85,11 +85,11 @@ const projects = [
         title: "MUCEDS",
         subtitle: "Multi-UAV Cost-Efficient Deployment Scheme",
         description:
-            "A comprehensive optimization framework for UAV-assisted Vehicular Edge Computing. It integrates high-fidelity traffic simulation (SUMO) with a Hierarchical Reinforcement Learning (HRL) agent to dynamically position UAVs and a Spatial-Temporal LSTM to predict content demand, significantly reducing service latency.",
+            "A comprehensive optimization framework for UAV-assisted Vehicular Edge Computing. It integrates high-fidelity traffic simulation (SUMO) with a Hierarchical Reinforcement Learning (HRL) agent to dynamically position UAVs and a Spatial-Temporal LSTM to predict content demand, achieving a 78% cache hit ratio, 53% lower average task latency, and ~300% higher profit vs. the baseline.",
         metrics: [
-            { label: "Cache Hit Ratio", value: "~90%" },
-            { label: "Profit Increase", value: "4x vs Base" },
-            { label: "Latency", value: "~21 Steps" },
+            { label: "Cache Hit Ratio", value: "18%→78%" },
+            { label: "Avg Task Latency", value: "↓53%" },
+            { label: "Profit vs Baseline", value: "~300%" },
         ],
         techStack: [
             "Python",
@@ -109,7 +109,7 @@ const projects = [
                 decision: "Predictive Caching (LSTM)",
                 tradeoff: "Compute Overhead vs. Backhaul Load",
                 outcome:
-                    "Proactive content caching based on predicted vehicle trajectories improved Cache Hit Ratio from ~20% (Zipf) to ~90%.",
+                    "Proactive content caching based on predicted vehicle trajectories improved Cache Hit Ratio from 18% (Zipf baseline) to 78%, with 53% lower average task latency.",
             },
             {
                 decision: "SUMO Physics Integration",
@@ -218,7 +218,7 @@ const projects = [
         status: "Testbed Validated",
         links: {
             github: "https://github.com/Rudra-Garg/CS300",
-            report: "/reports/docker.pdf",
+            report: "/reports/Docker.pdf",
         }
     },
 ];

@@ -217,13 +217,13 @@ export function Hero() {
                     </h1>
 
                     <p className="text-xl md:text-2xl text-slate-700 dark:text-slate-400 mb-8 font-medium">
-                        Systems Researcher & Full-Stack Engineer
+                        Backend Engineer | Distributed Systems & Applied AI
                     </p>
 
                     <p className="text-lg md:text-xl text-slate-600 dark:text-slate-500 max-w-2xl mx-auto mb-10 leading-relaxed">
-                        Bridging the gap between{" "}
-                        <span className="text-sky-700 dark:text-cyan-400 font-semibold">academic theory</span> and{" "}
-                        <span className="text-sky-700 dark:text-cyan-400 font-semibold">production reality</span>
+                        Building{" "}
+                        <span className="text-sky-700 dark:text-cyan-400 font-semibold">production backend systems</span>,{" "}
+                        <span className="text-sky-700 dark:text-cyan-400 font-semibold">cloud infrastructure</span>, and privacy-first AI applications
                     </p>
 
                     <motion.div

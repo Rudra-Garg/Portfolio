@@ -58,13 +58,13 @@ export function KernelHero() {
 
 
                             <p className="text-xl text-slate-600 dark:text-slate-400 mb-4">
-                                Systems Researcher & Full-Stack Engineer
+                                Backend Engineer | Distributed Systems & Applied AI
                             </p>
 
                             <div className="flex flex-wrap gap-4 text-sm text-slate-500">
                                 <div className="flex items-center gap-2">
                                     <MapPin className="w-4 h-4" />
-                                    <span>Guwahati, India</span>
+                                    <span>India</span>
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <GraduationCap className="w-4 h-4" />
@@ -77,7 +77,7 @@ export function KernelHero() {
                             </div>
 
                             <p className="text-slate-500 font-mono text-sm mt-4">
-                                Semester 7 CGPA: <span className="text-emerald-700 dark:text-emerald-400 font-bold">8.42</span>
+                                CGPA: <span className="text-emerald-700 dark:text-emerald-400 font-bold">8.48</span>
                             </p>
 
                             <button
@@ -352,7 +352,7 @@ interface TechStackGridProps {
     stack: {
         [category: string]: {
             description: string;
-            items: { name: string; level: string; years: number }[];
+            items: { name: string; level: string }[];
         };
     };
 }
@@ -427,9 +427,6 @@ export function TechStackGrid({ stack }: TechStackGridProps) {
                                                     className={cn("font-mono text-sm", colors.text)}
                                                 >
                                                     {item.name}
-                                                </span>
-                                                <span className="text-xs text-slate-500">
-                                                    {item.years}y
                                                 </span>
                                             </div>
                                             <div className="h-1.5 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">

@@ -43,7 +43,7 @@ const metrics: Metric[] = [
         ),
     },
     {
-        value: "~90%",
+        value: "78%",
         label: "Cache Hit Ratio",
         project: "MUCEDS / UAV Networks",
         icon: (

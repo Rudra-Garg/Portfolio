@@ -202,8 +202,8 @@ export function Footer() {
                             </h2>
                         </Link>
                         <p className="text-base text-slate-600 dark:text-slate-400 max-w-sm font-light leading-relaxed">
-                            Systems Researcher & Full-Stack Engineer.<br />
-                            Bridging theory and production.
+                            Backend Engineer | Distributed Systems & Applied AI.<br />
+                            Building production systems and privacy-first AI.
                         </p>
                     </div>
 

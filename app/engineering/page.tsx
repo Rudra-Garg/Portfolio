@@ -31,9 +31,9 @@ const projects = [
             { name: "Vite", category: "Build Tool" },
         ],
         metrics: [
-            { label: "Test Coverage", value: "15+ Suites" },
-            { label: "Latency", value: "<100ms" },
-            { label: "Voice Sync", value: "P2P UDP" },
+            { label: "Atomic Commits", value: "Firestore" },
+            { label: "Time Sync", value: "Server-Offset" },
+            { label: "Voice", value: "WebRTC P2P" },
         ],
         color: "orange",
         demoAspect: "video" as const,
@@ -57,7 +57,7 @@ const projects = [
             P1->>FB: Signal Offer (SDP)
             FB->>P2: Relay Signal
             P2->>FB: Signal Answer
-            P1<->>P2: P2P Audio Stream (UDP)
+            P1<->>P2: P2P Audio Stream (WebRTC)
         `
     },
     {
@@ -65,7 +65,7 @@ const projects = [
         title: "TerraQuest",
         subtitle: "Concurrent Geo-Spatial Gaming Platform",
         description:
-            "A high-throughput multiplayer engine built in Go. Leverages Goroutines and Worker Pools to concurrently process and validate 81,000+ global locations from Google Street View API, storing them in a PostGIS-optimized database.",
+            "A high-throughput multiplayer engine built in Go. Leverages Goroutines and Worker Pools to concurrently process and validate 81,000+ global locations from Google Street View API, storing them in PostgreSQL with composite latitude/longitude indexes.",
         features: [
             "Go Worker Pools for Mass Data Ingestion",
             "Thread-safe Lobby Management (RWMutex)",
@@ -82,7 +82,7 @@ const projects = [
         metrics: [
             { label: "Data Points", value: "81,000+" },
             { label: "Concurrency", value: "Worker Pool" },
-            { label: "Map FPS", value: "60 FPS" },
+            { label: "Interaction", value: "<100ms" },
         ],
         color: "emerald",
         links: {
@@ -109,7 +109,7 @@ const projects = [
     {
         id: "pilgrim-ai",
         title: "Pilgrim AI",
-        subtitle: "Hybrid Mental Health Architecture",
+        subtitle: "Hybrid Mental Health Architecture (Earlier Project)",
         description:
             "A multi-platform mental health ecosystem integrating Google Vertex AI for empathetic counseling. Features a decentralized 3-tier architecture with a context-aware session management system hosted on Google App Engine.",
         features: [
@@ -126,9 +126,9 @@ const projects = [
             { name: "Google Maps", category: "GIS" },
         ],
         metrics: [
-            { label: "Uptime", value: "99.9%" },
             { label: "Platforms", value: "Mobile/Web" },
             { label: "AI Model", value: "PaLM 2" },
+            { label: "Deploy", value: "App Engine" },
         ],
         color: "cyan",
         demoAspect: "mobile" as const,

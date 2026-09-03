@@ -3,9 +3,9 @@ import { ThemeProvider } from "@/components/providers";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Rudra Garg | Systems Researcher & Full-Stack Engineer",
+  title: "Rudra Garg | Backend Engineer | Distributed Systems & Applied AI",
   description:
-    "Bridging the gap between academic theory and production reality. Systems research in Fog Computing, UAV Networks, and AI/ML, with production engineering in Next.js, Go, and distributed systems.",
+    "Building production backend systems, cloud infrastructure, and privacy-first AI applications. Research in Fog Computing, UAV Edge Networks, and NLP.",
   keywords: [
     "Systems Research",
     "Full-Stack Engineer",
@@ -21,9 +21,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Rudra Garg" }],
   openGraph: {
-    title: "Rudra Garg | Systems Researcher & Full-Stack Engineer",
+    title: "Rudra Garg | Backend Engineer | Distributed Systems & Applied AI",
     description:
-      "Bridging the gap between academic theory and production reality.",
+      "Building production backend systems, cloud infrastructure, and privacy-first AI applications.",
     type: "website",
   },
 };

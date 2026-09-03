@@ -5,7 +5,7 @@ import { KernelHero, Timeline, TechStackGrid, SystemsThinking } from "./componen
 export const metadata: Metadata = {
     title: "The Kernel | Rudra Garg",
     description:
-        "Systems Researcher & Full-Stack Engineer at IIIT Guwahati. Background, experience timeline, and technical expertise.",
+        "Backend Engineer focused on Distributed Systems & Applied AI. Background, experience timeline, and technical expertise.",
 };
 
 // Timeline data - Reverse Chronological (Latest First)
@@ -13,8 +13,8 @@ const timeline = [
     {
         year: "2026",
         title: "Graduation",
-        subtitle: "B.Tech Computer Science & Engineering",
-        description: "Expected graduation from IIIT Guwahati. Ready for roles in Systems Engineering, Backend Infrastructure, or Research.",
+        subtitle: "B.Tech CSE · IIIT Guwahati · 2022–2026",
+        description: "B.Tech Computer Science & Engineering, IIIT Guwahati. CGPA: 8.48. Seeking roles in Backend Engineering, Distributed Systems, and Applied AI.",
         type: "education" as const,
         upcoming: true,
     },
@@ -23,9 +23,9 @@ const timeline = [
         title: "MUCEDS (UAV Research)",
         subtitle: "Hierarchical RL & LSTM",
         description:
-            "Developed a cost-efficient UAV deployment scheme for Vehicular Edge Networks. Integrated SUMO traffic simulation with PyTorch RL agents to optimize fleet positioning, achieving ~90% Cache Hit Ratio.",
+            "Developed a cost-efficient UAV deployment scheme for Vehicular Edge Networks. Integrated SUMO traffic simulation with PyTorch RL agents to optimize fleet positioning, improving cache hit ratio from 18% to 78% and reducing average task latency by 53%.",
         type: "research" as const,
-        highlight: "~90% Cache Hit",
+        highlight: "78% Cache Hit",
     },
     {
         year: "Oct 2025",
@@ -41,9 +41,9 @@ const timeline = [
         title: "GRIG Technologies",
         subtitle: "Back End Developer Intern (Jun '24 - Aug '25)",
         description:
-            "Concluded a year-long internship. Engineered certificate generation systems (98.3% speedup) and orchestrated containerized microservices on Kubernetes. Built scalable RESTful APIs with Flask/FastAPI.",
+            "Concluded a year-long internship. Engineered certificate generation systems (98.3% processing-time reduction) and orchestrated containerized microservices on Kubernetes. Built scalable RESTful APIs with Flask/FastAPI.",
         type: "work" as const,
-        highlight: "98.3% Speedup",
+        highlight: "98.3% Reduction",
     },
     {
         year: "Jun 2025",
@@ -86,7 +86,7 @@ const timeline = [
         title: "IIIT Guwahati",
         subtitle: "B.Tech CSE - Started",
         description:
-            "Began undergraduate studies. Built a strong foundation in Distributed Systems, Network Engineering, and Data Structures. Current Semester 7 CGPA: 8.42.",
+            "Began undergraduate studies at IIIT Guwahati. Built a foundation in Distributed Systems, Network Engineering, and Data Structures.",
         type: "education" as const,
     },
 ];
@@ -96,40 +96,49 @@ const techStack = {
     "Languages": {
         description: "Core programming languages for systems and application development",
         items: [
-            { name: "Python", level: "advanced", years: 4 },
-            { name: "C++", level: "advanced", years: 3 },
-            { name: "Java", level: "intermediate", years: 2 },
-            { name: "Go (Golang)", level: "intermediate", years: 1 },
-            { name: "JavaScript (ES6+)", level: "intermediate", years: 1 },
+            { name: "Python", level: "advanced" },
+            { name: "C++", level: "advanced" },
+            { name: "SQL", level: "advanced" },
+            { name: "Go", level: "intermediate" },
+            { name: "JavaScript", level: "intermediate" },
         ],
     },
-    "Frameworks & Tech": {
-        description: "Full-stack frameworks for web, mobile, and orchestration",
+    "Backend & ML": {
+        description: "Backend frameworks, ML libraries, and workflow orchestration",
         items: [
-            { name: "Flask / FastAPI", level: "advanced", years: 3 },
-            { name: "React / Vue 3", level: "advanced", years: 2 },
-            { name: "Gin Gonic", level: "intermediate", years: 1 },
-            { name: "Temporal", level: "intermediate", years: 2 },
-            { name: "Flutter", level: "intermediate", years: 1 },
-
+            { name: "FastAPI", level: "advanced" },
+            { name: "Flask", level: "advanced" },
+            { name: "Temporal", level: "intermediate" },
+            { name: "SQLAlchemy", level: "advanced" },
+            { name: "PyTorch", level: "intermediate" },
+            { name: "NumPy", level: "advanced" },
+            { name: "React", level: "intermediate" },
+            { name: "Vue", level: "intermediate" },
         ],
     },
     "Cloud & Databases": {
         description: "Cloud-native infrastructure and persistence layers",
         items: [
-            { name: "GCP / AWS / Azure", level: "advanced", years: 3 },
-            { name: "PostgreSQL / MySQL", level: "advanced", years: 3 },
-            { name: "Firebase / Supabase", level: "advanced", years: 3 },
-            { name: "MongoDB", level: "intermediate", years: 1 },
+            { name: "AWS", level: "advanced" },
+            { name: "Google Cloud", level: "advanced" },
+            { name: "PostgreSQL", level: "advanced" },
+            { name: "Redis", level: "intermediate" },
+            { name: "Supabase", level: "advanced" },
+            { name: "Firebase", level: "advanced" },
+            { name: "MongoDB", level: "intermediate" },
         ],
     },
-    "Tools & Observability": {
-        description: "DevOps, monitoring, and collaboration tools",
+    "Infrastructure": {
+        description: "DevOps, containerization, CI/CD, and observability",
         items: [
-            { name: "Docker / Linux", level: "advanced", years: 3 },
-            { name: "Git / GitHub", level: "advanced", years: 3 },
-            { name: "Postman / Swagger", level: "advanced", years: 3 },
-            { name: "Prometheus / Grafana", level: "intermediate", years: 1 },
+            { name: "Docker", level: "advanced" },
+            { name: "Kubernetes", level: "intermediate" },
+            { name: "Helm", level: "intermediate" },
+            { name: "GitHub Actions", level: "intermediate" },
+            { name: "Prometheus", level: "intermediate" },
+            { name: "Grafana", level: "intermediate" },
+            { name: "Linux", level: "advanced" },
+            { name: "Git", level: "advanced" },
         ],
     },
 };
