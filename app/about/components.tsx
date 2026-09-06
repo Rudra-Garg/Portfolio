@@ -46,7 +46,7 @@ export function KernelHero() {
                         </div>
 
                         <div className="flex-1">
-                            <div className="flex items-center gap-3 mb-2">
+                            <div className="flex flex-wrap items-center gap-3 mb-2">
                                 <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-100">
                                     Rudra Garg
                                 </h1>
@@ -60,6 +60,12 @@ export function KernelHero() {
                             <p className="text-xl text-slate-600 dark:text-slate-400 mb-4">
                                 Backend Engineer | Distributed Systems & Applied AI
                             </p>
+
+                            <div className="max-w-3xl space-y-4 text-base leading-relaxed text-slate-600 dark:text-slate-400 mb-6">
+                                <p>I build backend services in Python and Go, with a focus on workflow orchestration, real-time applications, and cloud infrastructure. I graduated from IIIT Guwahati with a B.Tech in Computer Science and Engineering in 2026.</p>
+                                <p>At GRIG Technologies, I worked on notification and inventory services, authentication, and Kubernetes deployments. My projects extend that work into multiplayer systems, local voice assistants, and simulations for UAV-assisted edge computing.</p>
+                                <p>I am looking for backend engineering opportunities where I can contribute to APIs, distributed workflows, and reliable infrastructure.</p>
+                            </div>
 
                             <div className="flex flex-wrap gap-4 text-sm text-slate-500">
                                 <div className="flex items-center gap-2">
@@ -114,7 +120,7 @@ export function SystemsThinking() {
             icon: Network,
             title: "Distributed First",
             description:
-                "Designing for failure, partition tolerance, and eventual consistency. Real-world systems are distributed—embrace it.",
+                "I use explicit workflow state and retries for long-running work, and transactions where related records need to stay consistent.",
         },
         {
             icon: Activity,
@@ -126,7 +132,7 @@ export function SystemsThinking() {
             icon: Brain,
             title: "Theory Meets Practice",
             description:
-                "Research simulations validated on real testbeds. Academic rigor combined with production engineering pragmatism.",
+                "I explore edge computing through SUMO simulations and a Docker fog testbed, keeping evaluation results separate from production claims.",
         },
     ];
 
@@ -150,8 +156,7 @@ export function SystemsThinking() {
                         Systems Thinking
                     </h2>
                     <p className="text-slate-500 max-w-2xl">
-                        My approach to engineering is rooted in understanding systems
-                        holistically—from the kernel to the cloud.
+                        How I approach backend services, infrastructure, and research projects.
                     </p>
                 </motion.div>
 
@@ -358,20 +363,6 @@ interface TechStackGridProps {
 }
 
 export function TechStackGrid({ stack }: TechStackGridProps) {
-    const levelColors = {
-        advanced: {
-            bg: "bg-cyan-50 dark:bg-cyan-500/10",
-            border: "border-cyan-200 dark:border-cyan-500/30",
-            text: "text-cyan-700 dark:text-cyan-400",
-            bar: "bg-cyan-500 dark:bg-cyan-400",
-        },
-        intermediate: {
-            bg: "bg-slate-100 dark:bg-slate-700/30",
-            border: "border-slate-200 dark:border-slate-600/30",
-            text: "text-slate-600 dark:text-slate-400",
-            bar: "bg-slate-400 dark:bg-slate-500",
-        },
-    };
 
     return (
         <section className="py-16 relative">
@@ -417,30 +408,11 @@ export function TechStackGrid({ stack }: TechStackGridProps) {
                             <p className="text-sm text-slate-500 dark:text-slate-500 mb-4">{data.description}</p>
 
                             <div className="space-y-3">
-                                {data.items.map((item) => {
-                                    const colors =
-                                        levelColors[item.level as keyof typeof levelColors];
-                                    return (
-                                        <div key={item.name}>
-                                            <div className="flex justify-between items-center mb-1">
-                                                <span
-                                                    className={cn("font-mono text-sm", colors.text)}
-                                                >
-                                                    {item.name}
-                                                </span>
-                                            </div>
-                                            <div className="h-1.5 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
-                                                <div
-                                                    className={cn("h-full rounded-full", colors.bar)}
-                                                    style={{
-                                                        width:
-                                                            item.level === "advanced" ? "90%" : "60%",
-                                                    }}
-                                                />
-                                            </div>
-                                        </div>
-                                    );
-                                })}
+                                {data.items.map((item) => (
+                                    <div key={item.name} className="text-base text-slate-700 dark:text-slate-300">
+                                        {item.name}
+                                    </div>
+                                ))}
                             </div>
                         </motion.div>
                     ))}

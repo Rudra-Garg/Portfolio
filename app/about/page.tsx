@@ -23,7 +23,7 @@ const timeline = [
         title: "MUCEDS (UAV Research)",
         subtitle: "Hierarchical RL & LSTM",
         description:
-            "Developed a cost-efficient UAV deployment scheme for Vehicular Edge Networks. Integrated SUMO traffic simulation with PyTorch RL agents to optimize fleet positioning, improving cache hit ratio from 18% to 78% and reducing average task latency by 53%.",
+            "Developed a cost-efficient UAV deployment scheme for Vehicular Edge Networks. Integrated SUMO traffic simulation with PyTorch RL agents to optimize fleet positioning, improving cache hit ratio from 18% to 78% and reducing average task latency by 53% in the reported simulation evaluation.",
         type: "research" as const,
         highlight: "78% Cache Hit",
     },
@@ -32,7 +32,7 @@ const timeline = [
         title: "LOKI Voice Assistant",
         subtitle: "Hybrid NLU Engine",
         description:
-            "Engineered a local-first voice assistant. Achieved 99.77% NER F1-score using a dual-layer architecture: fast-path embeddings for common commands and local LLM fallback for semantic complexity.",
+            "Engineered a local-first voice assistant. Achieved a weighted NER F1-score of 0.9977 using a dual-layer architecture: fast-path embeddings for common commands and local LLM fallback for semantic complexity.",
         type: "research" as const,
         highlight: "99.77% F1-Score",
     },
@@ -41,9 +41,9 @@ const timeline = [
         title: "GRIG Technologies",
         subtitle: "Back End Developer Intern (Jun '24 - Aug '25)",
         description:
-            "Completed a backend internship from June 2024 to August 2025. Engineered certificate generation systems (98.3% processing-time reduction) and orchestrated containerized microservices on Kubernetes. Built scalable RESTful APIs with Flask/FastAPI.",
+            "Built alert.ventory with FastAPI and Temporal for priority-based notifications and human approval. Developed request.ventory with Firestore and Supabase, implemented OAuth2/JWT authentication and RBAC, and automated Kubernetes infrastructure with Helm, NGINX Ingress, and cert-manager.",
         type: "work" as const,
-        highlight: "98.3% Reduction",
+        highlight: "Backend & Infrastructure",
     },
     {
         year: "Jun 2025",
@@ -151,9 +151,9 @@ export default function AboutPage() {
                 <div className="absolute inset-0 grid-pattern opacity-30 pointer-events-none" />
                 <div className="relative">
                     <KernelHero />
-                    <TechStackGrid stack={techStack} />
-                    <SystemsThinking />
                     <Timeline events={timeline} />
+                    <SystemsThinking />
+                    <TechStackGrid stack={techStack} />
                 </div>
             </main>
             <div className="relative z-10 bg-[#FAFBFC] dark:bg-[#0B0F14] transition-colors duration-300">
