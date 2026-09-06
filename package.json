@@ -33,5 +33,22 @@
     "eslint-config-next": "16.1.1",
     "tailwindcss": "^4",
     "typescript": "^5"
-  }
+  },
+  "description": "Rudra Garg's portfolio: backend engineering, distributed systems, cloud infrastructure, and applied AI.",
+  "homepage": "https://rudragarg.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rudra-Garg/Portfolio.git"
+  },
+  "author": "Rudra Garg",
+  "keywords": [
+    "portfolio",
+    "nextjs",
+    "react",
+    "typescript",
+    "tailwindcss",
+    "backend-engineering",
+    "distributed-systems",
+    "applied-ai"
+  ]
 }
