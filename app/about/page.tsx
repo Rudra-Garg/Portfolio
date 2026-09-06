@@ -3,7 +3,7 @@ import { Navbar, Footer } from "@/components/layout";
 import { KernelHero, Timeline, TechStackGrid, SystemsThinking } from "./components";
 
 export const metadata: Metadata = {
-    title: "The Kernel | Rudra Garg",
+    title: "About & Experience | Rudra Garg",
     description:
         "Backend Engineer focused on Distributed Systems & Applied AI. Background, experience timeline, and technical expertise.",
 };
@@ -16,7 +16,7 @@ const timeline = [
         subtitle: "B.Tech CSE · IIIT Guwahati · 2022–2026",
         description: "B.Tech Computer Science & Engineering, IIIT Guwahati. CGPA: 8.48. Seeking roles in Backend Engineering, Distributed Systems, and Applied AI.",
         type: "education" as const,
-        upcoming: true,
+        upcoming: false,
     },
     {
         year: "Nov 2025",
@@ -32,7 +32,7 @@ const timeline = [
         title: "LOKI Voice Assistant",
         subtitle: "Hybrid NLU Engine",
         description:
-            "Engineered a local-first voice assistant. Achieved 99.77% NER F1-score using a dual-layer architecture: fast-path embeddings for latency (<60ms) and local LLM fallback for semantic complexity.",
+            "Engineered a local-first voice assistant. Achieved 99.77% NER F1-score using a dual-layer architecture: fast-path embeddings for common commands and local LLM fallback for semantic complexity.",
         type: "research" as const,
         highlight: "99.77% F1-Score",
     },
@@ -41,7 +41,7 @@ const timeline = [
         title: "GRIG Technologies",
         subtitle: "Back End Developer Intern (Jun '24 - Aug '25)",
         description:
-            "Concluded a year-long internship. Engineered certificate generation systems (98.3% processing-time reduction) and orchestrated containerized microservices on Kubernetes. Built scalable RESTful APIs with Flask/FastAPI.",
+            "Completed a backend internship from June 2024 to August 2025. Engineered certificate generation systems (98.3% processing-time reduction) and orchestrated containerized microservices on Kubernetes. Built scalable RESTful APIs with Flask/FastAPI.",
         type: "work" as const,
         highlight: "98.3% Reduction",
     },

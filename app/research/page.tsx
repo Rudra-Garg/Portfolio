@@ -15,11 +15,11 @@ const projects = [
         title: "LOKI (NLP Engine)",
         subtitle: "Local-First Voice Assistant with Hybrid NLU",
         description:
-            "A privacy-centric voice assistant that performs 100% local inference. It addresses the latency and privacy issues of cloud-based assistants by employing a novel dual-layer intent classification system: utilizing high-speed vector embeddings for common commands and falling back to a local Quantized LLM for complex semantic understanding.",
+            "A privacy-centric voice assistant that performs 100% local inference. It processes speech and commands locally using a dual-layer intent classification system: utilizing high-speed vector embeddings for common commands and falling back to a local Quantized LLM for complex semantic understanding.",
         metrics: [
             { label: "Weighted NER F1", value: "0.9977" },
-            { label: "Offline Inference", value: "<500ms" },
-            { label: "Intent Fast-Path", value: "<60ms" },
+            { label: "Inference", value: "Local" },
+            { label: "Intent Fast-Path", value: "Embeddings" },
         ],
         techStack: [
             "Python",
@@ -33,7 +33,7 @@ const projects = [
                 decision: "Hybrid Classifier Strategy",
                 tradeoff: "System Complexity vs. Responsiveness",
                 outcome:
-                    "Implemented a 'Fast Path' (Cosine Similarity > 0.6) for instant execution of 90% of commands, reserving the heavy LLM only for complex, novel queries.",
+                    "Implemented a 'Fast Path' (Cosine Similarity > 0.6) for common commands, reserving the heavy LLM only for complex, novel queries.",
             },
             {
                 decision: "CRF for NER",
@@ -85,7 +85,7 @@ const projects = [
         title: "MUCEDS",
         subtitle: "Multi-UAV Cost-Efficient Deployment Scheme",
         description:
-            "A comprehensive optimization framework for UAV-assisted Vehicular Edge Computing. It integrates high-fidelity traffic simulation (SUMO) with a Hierarchical Reinforcement Learning (HRL) agent to dynamically position UAVs and a Spatial-Temporal LSTM to predict content demand, achieving a 78% cache hit ratio, 53% lower average task latency, and ~300% higher profit vs. the baseline.",
+            "A comprehensive optimization framework for UAV-assisted Vehicular Edge Computing. It integrates high-fidelity traffic simulation (SUMO) with a Hierarchical Reinforcement Learning (HRL) agent to dynamically position UAVs and a Spatial-Temporal LSTM to predict content demand. In the reported simulation evaluation, cache hit ratio improved from 18% to 78% and average task latency fell by 53% compared with the baseline. These are simulation results, not production measurements.",
         metrics: [
             { label: "Cache Hit Ratio", value: "18%→78%" },
             { label: "Avg Task Latency", value: "↓53%" },
@@ -115,7 +115,7 @@ const projects = [
                 decision: "SUMO Physics Integration",
                 tradeoff: "Simulation Speed vs. Accuracy",
                 outcome:
-                    "Replaced synthetic Random Waypoint models with real OpenStreetMap data (Delhi/Mumbai), proving system viability in realistic traffic flows.",
+                    "Replaced synthetic Random Waypoint models with real OpenStreetMap data (Delhi/Mumbai), to evaluate the approach with modeled urban traffic flows.",
             },
         ],
         architecture: `

@@ -5,13 +5,13 @@ The aesthetic is "Engineered Intelligence": Blueprint, Sci-Fi UI, Data Visualiza
 
 # User Profile (The Truth)
 - Name: Rudra Garg
-- Education: IIIT Guwahati (CSE, 2026), CGPA 8.29.
+- Education: IIIT Guwahati (CSE, 2026), CGPA 8.48.
 - Key Stack: Next.js, Tailwind, Framer Motion, Python, Go, Docker, Kubernetes.
 - Key Metrics (ALWAYS use these exact numbers):
   - [cite_start]"98.3% processing time reduction" (GRIG Technologies) [cite: 1395]
   - [cite_start]"95% network usage reduction" (Fog Computing/GVMP) [cite: 26, 416]
   - [cite_start]"99.77% NER F1-score" (LOKI Voice Assistant) [cite: 1304]
-  - [cite_start]"~90% Cache Hit Ratio" (UAV/MUCEDS) [cite: 995]
+  - [cite_start]"78% Cache Hit Ratio" (UAV/MUCEDS) [cite: 995]
 
 # Design System Rules
 - Fonts: Inter (Body/Headers), JetBrains Mono (Data/Metrics/Code).
@@ -33,5 +33,5 @@ The aesthetic is "Engineered Intelligence": Blueprint, Sci-Fi UI, Data Visualiza
 # Special Instructions
 1. When summarizing Research (MUCEDS, GVMP, LOKI), prioritize "Architecture", "Trade-offs", and "Technical Decisions".
 2. When creating the "Hero" section, avoid human photos. Use abstract node/network topologies.
-3. The "About" section is called "The Kernel".
+3. The "About" section is called "About & Experience".
 4. Always separate "Research" (Academic/Simulations) from "Engineering" (Product/Web).

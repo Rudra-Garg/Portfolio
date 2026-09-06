@@ -6,11 +6,49 @@ import { Mermaid } from "@/components/ui";
 export const metadata: Metadata = {
     title: "Engineering | Rudra Garg",
     description:
-        "Production-grade applications: real-time multiplayer games, geo-location services, and AI-driven platforms.",
+        "Backend engineering: notification workflows, multiplayer applications, and cloud infrastructure.",
 };
 
 // Engineering project data
 const projects = [
+    {
+        id: "alert-ventory",
+        title: "alert.ventory",
+        subtitle: "Enterprise notification workflows at GRIG Technologies",
+        description: "During my June 2024 to August 2025 backend internship, I built a FastAPI notification service with Temporal workflow orchestration. My work covered priority queues, human approval, authentication, and container infrastructure. Temporal keeps multi-step work outside the request lifecycle and can resume after approval or retryable failures. This adds worker and workflow management overhead, but makes long-running notification processes easier to coordinate. The diagram summarizes the workflow rather than an internal deployment topology.",
+        features: [
+            "Priority queues separate high, medium, and low urgency work",
+            "Temporal workflows coordinate delivery steps and retries",
+            "Temporal Signals resume sensitive alerts after human approval",
+            "Zoho OAuth2, JWT sessions, and RBAC protect internal routes",
+            "Helm, NGINX Ingress, and cert-manager automate Kubernetes setup",
+        ],
+        techStack: [
+            { name: "FastAPI", category: "API" },
+            { name: "Temporal", category: "Workflows" },
+            { name: "PostgreSQL", category: "Data" },
+            { name: "Kubernetes / Helm", category: "Infrastructure" },
+        ],
+        metrics: [
+            { label: "Workflows", value: "Durable" },
+            { label: "Approval", value: "Human-in-loop" },
+            { label: "Access", value: "RBAC" },
+        ],
+        color: "cyan",
+        links: {},
+        architecture: `flowchart TD
+            API[FastAPI request] --> Auth[Identity and permission checks]
+            Auth --> Queue[Priority task queue]
+            Queue --> Workflow[Temporal workflow]
+            Workflow --> Review{Approval required?}
+            Review -->|Yes| Human[Human review]
+            Human -->|Approval signal| Delivery[Delivery activity]
+            Review -->|No| Delivery
+            Delivery --> Result{Delivery result}
+            Result -->|Retryable failure| Retry[Retry policy]
+            Retry --> Delivery
+            Result -->|Success| Done[Complete]`,
+    },
     {
         id: "portal-gambit",
         title: "Portal Gambit",
@@ -65,7 +103,7 @@ const projects = [
         title: "TerraQuest",
         subtitle: "Concurrent Geo-Spatial Gaming Platform",
         description:
-            "A high-throughput multiplayer engine built in Go. Leverages Goroutines and Worker Pools to concurrently process and validate 81,000+ global locations from Google Street View API, storing them in PostgreSQL with composite latitude/longitude indexes.",
+            "A multiplayer geography game with a concurrent Go backend. Leverages Goroutines and Worker Pools to concurrently process and validate 81,000+ global locations from Google Street View API, storing them in PostgreSQL with composite latitude/longitude indexes.",
         features: [
             "Go Worker Pools for Mass Data Ingestion",
             "Thread-safe Lobby Management (RWMutex)",
@@ -82,7 +120,7 @@ const projects = [
         metrics: [
             { label: "Data Points", value: "81,000+" },
             { label: "Concurrency", value: "Worker Pool" },
-            { label: "Interaction", value: "<100ms" },
+            { label: "Scoring", value: "Server-side" },
         ],
         color: "emerald",
         links: {
@@ -173,7 +211,7 @@ export default function EngineeringPage() {
                                             reverse={index % 2 === 1}
                                         />
                                         {/* Architecture Diagram */}
-                                        {project.demoMedia && (
+                                        {project.architecture && (
                                             <div className="max-w-4xl mx-auto">
                                                 <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/30 overflow-hidden">
                                                     <div className="px-4 py-2 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 flex items-center gap-2">
@@ -197,3 +235,4 @@ export default function EngineeringPage() {
         </>
     );
 }
+

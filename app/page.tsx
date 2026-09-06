@@ -1,4 +1,5 @@
-import { Hero, MetricsTicker, SectionPreview, TechStackPreview, NetworkBackground } from "@/components/sections";
+import { Hero, TechStackPreview } from "@/components/sections";
+import { Experience, FeaturedEngineering, ResearchHighlights } from "@/components/sections/CareerHighlights";
 import { Navbar, Footer } from "@/components/layout";
 
 export default function Home() {
@@ -13,8 +14,9 @@ export default function Home() {
         <div className="relative">
           <div className="absolute inset-0 grid-pattern opacity-30 pointer-events-none" />
           <div className="relative">
-            <MetricsTicker />
-            <SectionPreview />
+            <Experience />
+            <FeaturedEngineering />
+            <ResearchHighlights />
             <TechStackPreview />
           </div>
         </div>

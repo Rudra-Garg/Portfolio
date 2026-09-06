@@ -37,7 +37,7 @@ export function KernelHero() {
                             Home
                         </a>
                         <ChevronRight className="w-4 h-4" />
-                        <span className="text-emerald-700 dark:text-emerald-400 font-medium">The Kernel</span>
+                        <span className="text-emerald-700 dark:text-emerald-400 font-medium">About &amp; Experience</span>
                     </div>
 
                     <div className="flex flex-col md:flex-row md:items-start gap-8">

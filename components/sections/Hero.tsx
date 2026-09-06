@@ -192,7 +192,7 @@ export const NetworkCanvas = NetworkBackground;
 
 export function Hero() {
     return (
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden z-10 pointer-events-none">
+        <section className="relative min-h-[75svh] py-32 flex items-center justify-center overflow-hidden z-10 pointer-events-none">
             {/* Gradient Overlay using CSS Mask for cleaner fade */}
             <NetworkBackground />
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[var(--background)] transition-colors duration-300 opacity-90" />
@@ -233,11 +233,11 @@ export function Hero() {
                         transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
                     >
                         <a
-                            href="/research"
-                            className="group px-6 py-3 font-medium text-slate-700 dark:text-slate-300 rounded-lg transition-all hover:text-sky-700 dark:hover:text-cyan-400 liquid-glass hover:bg-white/50"
+                            href="/engineering"
+                            className="group px-6 py-3 font-semibold text-white bg-sky-700 dark:bg-cyan-400 dark:text-slate-950 rounded-lg transition-colors hover:bg-sky-800 dark:hover:bg-cyan-300"
                         >
                             <span className="flex items-center gap-2">
-                                <span>View Research</span>
+                                <span>Engineering Work</span>
                                 <svg
                                     className="w-4 h-4 transition-transform group-hover:translate-x-1"
                                     fill="none"
@@ -254,11 +254,11 @@ export function Hero() {
                             </span>
                         </a>
                         <a
-                            href="/engineering"
+                            href="/resume"
                             className="group px-6 py-3 font-medium text-slate-700 dark:text-slate-300 rounded-lg transition-all hover:text-sky-700 dark:hover:text-cyan-400 liquid-glass hover:bg-white/50"
                         >
                             <span className="flex items-center gap-2">
-                                <span>Engineering Work</span>
+                                <span>View Resume</span>
                                 <svg
                                     className="w-4 h-4 transition-transform group-hover:translate-x-1"
                                     fill="none"

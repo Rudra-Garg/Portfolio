@@ -43,9 +43,9 @@ const LinkedinIcon = ({ className }: { className?: string }) => (
 );
 
 const navigation = [
-    { name: "Research", href: "/research", icon: FlaskConical },
     { name: "Engineering", href: "/engineering", icon: Wrench },
-    { name: "The Kernel", href: "/about", icon: User },
+    { name: "Research", href: "/research", icon: FlaskConical },
+    { name: "About & Experience", href: "/about", icon: User },
 ];
 
 const socials = [
@@ -91,7 +91,7 @@ export function Navbar() {
                 </Link>
 
                 {/* Desktop Navigation */}
-                <div className="hidden md:flex items-center gap-1">
+                <div className="hidden lg:flex items-center gap-1">
                     {navigation.map((item) => (
                         <Link
                             key={item.name}
@@ -105,7 +105,7 @@ export function Navbar() {
                 </div>
 
                 {/* Right Actions */}
-                <div className="hidden md:flex items-center gap-6">
+                <div className="hidden lg:flex items-center gap-6">
                     <div className="flex items-center gap-4 pr-6 border-r border-slate-200 dark:border-slate-800">
                         {socials.map((item) => (
                             <a
@@ -124,7 +124,7 @@ export function Navbar() {
                 </div>
 
                 {/* Mobile Menu Button */}
-                <div className="md:hidden flex items-center gap-4">
+                <div className="lg:hidden flex items-center gap-4">
                     <ThemeToggle />
                     <button
                         className="p-2 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
@@ -144,7 +144,7 @@ export function Navbar() {
                         animate={{ opacity: 1, height: "100vh" }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.3, ease: "easeInOut" }}
-                        className="md:hidden absolute top-full left-0 right-0 bg-[#FAFBFC] dark:bg-[#0B0F14] border-t border-slate-200 dark:border-slate-800 overflow-hidden"
+                        className="lg:hidden absolute top-full left-0 right-0 bg-[#FAFBFC] dark:bg-[#0B0F14] border-t border-slate-200 dark:border-slate-800 overflow-hidden"
                     >
                         <div className="flex flex-col h-full liquid-glass border-0 rounded-none">
                             <div className="p-6 space-y-2">
@@ -270,3 +270,4 @@ export function Footer() {
         </footer>
     );
 }
+

@@ -44,13 +44,13 @@ export function EngineeringHero() {
                                 Engineering
                             </h1>
                             <p className="text-slate-500 font-mono text-sm mt-1">
-                                /systems/archived
+                                /engineering/case-studies
                             </p>
                         </div>
                     </div>
 
                     <p className="text-xl text-slate-600 dark:text-slate-400 max-w-3xl mb-12">
-                        System architectures and engineering prototypes. While live backends are offline, these archives demonstrate the rigorous engineering behind the gameplay.
+                        Backend services, workflow orchestration, and multiplayer applications. Explore my contributions, implementation details, and architecture. Game demos are recorded; their live backends are offline.
                     </p>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -58,17 +58,17 @@ export function EngineeringHero() {
                             {
                                 icon: Gamepad2,
                                 label: "Game Systems",
-                                desc: "Entity Component Systems, State Sync",
+                                desc: "Custom move rules, shared game state",
                             },
                             {
                                 icon: Globe,
                                 label: "Distributed Logic",
-                                desc: "P2P, WebSockets, Sharding",
+                                desc: "P2P audio, WebSocket lobbies",
                             },
                             {
                                 icon: Zap,
                                 label: "Performance",
-                                desc: "Worker Pools, Binary Protocols",
+                                desc: "Go worker pools, PostgreSQL indexes",
                             },
                         ].map((area, index) => (
                             <motion.div
@@ -154,7 +154,7 @@ export function ProjectBento({ project, index, reverse }: ProjectBentoProps) {
                 </span>
                 <div className="flex-1 h-px bg-slate-200 dark:bg-slate-800" />
                 <span className="text-xs font-mono text-slate-400 uppercase tracking-widest">
-                    System Archived
+                    Engineering Case Study
                 </span>
             </div>
 
@@ -297,3 +297,4 @@ export function ProjectBento({ project, index, reverse }: ProjectBentoProps) {
         </motion.article>
     );
 }
+
