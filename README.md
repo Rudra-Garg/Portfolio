@@ -11,7 +11,7 @@ My personal portfolio, bringing together backend development at GRIG Technologie
 - **Experience first:** GRIG internship work on notification workflows, inventory APIs, authentication, and Kubernetes infrastructure.
 - **Engineering case studies:** alert.ventory, TerraQuest, Portal Gambit, and the earlier Pilgrim AI project.
 - **Research:** LOKI's local NLP pipeline, MUCEDS UAV simulations, and a fog computing testbed, with architecture diagrams and technical reports.
-- **Presentation:** light and dark themes, responsive layouts, animated network visuals, recorded demos, and an embedded PDF viewer.
+- **Presentation:** light and dark themes, responsive layouts, an interactive Three.js city with animated drones and traffic, recorded demos, and an embedded PDF viewer.
 
 Game demos are recorded; their live backends are offline. Research metrics describe their respective model evaluations or simulation studies, not production-wide guarantees.
 
@@ -21,7 +21,7 @@ Game demos are recorded; their live backends are offline. Research metrics descr
 | --- | --- |
 | Application | Next.js 16 App Router, React 19, TypeScript |
 | Styling | Tailwind CSS 4, locally bundled Fontsource fonts |
-| Interaction | Framer Motion, next-themes, Lucide icons |
+| Interaction | Three.js, Framer Motion, next-themes, Lucide icons |
 | Technical content | Mermaid diagrams, PDF viewer, recorded GIF demos |
 | Hosting | Cloudflare Pages with GitHub integration |
 
@@ -54,6 +54,7 @@ The site uses `output: 'export'` in `next.config.ts` and writes the deployable s
 | --- | --- |
 | `app/page.tsx` | Homepage section order |
 | `components/sections/Hero.tsx` | Introduction and primary actions |
+| `components/hero/` | Instanced city geometry, drone/traffic animation, camera controls, and scene lifecycle |
 | `components/sections/CareerHighlights.tsx` | Experience, featured projects, and research summaries |
 | `components/layout/Navigation.tsx` | Navigation, footer, and contact links |
 | `app/engineering/page.tsx` | Engineering project data and diagrams |
@@ -85,3 +86,9 @@ Cloudflare Pages is connected to this repository. The static build command is `n
 ## Contact
 
 [Rudra Garg on GitHub](https://github.com/Rudra-Garg) · [LinkedIn](https://www.linkedin.com/in/rudra-garg/) · [Email](mailto:rudragarg09006@gmail.com)
+
+## Interactive city hero
+
+The hero uses a procedural Three.js city, with instanced architectural details and three quadcopters. Isometric and top-down presets share the same scene. Drag with a mouse to orbit, or use Rotate and Reset; Play/Pause controls vehicles and drones. Touch scrolling remains available, with camera buttons on touch devices.
+
+The renderer loads only in the browser, caps pixel density, stops off-screen or in a hidden tab, and starts paused when reduced motion is enabled. A text fallback keeps the research link available without WebGL. This is an illustrative scene, not an execution or visualization of the trained MUCEDS model.
