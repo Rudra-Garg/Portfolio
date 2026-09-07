@@ -15,10 +15,6 @@ export function Hero() {
             <div aria-hidden="true" className="pointer-events-none absolute inset-0 grid-pattern opacity-30" />
             <div className="relative mx-auto grid max-w-[1600px] lg:min-h-[720px] lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] xl:min-h-[780px]">
                 <div className="relative z-10 flex flex-col justify-center px-6 pb-12 pt-12 sm:px-10 lg:py-20 lg:pl-12 lg:pr-4 xl:pl-16">
-                    <p className="mb-8 flex items-center gap-3 font-mono text-xs tracking-[0.14em] text-slate-600 dark:text-slate-400">
-                        <span className="h-2 w-2 bg-orange-500" aria-hidden="true" />
-                        BACKEND ENGINEERING / APPLIED AI
-                    </p>
                     <h1 id="hero-title" className="text-[clamp(3.25rem,6.2vw,6.25rem)] font-semibold leading-[1.04] tracking-[-0.055em]">Rudra Garg<span className="text-orange-500">.</span></h1>
                     <p className="mt-6 max-w-lg text-2xl leading-snug tracking-tight sm:text-3xl">Backend systems.<br />Infrastructure. Applied AI.</p>
                     <p className="mt-6 max-w-md text-base leading-7 text-slate-600 dark:text-slate-300">
