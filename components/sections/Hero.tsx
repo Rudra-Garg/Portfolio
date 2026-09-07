@@ -11,7 +11,7 @@ const CityScene = dynamic(() => import("@/components/hero/CityScene"), {
 
 export function Hero() {
     return (
-        <section aria-labelledby="hero-title" className="relative overflow-hidden border-b border-slate-200 bg-[#f7f8f6] pt-20 text-slate-900 dark:border-slate-800 dark:bg-[#111e2b] dark:text-slate-100">
+        <section aria-labelledby="hero-title" className="relative overflow-hidden border-b border-slate-200 bg-background pt-20 text-slate-900 dark:border-slate-800 dark:text-slate-100">
             <div className="mx-auto grid max-w-[1600px] lg:min-h-[720px] lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] xl:min-h-[780px]">
                 <div className="relative z-10 flex flex-col justify-center px-6 pb-12 pt-12 sm:px-10 lg:py-20 lg:pl-12 lg:pr-4 xl:pl-16">
                     <p className="mb-8 flex items-center gap-3 font-mono text-xs tracking-[0.14em] text-slate-600 dark:text-slate-400">

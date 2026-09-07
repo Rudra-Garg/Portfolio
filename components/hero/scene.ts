@@ -8,7 +8,9 @@ export type CityView = "isometric" | "overhead";
 export function mountCity(host: HTMLElement, onFailure: () => void) {
     const scene = new THREE.Scene();
     const camera = new THREE.OrthographicCamera(-32, 32, 26, -26, 0.1, 180);
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: "low-power" });
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "low-power" });
+    // Let the shared page background show through, including during theme transitions.
+    renderer.setClearColor(0x000000, 0);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFShadowMap;
@@ -109,7 +111,6 @@ export function mountCity(host: HTMLElement, onFailure: () => void) {
 
     return {
         setTheme(dark: boolean) {
-            scene.background = new THREE.Color(dark ? "#111e2b" : "#f7f8f6");
             ambient.intensity = dark ? 1.8 : 2.2;
             requestFrame();
         },
