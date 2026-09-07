@@ -40,12 +40,12 @@ export default function CityScene() {
     useEffect(() => { theme.current = resolvedTheme; engine.current?.setTheme(resolvedTheme === "dark"); }, [resolvedTheme]);
     useEffect(() => { pausedRef.current = paused; engine.current?.setPaused(paused); }, [paused]);
     const changeView = (next: CityView) => { setView(next); engine.current?.setView(next); };
-    const button = "inline-flex min-h-11 items-center justify-center gap-2 px-3 text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange-500 disabled:opacity-40";
+    const button = "inline-flex min-h-11 rounded-lg items-center justify-center gap-2 px-3 text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange-500 disabled:opacity-40";
 
     return (
         <figure className="relative m-0 flex h-full min-h-[420px] flex-col" aria-label="Interactive miniature city with animated traffic and three drones">
             <div className="flex items-center justify-between gap-3 px-5 pt-5 lg:px-8" role="group" aria-label="City camera view">
-                <div className="flex border border-slate-300 dark:border-slate-600">
+                <div className="flex gap-1 rounded-xl border border-slate-300 p-1 dark:border-slate-600">
                     {(["isometric", "overhead"] as const).map(option => (
                         <button key={option} type="button" disabled={status !== "ready"} aria-pressed={view === option} onClick={() => changeView(option)} className={`${button} ${view === option ? "bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900" : "text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800"}`}>
                             {option === "isometric" ? "Isometric" : "Top-down"}
@@ -60,7 +60,7 @@ export default function CityScene() {
                     {status === "loading" ? "Preparing the city…" : <p>The interactive city is unavailable in this browser.<br /><a className="mt-3 inline-block underline underline-offset-4" href="/research#muceds">Explore the UAV research</a></p>}
                 </div>}
             </div>
-            <figcaption className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-t border-slate-200 dark:border-slate-700 px-5 py-3 lg:px-8">
+            <figcaption className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 px-5 py-3 lg:px-8">
                 <div>
                     <a href="/research#muceds" className="text-sm font-medium text-slate-800 dark:text-slate-200 underline underline-offset-4">UAV edge computing</a>
                     <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">Illustrative simulation · Drag to orbit</p>

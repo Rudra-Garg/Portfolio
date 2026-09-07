@@ -11,7 +11,7 @@ const CityScene = dynamic(() => import("@/components/hero/CityScene"), {
 
 export function Hero() {
     return (
-        <section aria-labelledby="hero-title" className="relative overflow-hidden border-b border-slate-200 bg-background pt-20 text-slate-900 dark:border-slate-800 dark:text-slate-100">
+        <section aria-labelledby="hero-title" className="relative overflow-hidden bg-background pt-20 text-slate-900 dark:text-slate-100">
             <div aria-hidden="true" className="pointer-events-none absolute inset-0 grid-pattern opacity-30" />
             <div className="relative mx-auto grid max-w-[1600px] lg:min-h-[720px] lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] xl:min-h-[780px]">
                 <div className="relative z-10 flex flex-col justify-center px-6 pb-12 pt-12 sm:px-10 lg:py-20 lg:pl-12 lg:pr-4 xl:pl-16">
@@ -25,12 +25,12 @@ export function Hero() {
                         I build services in Python and Go, from notification workflows and multiplayer backends to local AI and edge computing research.
                     </p>
                     <div className="mt-9 flex flex-wrap gap-3">
-                        <Link href="/engineering" className="inline-flex min-h-12 items-center gap-3 bg-orange-500 px-5 py-3 font-semibold text-slate-950 transition-colors hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange-500">Engineering Work<ArrowUpRight size={18} aria-hidden="true" /></Link>
-                        <a href="/resume" className="inline-flex min-h-12 items-center gap-3 border border-slate-400 px-5 py-3 font-medium transition-colors hover:bg-slate-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange-500 dark:border-slate-500 dark:hover:bg-slate-800">Resume<ArrowUpRight size={18} aria-hidden="true" /></a>
+                        <Link href="/engineering" className="inline-flex min-h-12 rounded-lg items-center gap-3 bg-orange-500 px-5 py-3 font-semibold text-slate-950 transition-colors hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange-500">Engineering Work<ArrowUpRight size={18} aria-hidden="true" /></Link>
+                        <a href="/resume" className="inline-flex min-h-12 rounded-lg items-center gap-3 border border-slate-400 px-5 py-3 font-medium transition-colors hover:bg-slate-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange-500 dark:border-slate-500 dark:hover:bg-slate-800">Resume<ArrowUpRight size={18} aria-hidden="true" /></a>
                     </div>
                     <p className="mt-10 max-w-sm text-sm leading-6 text-slate-500 dark:text-slate-400">IIIT Guwahati ’26<br />Former Backend Developer Intern at GRIG</p>
                 </div>
-                <div className="relative h-[520px] min-w-0 border-t border-slate-200 sm:h-[600px] lg:h-auto lg:border-l lg:border-t-0 dark:border-slate-700/70">
+                <div className="relative h-[520px] min-w-0 sm:h-[600px] lg:h-auto">
                     <CityScene />
                 </div>
             </div>
