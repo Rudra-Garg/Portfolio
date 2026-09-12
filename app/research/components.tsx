@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import {
@@ -28,9 +29,9 @@ export function ResearchHero() {
                     transition={{ duration: 0.6 }}
                 >
                     <div className="flex items-center gap-2 text-sm text-slate-500 mb-8">
-                        <a href="/" className="hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">
+                        <Link href="/" className="hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">
                             Home
-                        </a>
+                        </Link>
                         <ChevronRight className="w-4 h-4" />
                         <span className="text-cyan-700 dark:text-cyan-400 font-medium">Research</span>
                     </div>

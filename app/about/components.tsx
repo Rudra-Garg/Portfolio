@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 import {
     User,
@@ -33,9 +34,9 @@ export function KernelHero() {
                     transition={{ duration: 0.6 }}
                 >
                     <div className="flex items-center gap-2 text-sm text-slate-500 mb-8">
-                        <a href="/" className="hover:text-emerald-600 dark:hover:text-cyan-400 transition-colors">
+                        <Link href="/" className="hover:text-emerald-600 dark:hover:text-cyan-400 transition-colors">
                             Home
-                        </a>
+                        </Link>
                         <ChevronRight className="w-4 h-4" />
                         <span className="text-emerald-700 dark:text-emerald-400 font-medium">About &amp; Experience</span>
                     </div>

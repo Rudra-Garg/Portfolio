@@ -14,6 +14,7 @@ import {
     Cpu,
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { PDFViewer, usePDFViewer } from "@/components/ui";
 
 export function EngineeringHero() {
@@ -28,9 +29,9 @@ export function EngineeringHero() {
                     transition={{ duration: 0.6 }}
                 >
                     <div className="flex items-center gap-2 text-sm text-slate-500 mb-8">
-                        <a href="/" className="hover:text-violet-600 dark:hover:text-cyan-400 transition-colors">
+                        <Link href="/" className="hover:text-violet-600 dark:hover:text-cyan-400 transition-colors">
                             Home
-                        </a>
+                        </Link>
                         <ChevronRight className="w-4 h-4" />
                         <span className="text-violet-700 dark:text-violet-400 font-medium">Engineering</span>
                     </div>
